@@ -2,9 +2,7 @@ var storage_id = "storage_id"
 
 
 function send(added_exp, callback){
-  /* (int, function) -> ()
-   *
-   * Increases experience in storage by added_exp.
+  /* Increases experience in storage by added_exp.
    */
 
   var updateStorage = function (result) {
@@ -23,9 +21,6 @@ function send(added_exp, callback){
 }
 
 function get(callback){
-  /* 
-   */
-
   chrome.storage.sync.get([storage_id], function (result) {
     var overall_exp;
     if (storage_id in result) {
