@@ -2,9 +2,9 @@ var storage_id = "storage_id"
 
 
 function send(added_exp, callback){
-  /* (int) -> (int)
+  /* (int, function) -> ()
    *
-   * Gives amount of exp by which overall exp increases and returns overall exp.
+   * Increases experience in storage by added_exp.
    */
 
   var updateStorage = function (result) {
@@ -23,9 +23,7 @@ function send(added_exp, callback){
 }
 
 function get(callback){
-  /* (null) -> (int)
-   *
-   * Gets the amount of overall exp.
+  /* 
    */
 
   chrome.storage.sync.get([storage_id], function (result) {
