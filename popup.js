@@ -73,11 +73,11 @@ function createRowTable(skill) {
   // extension_log(htmlCode);
 }
 
-function displayTable (callback) {
+function displayTable () {
   /* Creates table of skills by adding every skill row by row
    * and sets display of this skill.
    */
-  for(i = 0; i < allSkills.length; i++){
+  for(var i = 0; i < allSkills.length; i++){
     var skill = {
       skillName: allSkills[i],
       expValue: -1, // This value will be updated in the display function.
@@ -86,7 +86,6 @@ function displayTable (callback) {
     createRowTable(skill);
     displayExp(i);
   }
-  callback();
 }
 
 function newSkillToTable (nr) {
@@ -101,16 +100,9 @@ function newSkillToTable (nr) {
   createRowTable(skill);
 }
 
-function addSkill () {
-  /* Adds skill to storage and to current table.
+function debugAddingSkill(skillName) {
+  /* Writes all skills' names and experience value of currently added skill.
    */
-  var skillName = $('#skill_name').val();
-  var object = {}
-  object[skillName] = 0;
-  allSkills.push(skillName);
-  chrome.storage.sync.set({skillsArrayId: allSkills});
-  chrome.storage.sync.set(object);
-
   var logResult = function (result) {
     extension_log("The array of skills' names: ");
     extension_log(JSON.stringify(result));
@@ -126,6 +118,19 @@ function addSkill () {
   }
   chrome.storage.sync.get([skillsArrayId], logResult);
   chrome.storage.sync.get([skillName], logValueResult);
+}
+
+function addSkill () {
+  /* Adds skill to storage and to current table.
+   */
+  var skillName = $('#skill_name').val();
+  var object = {}
+  object[skillName] = 0;
+  allSkills.push(skillName);
+  chrome.storage.sync.set({skillsArrayId: allSkills});
+  chrome.storage.sync.set(object);
+  debugAddingSkill(skillName);
+
   newSkillToTable(allSkills.length - 1);
 }
 
@@ -151,7 +156,7 @@ function debugSkillsExp(index) {
 function getSkillsFromStorage (callbackDisplay) {
   /* Creates local table by taking skills from chrome storage.
    */
-   var logResult = function (result) {
+   var setSkillsArray = function (result) {
     if (skillsArrayId in result) {
       allSkills = result[skillsArrayId];
       callbackDisplay(handleButtons);
@@ -160,7 +165,7 @@ function getSkillsFromStorage (callbackDisplay) {
       extension_log("Can't load the array of skills' names.");
     }
   }
-  chrome.storage.sync.get([skillsArrayId], logResult);
+  chrome.storage.sync.get([skillsArrayId], setSkillsArray);
 }
 
 function handleButtons () {
