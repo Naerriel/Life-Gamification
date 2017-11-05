@@ -1,7 +1,7 @@
-var skillsId = "skillsId";
+var skillsArrayId = "skillsArrayId";
 var allSkills = [];
 
-function updateExp(addedExp, callback, skillNr){
+function updateExp(addedExp, skillNr, callback){
   /* Increases skill's exp by a certain amount.
    */
   var skillName = allSkills[skillNr];
@@ -40,14 +40,13 @@ function displayExp(skillNr) {
   /* Sets display of a skill with certain number.
    */
   getExp(allSkills[skillNr], function (exp) {
-    extension_log(allSkills[skillNr] + " ma exp = " + exp);
     $(".exp" + skillNr).html(exp);
   });
 }
 
 function increaseValue(skillNr){
   var addedExp = $("#add_value_num" + skillNr).val();
-  updateExp(parseInt(addedExp), displayExp, skillNr);
+  updateExp(parseInt(addedExp), skillNr, displayExp);
 }
 
 function extension_log (message) {
@@ -75,13 +74,13 @@ function createRowTable(skill) {
 }
 
 function displayTable (callback) {
-  /* Creates table of skills by adding one skill row by row
+  /* Creates table of skills by adding every skill row by row
    * and sets display of this skill.
    */
   for(i = 0; i < allSkills.length; i++){
     var skill = {
       skillName: allSkills[i],
-      expValue: -1,
+      expValue: -1, // This value will be updated in the display function.
       skillNr: i,
     };
     createRowTable(skill);
@@ -91,7 +90,7 @@ function displayTable (callback) {
 }
 
 function newSkillToTable (nr) {
-  /* Used for inserting added skill to table of skills.
+  /* Inserts new skill to HTML table of skills.
    */
   var skill = {
     skillName: allSkills[nr],
@@ -109,24 +108,23 @@ function addSkill () {
   var object = {}
   object[skillName] = 0;
   allSkills.push(skillName);
-  chrome.storage.sync.set({skillsId: allSkills});
+  chrome.storage.sync.set({skillsArrayId: allSkills});
   chrome.storage.sync.set(object);
 
   var logResult = function (result) {
-    extension_log("Wypisuje moje obecne skille.");
+    extension_log("The array of skills' names: ");
     extension_log(JSON.stringify(result));
   }
   var logValueResult = function (result) {
-    extension_log("Wypisuje dodany skill.");
     if (skillName in result) {
-      extension_log("Wartosc skilla " + skillName + " to ");
+      extension_log("Skill " + skillName + " experience value is ");
       extension_log(result[skillName]);
     }
     else {
-      extension_log('Nie ma w bazie skilla ' + skillName + '.');
+      extension_log('Skill ' + skillName + ' is not in the base.');
     }
   }
-  chrome.storage.sync.get([skillsId], logResult);
+  chrome.storage.sync.get([skillsArrayId], logResult);
   chrome.storage.sync.get([skillName], logValueResult);
   newSkillToTable(allSkills.length - 1);
 }
@@ -135,14 +133,13 @@ function clearSkills () {
   /* Erases all skills.
    */
   var emptyArray = [];
-  chrome.storage.sync.set({skillsId: emptyArray});
+  chrome.storage.sync.set({skillsArrayId: emptyArray});
 }
 
 function debugSkillsExp(index) {
   /* Writes to consol all skills and it's exp.
    */
   var skillName = allSkills[index];
-  extension_log("nazwa skilla to: " + skillName);
   chrome.storage.sync.get([skillName], function (result) {
     extension_log(skillName + ": " + result[skillName]);
   });
@@ -155,15 +152,15 @@ function getSkillsFromStorage (callbackDisplay) {
   /* Creates local table by taking skills from chrome storage.
    */
    var logResult = function (result) {
-    if (skillsId in result) {
-      allSkills = result[skillsId];
+    if (skillsArrayId in result) {
+      allSkills = result[skillsArrayId];
       callbackDisplay(handleButtons);
     }
     else{
-      extension_log('Jest problem z pobraniem skilli.');
+      extension_log("Can't load the array of skills' names.");
     }
   }
-  chrome.storage.sync.get([skillsId], logResult);
+  chrome.storage.sync.get([skillsArrayId], logResult);
 }
 
 function handleButtons () {
@@ -174,7 +171,6 @@ function handleButtons () {
 
 document.addEventListener('DOMContentLoaded', function () {
   $('#add_skill').click(addSkill);
-  extension_log("Rozpoczynam.");
-  // clearSkills();
+  extension_log("Application begins.");
   getSkillsFromStorage(displayTable);
 });
