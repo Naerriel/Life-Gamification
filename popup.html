@@ -2,11 +2,26 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="popup.js"></script>
+    <style>
+    .skill_name {
+        display: inline;
+    }
+    .add_value_form {
+        display: inline-block;
+    }
+    .add_value_button {
+        display: inline;
+    }
+    </style>
 </head>
 <body style="width: 400px">
 
-    <input class="add_value_form" type="number" name="addValue" value ="">
-    <button class="add_value_button" type="button">Dodaj</button>
-    <div class="expValue"> Exp </div>
+    <h3> Skills: </h3>
+    <div id="skills">
+    </div>
+
+    <h3> Dodaj skill: </h3>
+    <input id="skill_name" type="text" name"addSkill" value="">
+    <button id="add_skill" type="button">Dodaj</button>
 </body>
 </html>
