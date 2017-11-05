@@ -73,7 +73,7 @@ function createRowTable(skill) {
   // extension_log(htmlCode);
 }
 
-function displayTable () {
+function displayTable (callback) {
   /* Creates table of skills by adding every skill row by row
    * and sets display of this skill.
    */
@@ -86,6 +86,7 @@ function displayTable () {
     createRowTable(skill);
     displayExp(i);
   }
+  callback();
 }
 
 function newSkillToTable (nr) {
