@@ -1,6 +1,7 @@
 var skillsArrayId = "skillsArrayId";
 var allSkills = [];
 var expTable = [];
+const maxLevel = 210;
 
 function updateExp(addedExp, skillNr, callback){
   /* Increases skill's exp by a certain amount.
@@ -42,7 +43,7 @@ function getLevel(exp) {
    * O(max_level) - computational complexity
    */
   var level = 0;
-  for (var i = 0; i < 200; i++){
+  for (var i = 0; i < maxLevel - 1; i++){
     if(exp < expTable[i]) break;
     level = i;
   }
@@ -243,7 +244,7 @@ function floor(num) {
 function fillExpTable() {
   /* Fills expTable with numbers according to a certain formula.
    */
-  for (var i = 0; i < 210; i++) {
+  for (var i = 0; i < maxLevel; i++) {
     expTable[i] = floor(i * i / 2);
   }
 }
