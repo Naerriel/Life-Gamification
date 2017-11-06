@@ -100,6 +100,7 @@ function newSkillToTable (nr) {
   };
   displayExp(nr);
   createRowTable(skill);
+  handleButtons();
 }
 
 function debugAddingSkill(skillName) {
