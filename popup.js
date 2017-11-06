@@ -46,6 +46,8 @@ function displayExp(skillNr) {
 
 function increaseValue(skillNr){
   var addedExp = $("#add_value_num" + skillNr).val();
+  extension_log("I increase value");
+  $("#add_value_num" + skillNr).val('');
   updateExp(parseInt(addedExp), skillNr, displayExp);
 }
 
@@ -65,7 +67,7 @@ function createRowTable(skill) {
     <h4 class="skill_name"> ` + skill.skillName + `: </h4>
     <a class="exp` + skill.skillNr + `"> ` + skill.expValue + ` </a>
       <div>
-      <input id="add_value_num` + skill.skillNr + `" class="add_value_nums" type="number" name="addValue" value ="">
+      <input id="add_value_num` + skill.skillNr + `" class="add_value_nums" type="number" name="addValue" value="">
       <button id="add_value_button` + skill.skillNr + `" class="add_value_buttons" type="button">Add</button>
       <button id="remove_skill_button` + skill.skillNr + `" class="remove_skill_buttons" type="button">Remove</button>
     </div>
@@ -127,6 +129,7 @@ function addSkill () {
   /* Adds skill to storage and to current table.
    */
   var skillName = $('#skill_name').val();
+  $('#skill_name').val('');
   var object = {}
   object[skillName] = 0;
   allSkills.push(skillName);
@@ -192,6 +195,16 @@ function handleButtons () {
   });
   $('.add_value_buttons').click(function () {
     increaseValue(this.id.replace('add_value_button', ''));
+  });
+  $('.add_value_nums').keyup(function (event) {
+    if (event.keyCode === 13) {
+      increaseValue(this.id.replace('add_value_num', ''));
+    }
+  });
+  $("#skill_name").keyup(function (event) {
+    if (event.keyCode === 13) {
+      addSkill();
+    }
   });
 }
 
