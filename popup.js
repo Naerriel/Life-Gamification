@@ -66,7 +66,7 @@ function createRowTable(skill) {
     <a class="exp` + skill.skillNr + `"> ` + skill.expValue + ` </a>
       <div>
       <input id="add_value_num` + skill.skillNr + `" class="add_value_nums" type="number" name="addValue" value ="">
-      <button id="add_value_button` + skill.skillNr + `" class="add_value_buttons" type="button">Dodaj</button>
+      <button id="add_value_button` + skill.skillNr + `" class="add_value_buttons" type="button">Add</button>
       <button id="remove_skill_button` + skill.skillNr + `" class="remove_skill_buttons" type="button">Remove</button>
     </div>
   `);
