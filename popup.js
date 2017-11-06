@@ -67,6 +67,7 @@ function createRowTable(skill) {
       <div>
       <input id="add_value_num` + skill.skillNr + `" class="add_value_nums" type="number" name="addValue" value ="">
       <button id="add_value_button` + skill.skillNr + `" class="add_value_buttons" type="button">Dodaj</button>
+      <button id="remove_skill_button` + skill.skillNr + `" class="remove_skill_buttons" type="button">Remove</button>
     </div>
   `);
   $('#skills').append(htmlCode);
@@ -169,7 +170,25 @@ function getSkillsFromStorage (callbackDisplay) {
   chrome.storage.sync.get([skillsArrayId], setSkillsArray);
 }
 
+function resetHTMLTable() {
+  $("#skills").remove();
+  $("#skillBody").append(`
+    <div id="skills">
+    </div>
+  `);
+  displayTable(handleButtons);
+}
+
+function removeSkill(skillNr) {
+  allSkills.splice(skillNr, 1);
+  chrome.storage.sync.set({skillsArrayId: allSkills});
+  resetHTMLTable();
+}
+
 function handleButtons () {
+  $('.remove_skill_buttons').click(function () {
+    removeSkill(this.id.replace('remove_skill_button', ''));
+  });
   $('.add_value_buttons').click(function () {
     increaseValue(this.id.replace('add_value_button', ''));
   });
