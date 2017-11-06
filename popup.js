@@ -196,6 +196,16 @@ function handleButtons () {
   $('.add_value_buttons').click(function () {
     increaseValue(this.id.replace('add_value_button', ''));
   });
+  $('.add_value_nums').keyup(function (event) {
+    if (event.keyCode === 13) {
+      increaseValue(this.id.replace('add_value_num', ''));
+    }
+  });
+  $("#skill_name").keyup(function (event) {
+    if (event.keyCode === 13) {
+      addSkill();
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
