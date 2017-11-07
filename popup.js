@@ -43,9 +43,9 @@ function getLevel(exp) {
    * O(max_level) - computational complexity
    */
   var level = 0;
-  for (var i = 0; i < maxLevel - 1; i++){
-    if(exp < expTable[i]) break;
-    level = i;
+
+  while(exp >= expTable[level + 1]){
+      level++;
   }
   var levelExp = exp - expTable[level];
   var totalExpNeeded = expTable[level + 1] - expTable[level];
@@ -87,7 +87,7 @@ function createRowTable(skill) {
   var htmlCode = (`
     <h4 class="skill_name"> ` + skill.skillName + `: </h4>
     <a class="exp` + skill.skillNr + `"> ` + skill.expValue + ` </a>
-      <div class="lala">
+    <div>
       <input id="add_value_num` + skill.skillNr + `" class="add_value_nums" type="number" name="addValue" value="">
       <button id="add_value_button` + skill.skillNr + `" class="add_value_buttons" type="button">Add</button>
       <button id="remove_skill_button` + skill.skillNr + `" class="remove_skill_buttons" type="button">Remove</button>
@@ -235,17 +235,11 @@ function handleButtons () {
   $('#add_skill').click(addSkill);
 }
 
-function floor(num) {
-  /* Calculates and returns the biggest integer not bigger than number num.
-   */
-  return num - num % 1;
-}
-
 function fillExpTable() {
   /* Fills expTable with numbers according to a certain formula.
    */
   for (var i = 0; i < maxLevel; i++) {
-    expTable[i] = floor(i * i / 2);
+    expTable[i] = Math.floor(i * i / 2);
   }
 }
 
