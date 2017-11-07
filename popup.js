@@ -242,20 +242,6 @@ function fillExpTable() {
   }
 }
 
-function floor(num) {
-  /* Calculates and returns the biggest integer not bigger than number num.
-   */
-  return num - num % 1;
-}
-
-function fillExpTable() {
-  /* Fills expTable with numbers according to a certain formula.
-   */
-  for (var i = 0; i < 210; i++) {
-    expTable[i] = floor(i * i / 2);
-  }
-}
-
 document.addEventListener('DOMContentLoaded', function () {
   extension_log("Application begins.");
   fillExpTable();
