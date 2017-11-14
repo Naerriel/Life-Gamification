@@ -165,11 +165,11 @@ function getSkillsFromStorage (callbackDisplay) {
    var setSkillsArray = function (result) {
     if (skillsArrayId in result) {
       allSkills = result[skillsArrayId];
-      callbackDisplay(handleButtons);
     }
     else{
       extension_log("Can't load the array of skills' names.");
     }
+    callbackDisplay(handleButtons);
   }
   chrome.storage.sync.get([skillsArrayId], setSkillsArray);
 }
