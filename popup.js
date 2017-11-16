@@ -1,5 +1,7 @@
 var skillsArrayId = "skillsArrayId";
 var allSkills = [];
+var expTable = [];
+const maxLevel = 210;
 
 function updateExp(addedExp, skillNr, callback){
   /* Increases skill's exp by a certain amount.
@@ -36,17 +38,35 @@ function getExp(skillName, callback){
   });
 }
 
+function getLevel(exp) {
+  /* Calculates current level and exp needed to next level.
+   * O(max_level) - computational complexity
+   */
+  var level = 0;
+  while(exp >= expTable[level + 1]){
+      level++;
+  }
+  var levelExp = exp - expTable[level];
+  var totalExpNeeded = expTable[level + 1] - expTable[level];
+  var levelUpExp = totalExpNeeded - levelExp;
+  var htmlCode = (`
+    Level ` + level + `: ` + levelUpExp + ` more.
+  `);
+  return htmlCode;
+}
+
 function displayExp(skillNr) {
   /* Sets display of a skill with certain number.
    */
   getExp(allSkills[skillNr], function (exp) {
-    $(".exp" + skillNr).html(exp);
+   $(".exp" + skillNr).html(getLevel(exp));
   });
 }
 
 function increaseValue(skillNr){
+  /* Increases value of a skill with certain number by value in input type text.
+   */
   var addedExp = $("#add_value_num" + skillNr).val();
-  extension_log("I increase value");
   $("#add_value_num" + skillNr).val('');
   updateExp(parseInt(addedExp), skillNr, displayExp);
 }
@@ -66,7 +86,7 @@ function createRowTable(skill) {
   var htmlCode = (`
     <h4 class="skill_name"> ` + skill.skillName + `: </h4>
     <a class="exp` + skill.skillNr + `"> ` + skill.expValue + ` </a>
-      <div>
+    <div>
       <input id="add_value_num` + skill.skillNr + `" class="add_value_nums" type="number" name="addValue" value="">
       <button id="add_value_button` + skill.skillNr + `" class="add_value_buttons" type="button">Add</button>
       <button id="remove_skill_button` + skill.skillNr + `" class="remove_skill_buttons" type="button">Remove</button>
@@ -184,12 +204,17 @@ function resetHTMLTable() {
 }
 
 function removeSkill(skillNr) {
+  /* Removes skill from allSkills table
+   * and stores modified table in Chrome Storage.
+   */
   allSkills.splice(skillNr, 1);
   chrome.storage.sync.set({skillsArrayId: allSkills});
   resetHTMLTable();
 }
 
 function handleButtons () {
+  /* Manages clicking on all buttons and submitting by enter.
+   */
   $('.remove_skill_buttons').click(function () {
     removeSkill(this.id.replace('remove_skill_button', ''));
   });
@@ -206,10 +231,19 @@ function handleButtons () {
       addSkill();
     }
   });
+  $('#add_skill').click(addSkill);
+}
+
+function fillExpTable() {
+  /* Fills expTable with numbers according to a certain formula.
+   */
+  for (var i = 0; i < maxLevel; i++) {
+    expTable[i] = Math.floor(i * i / 2);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  $('#add_skill').click(addSkill);
   extension_log("Application begins.");
+  fillExpTable();
   getSkillsFromStorage(displayTable);
 });
