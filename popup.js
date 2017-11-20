@@ -188,7 +188,7 @@ function getSkillsFromStorage (callbackDisplay) {
       callbackDisplay(handleButtons);
     }
     else{
-      extension_log("Can't load the array of skills' names.");
+      // extension_log("Can't load the array of skills' names.");
     }
   }
   chrome.storage.sync.get([skillsArrayId], setSkillsArray);
@@ -258,28 +258,26 @@ function fillExpTable() {
 }
 
 function inputListening(){
-  extension_log("Hi I want to listen to input.");
+  // extension_log("Hi I want to listen to input.");
 
   var input = document.getElementById("file-input");
         //.addEventListener("change", function(){
         //  extension_log("Test succesfull");
         //});
-  input.addEventListener("mousedown", function () {
-    extension_log("woot!");
+  input.addEventListener("change", function () {
     if (this.files && this.files[0]) {
       var myFile = this.files[0];
       var reader = new FileReader();
-      extension_log("I am inside");
-      reader.addEventListener('load', function (e) {
-        extension_log("Outputuje costam.");
-        //output.textContent = e.target.result;
-      });
+      reader.onload = function () {
+        $("body").html(this.result);
+      };
+      reader.readAsText(this.files[0]);
     }
   });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  extension_log("Application begins.");
+  // extension_log("Application begins.");
   inputListening();
   fillExpTable();
   getSkillsFromStorage(displayTable);
