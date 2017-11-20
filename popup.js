@@ -212,6 +212,20 @@ function removeSkill(skillNr) {
   resetHTMLTable();
 }
 
+function download (content, name, type) {
+  /* FILL WITH STORAGE CONTENT.
+   */
+  var saveButton = document.getElementById("save_storage_button");
+  var file = new Blob([content], {type: type});
+  saveButton.href = URL.createObjectURL(file);
+  saveButton.download = name;
+}
+
+function saveStorage () {
+  extension_log("I try to save storage.");
+  download("example", "example.txt", "text/plain");
+}
+
 function handleButtons () {
   /* Manages clicking on all buttons and submitting by enter.
    */
@@ -232,6 +246,7 @@ function handleButtons () {
     }
   });
   $('#add_skill').click(addSkill);
+  $('#save_storage_button').click(saveStorage);
 }
 
 function fillExpTable() {
@@ -242,8 +257,30 @@ function fillExpTable() {
   }
 }
 
+function inputListening(){
+  extension_log("Hi I want to listen to input.");
+
+  var input = document.getElementById("file-input");
+        //.addEventListener("change", function(){
+        //  extension_log("Test succesfull");
+        //});
+  input.addEventListener("mousedown", function () {
+    extension_log("woot!");
+    if (this.files && this.files[0]) {
+      var myFile = this.files[0];
+      var reader = new FileReader();
+      extension_log("I am inside");
+      reader.addEventListener('load', function (e) {
+        extension_log("Outputuje costam.");
+        //output.textContent = e.target.result;
+      });
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   extension_log("Application begins.");
+  inputListening();
   fillExpTable();
   getSkillsFromStorage(displayTable);
 });
