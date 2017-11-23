@@ -1,4 +1,4 @@
-# LifeSkills
+# Life Gamification
 Version 0.1
 
 Chrome extension which allows you to measure your progress in your real life skills.
