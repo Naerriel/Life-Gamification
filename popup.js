@@ -1,3 +1,4 @@
+"use strict"
 var skillsArrayId = "skillsArrayId";
 var allSkills = [];
 var expTable = [];
@@ -122,7 +123,7 @@ function newSkillToTable (nr) {
   };
   displayExp(nr);
   createRowTable(skill);
-  handleButtons();
+  handleSkillButtons();
 }
 
 function debugAddingSkill(skillName) {
@@ -148,6 +149,10 @@ function debugAddingSkill(skillName) {
 function addSkill () {
   /* Adds skill to storage and to current table.
    */
+  if($('#skill_name').val() == "") return;
+  // If not for this if, hundreds of empty skills would be created with Enter key.
+  // To fix.
+
   var skillName = $('#skill_name').val();
   $('#skill_name').val('');
   var object = {}
@@ -185,11 +190,13 @@ function getSkillsFromStorage (callbackDisplay) {
    var setSkillsArray = function (result) {
     if (skillsArrayId in result) {
       allSkills = result[skillsArrayId];
-      callbackDisplay(handleButtons);
     }
     else{
-      // extension_log("Can't load the array of skills' names.");
+      extension_log("Can't load the array of skills' names.");
     }
+    extension_log("All skills:");
+    extension_log(JSON.stringify(allSkills));
+    callbackDisplay(handleSkillButtons);
   }
   chrome.storage.sync.get([skillsArrayId], setSkillsArray);
 }
@@ -200,7 +207,7 @@ function resetHTMLTable() {
     <div id="skills">
     </div>
   `);
-  displayTable(handleButtons);
+  displayTable(handleSkillButtons);
 }
 
 function removeSkill(skillNr) {
@@ -212,21 +219,75 @@ function removeSkill(skillNr) {
   resetHTMLTable();
 }
 
-function download (content, name, type) {
-  /* FILL WITH STORAGE CONTENT.
-   */
-  var saveButton = document.getElementById("save_storage_button");
-  var file = new Blob([content], {type: type});
-  saveButton.href = URL.createObjectURL(file);
-  saveButton.download = name;
+function exportStorage () {
+  var text = JSON.stringify(allSkills);
+  extension_log(text);
+  text += "[";
+  function addToString(i) {
+    if(i < allSkills.length){
+      if(i != 0) {
+        text += ",";
+      }
+      chrome.storage.sync.get([allSkills[i]], function (result) {
+        var exp = result[allSkills[i]];
+        extension_log(exp);
+        text += exp.toString();
+        addToString(i + 1);
+      });
+    }
+    else{
+      text += "]";
+      extension_log(text);
+      $('#input').html(text);
+    }
+  }
+  addToString(0);
 }
 
-function saveStorage () {
-  extension_log("I try to save storage.");
-  download("example", "example.txt", "text/plain");
+function importStorage () {
+  var text = $('#input').val();
+  var rightBracketPos = 0;
+  while(text[rightBracketPos] != "]" && rightBracketPos < text.length){
+    rightBracketPos++;
+  }
+  if(rightBracketPos < text.length && text[rightBracketPos] == "]"){
+    var toSkills = text.slice(0, rightBracketPos + 1);
+    var toExp = text.slice(rightBracketPos + 1, text.length);
+    var newSkills = JSON.parse(toSkills);
+    var newExp = JSON.parse(toExp);
+    chrome.storage.sync.set({skillsArrayId: newSkills}, function () {
+      allSkills = newSkills;
+      extension_log(allSkills.length);
+
+      function setExp (i) {
+        if(i < allSkills.length){
+          var skillName = allSkills[i];
+          var skillExp = newExp[i];
+
+            // Here I debugged for 1h a bug that you must do this stupid object.
+            // So frustrating is this JS...
+            //
+            // I used setTimeout with the help of Jurek. I know it's ugly but it
+            // is JS and who cares. I couldn't do it otherwise.
+            var object = {}
+          object[skillName] = skillExp;
+          chrome.storage.sync.set(object, setExp(i+ 1));
+        }
+        else{
+          setTimeout(function() {
+            resetHTMLTable();
+          },100);
+        }
+      }
+      setExp(0);
+    });
+  }
+  else{
+    extension_log("Incorrect JSONs.");
+  }
 }
 
-function handleButtons () {
+function handleSkillButtons () {
   /* Manages clicking on all buttons and submitting by enter.
    */
   $('.remove_skill_buttons').click(function () {
@@ -245,8 +306,12 @@ function handleButtons () {
       addSkill();
     }
   });
+}
+
+function handleUniqueButtons () {
   $('#add_skill').click(addSkill);
-  $('#save_storage_button').click(saveStorage);
+  $('#export_storage_button').click(exportStorage);
+  $('#import_storage_button').click(importStorage);
 }
 
 function fillExpTable() {
@@ -257,28 +322,10 @@ function fillExpTable() {
   }
 }
 
-function inputListening(){
-  // extension_log("Hi I want to listen to input.");
-
-  var input = document.getElementById("file-input");
-        //.addEventListener("change", function(){
-        //  extension_log("Test succesfull");
-        //});
-  input.addEventListener("change", function () {
-    if (this.files && this.files[0]) {
-      var myFile = this.files[0];
-      var reader = new FileReader();
-      reader.onload = function () {
-        $("body").html(this.result);
-      };
-      reader.readAsText(this.files[0]);
-    }
-  });
-}
-
 document.addEventListener('DOMContentLoaded', function () {
-  // extension_log("Application begins.");
-  inputListening();
+  extension_log("Application begins.");
   fillExpTable();
+  //clearSkills();
+  handleUniqueButtons();
   getSkillsFromStorage(displayTable);
 });
