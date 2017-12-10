@@ -16,9 +16,9 @@ function updateExp(addedExp, skillNr, callback){
     else {
       overallExp = addedExp;
     }
-    var object = {}
-    object[skillName] = overallExp;
-    chrome.storage.sync.set(object);
+    var skillsDict = {}
+    skillsDict[skillName] = overallExp;
+    chrome.storage.sync.set(skillsDict);
     callback(skillNr);
   }
   chrome.storage.sync.get([skillName], updateStorage);
@@ -149,17 +149,18 @@ function debugAddingSkill(skillName) {
 function addSkill () {
   /* Adds skill to storage and to current table.
    */
-  if($('#skill_name').val() == "") return;
-  // If not for this if, hundreds of empty skills would be created with Enter key.
-  // To fix.
-
   var skillName = $('#skill_name').val();
   $('#skill_name').val('');
-  var object = {}
-  object[skillName] = 0;
+  if(skillName === ""){
+    return;
+  }
+  // If not for this if, hundreds of empty skills would be created with Enter key.
+  // To fix.
+  var skillsDict = {}
+  skillsDict[skillName] = 0;
   allSkills.push(skillName);
   chrome.storage.sync.set({skillsArrayId: allSkills});
-  chrome.storage.sync.set(object);
+  chrome.storage.sync.set(skillsDict);
   debugAddingSkill(skillName);
 
   newSkillToTable(allSkills.length - 1);
@@ -238,14 +239,14 @@ function exportStorage () {
     else{
       text += "]";
       extension_log(text);
-      $('#input').html(text);
+      $('#storage_stringified').html(text);
     }
   }
   addToString(0);
 }
 
 function importStorage () {
-  var text = $('#input').val();
+  var text = $('#storage_stringified').val();
   var rightBracketPos = 0;
   while(text[rightBracketPos] != "]" && rightBracketPos < text.length){
     rightBracketPos++;
@@ -263,15 +264,9 @@ function importStorage () {
         if(i < allSkills.length){
           var skillName = allSkills[i];
           var skillExp = newExp[i];
-
-            // Here I debugged for 1h a bug that you must do this stupid object.
-            // So frustrating is this JS...
-            //
-            // I used setTimeout with the help of Jurek. I know it's ugly but it
-            // is JS and who cares. I couldn't do it otherwise.
-            var object = {}
-          object[skillName] = skillExp;
-          chrome.storage.sync.set(object, setExp(i+ 1));
+          var skillsDict = {}
+          skillsDict[skillName] = skillExp;
+          chrome.storage.sync.set(skillsDict, setExp(i+ 1));
         }
         else{
           setTimeout(function() {
