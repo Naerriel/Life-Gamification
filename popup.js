@@ -221,28 +221,36 @@ function removeSkill(skillNr) {
 }
 
 function exportStorage () {
-  var text = JSON.stringify(allSkills);
-  extension_log(text);
-  text += "[";
-  function addToString(i) {
-    if(i < allSkills.length){
-      if(i != 0) {
-        text += ",";
-      }
-      chrome.storage.sync.get([allSkills[i]], function (result) {
-        var exp = result[allSkills[i]];
-        extension_log(exp);
-        text += exp.toString();
-        addToString(i + 1);
-      });
-    }
-    else{
-      text += "]";
-      extension_log(text);
-      $('#storage_stringified').html(text);
-    }
-  }
-  addToString(0);
+  let keyList = allSkills.slice();
+  keyList.push("skillsArrayId");
+  extension_log("KEYLIST:");
+  extension_log(keyList);
+  chrome.storage.sync.get(keyList, function (result) {
+    extension_log("Hi");
+    $('#storage_stringified').html(JSON.stringify(result));
+  });
+  //var text = JSON.stringify(allSkills);
+  //extension_log(text);
+  //text += "[";
+  //function addToString(i) {
+  //  if(i < allSkills.length){
+  //    if(i != 0) {
+  //      text += ",";
+  //    }
+  //    chrome.storage.sync.get([allSkills[i]], function (result) {
+  //      var exp = result[allSkills[i]];
+  //      extension_log(exp);
+  //      text += exp.toString();
+  //      addToString(i + 1);
+  //    });
+  //  }
+  //  else{
+  //    text += "]";
+  //    extension_log(text);
+  //    $('#storage_stringified').html(text);
+  //  }
+  //}
+  //addToString(0);
 }
 
 function importStorage () {
