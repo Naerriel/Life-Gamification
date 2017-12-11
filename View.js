@@ -104,15 +104,6 @@ function getSkillsFromStorage (callbackDisplay) {
       chrome.storage.sync.get([skillsArrayId], setSkillsArray);
 }
 
-function resetHTMLTable() {
-      $("#skills").remove();
-      $("#skillBody").append(`
-                  <div id="skills">
-                      </div>
-                    `);
-      displayTable(handleSkillButtons);
-}
-
 function getSkillsFromStorage (callbackDisplay) {
     /* Creates local table by taking skills from chrome storage.
      *    */
