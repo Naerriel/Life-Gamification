@@ -84,28 +84,6 @@ function exportStorage () {
     extension_log("Hi");
     $('#storage_stringified').html(JSON.stringify(result));
   });
-  //var text = JSON.stringify(allSkills);
-  //extension_log(text);
-  //text += "[";
-  //function addToString(i) {
-  //  if(i < allSkills.length){
-  //    if(i != 0) {
-  //      text += ",";
-  //    }
-  //    chrome.storage.sync.get([allSkills[i]], function (result) {
-  //      var exp = result[allSkills[i]];
-  //      extension_log(exp);
-  //      text += exp.toString();
-  //      addToString(i + 1);
-  //    });
-  //  }
-  //  else{
-  //    text += "]";
-  //    extension_log(text);
-  //    $('#storage_stringified').html(text);
-  //  }
-  //}
-  //addToString(0);
 }
 
 function importStorage () {
@@ -148,9 +126,11 @@ function importStorage () {
 function fillExpTable() {
     /* Fills expTable with numbers according to a certain formula.
      *    */
-    for (var i = 0; i < maxLevel; i++) {
+  console.log("Dupa");
+  for (var i = 0; i < maxLevel; i++) {
           expTable[i] = Math.floor(i * i / 2);
         }
+  console.log(expTable[3]);
 }
 
 function createRowTable(skill) {

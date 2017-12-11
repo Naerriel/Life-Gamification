@@ -1,8 +1,3 @@
-var skillsArrayId = "skillsArrayId";
-var allSkills = [];
-var expTable = [];
-const maxLevel = 210;
-
 function updateExp(addedExp, skillNr, callback){
     /* Increases skill's exp by a certain amount.
      *    */
@@ -54,29 +49,3 @@ function getLevel(exp) {
           `);
     return htmlCode;
 }
-
-//function getSkillsFromStorage (callbackDisplay) {
-//    /* Creates local table by taking skills from chrome storage.
-//     *    */
-//     var setSkillsArray = function (result) {
-//           if (skillsArrayId in result) {
-//                   allSkills = result[skillsArrayId];
-//                 }
-//           else{
-//                   extension_log("Can't load the array of skills' names.");
-//                 }
-//           extension_log("All skills:");
-//           extension_log(JSON.stringify(allSkills));
-//           callbackDisplay(handleSkillButtons);
-//         }
-//    chrome.storage.sync.get([skillsArrayId], setSkillsArray);
-//}
-//
-//function resetHTMLTable() {
-//    $("#skills").remove();
-//    $("#skillBody").append(`
-//          <div id="skills">
-//            </div>
-//          `);
-//    displayTable(handleSkillButtons);
-//}
