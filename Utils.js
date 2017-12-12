@@ -7,6 +7,13 @@ function extension_log (message) {
   });
 }
 
+function clearSkills () {
+  /* Erases all skills.
+   */
+  var emptyArray = [];
+  chrome.storage.sync.set({skillsArrayId: emptyArray});
+}
+
 function debugAddingSkill(skillName) {
   /* Writes all skills' names and experience value of currently added skill.
    */
@@ -25,33 +32,6 @@ function debugAddingSkill(skillName) {
   };
   chrome.storage.sync.get([skillsArrayId], logResult);
   chrome.storage.sync.get([skillName], logValueResult);
-}
-
-function addSkill () {
-  /* Adds skill to storage and to current table.
-   */
-  var skillName = $('#skill_name').val();
-  $('#skill_name').val('');
-  if(skillName === ""){
-    return;
-  }
-  // If not for this if, hundreds of empty skills would be created with Enter key.
-  // To fix.
-  var skillsDict = {};
-  skillsDict[skillName] = 0;
-  allSkills.push(skillName);
-  chrome.storage.sync.set({skillsArrayId: allSkills});
-  chrome.storage.sync.set(skillsDict);
-  debugAddingSkill(skillName);
-
-  newSkillToTable(allSkills.length - 1);
-}
-
-function clearSkills () {
-  /* Erases all skills.
-   */
-  var emptyArray = [];
-  chrome.storage.sync.set({skillsArrayId: emptyArray});
 }
 
 function debugSkillsExp(index) {
@@ -126,34 +106,7 @@ function importStorage () {
 function fillExpTable() {
     /* Fills expTable with numbers according to a certain formula.
      *    */
-  console.log("Dupa");
   for (var i = 0; i < maxLevel; i++) {
           expTable[i] = Math.floor(i * i / 2);
         }
-  console.log(expTable[3]);
 }
-
-function createRowTable(skill) {
-  /* Receiving parameters of a skill, creates table row.
-   */
-  var htmlCode = (`
-    <h4 class="skill_name"> ` + skill.skillName + `: </h4>
-    <a class="exp` + skill.skillNr + `"> ` + skill.expValue + ` </a>
-    <div>
-      <input id="add_value_num` + skill.skillNr + `" class="add_value_nums" type="number" name="addValue" value="">
-      <button id="add_value_button` + skill.skillNr + `" class="add_value_buttons" type="button">Add</button>
-      <button id="remove_skill_button` + skill.skillNr + `" class="remove_skill_buttons" type="button">Remove</button>
-    </div>
-  `);
-  $('#skills').append(htmlCode);
-  // extension_log(htmlCode);
-}
-
-function increaseValue(skillNr){
-  /* Increases value of a skill with certain number by value in input type text.
-   */
-  var addedExp = $("#add_value_num" + skillNr).val();
-  $("#add_value_num" + skillNr).val('');
-  updateExp(parseInt(addedExp), skillNr, displayExp);
-}
-

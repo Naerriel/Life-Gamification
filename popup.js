@@ -5,9 +5,10 @@ var expTable = [];
 const maxLevel = 210;
 
 document.addEventListener('DOMContentLoaded', function () {
-  console.log("dupa");
+  extension_log(" ");
   extension_log("Application begins.");
   fillExpTable();
+  getSkills()
+  .then(displayTable);
   handleUniqueButtons();
-  getSkillsFromStorage(displayTable);
 });
