@@ -1,4 +1,4 @@
-function displayLevelAndExp(skillNr) {
+function levelAndExpHTML(skillNr) {
   /* Sets display of a skill with a certain level
    * and number of experience points needed to level up.
    */
@@ -7,11 +7,10 @@ function displayLevelAndExp(skillNr) {
   });
 }
 
-function createRowTable(skill) {
-  /* Receiving parameters of a skill, creates table row.
+function rowTableHTML(skill) {
+  /* Receiving parameters of a skill, creates HTML of a table row.
    */
-  extension_log("I create new row.");
-  var htmlCode = (`
+  var HTMLCode = (`
     <h4 class="skill_name"> ` + skill.skillName + `: </h4>
     <a class="exp` + skill.skillNr + `"> ` + skill.expValue + ` </a>
     <div>
@@ -20,18 +19,20 @@ function createRowTable(skill) {
       <button id="remove_skill_button` + skill.skillNr + `" class="remove_skill_buttons" type="button">Remove</button>
     </div>
   `);
-  $('#skills').append(htmlCode);
+  return HTMLCode;
 }
 
-function skillToTable (i) {
+function skillToTable (skillNr) {
+  /* Adds a skill of a certain number to the HTML table.
+   */
   var skill = {
-    skillName: allSkills[i],
+    skillName: allSkills[skillNr],
     expValue: -1,
     // This value will be updated in the display function.
-    skillNr: i,
+    skillNr: skillNr,
   };
-  createRowTable(skill);
-  displayLevelAndExp(i);
+  $('#skills').append(rowTableHTML(skill));
+  displayLevelAndExp(skillNr);
 }
 
 function displayTable () {
@@ -43,19 +44,6 @@ function displayTable () {
   }
 }
 
-function newSkillToTable (nr) {
-  /* Inserts new skill to HTML table of skills.
-  *    */
-  var skill = {
-    skillName: allSkills[nr],
-    expValue: 0,
-    skillNr: nr,
-  };
-  extension_log("HERE!");
-  displayLevelAndExp(nr);
-  createRowTable(skill);
-}
-
 function resetHTMLTable() {
   $("#skills").remove();
   $("#skillBody").append(`
@@ -64,15 +52,4 @@ function resetHTMLTable() {
   `);
   displayTable();
   handleSkillButtons();
-}
-
-function handleUniqueButtons () {
-  $('#add_skill').click(addSkill);
-  $('#export_storage_button').click(exportStorage);
-  $('#import_storage_button').click(importStorage);
-  $("#skill_name").keyup(function (event) {
-    if (event.keyCode === 13) {
-      addSkill();
-    }
-  });
 }

@@ -116,3 +116,18 @@ function handleSkillButtons () {
     }
   });
 }
+
+function handleImportExportButtons () {
+  $('#export_storage_button').click(exportStorage);
+  $('#import_storage_button').click(importStorage);
+}
+
+function handleAddSkillButton () {
+  $('#add_skill').click(addSkill);
+  $("#skill_name").keyup(function (event) {
+    if (event.keyCode === 13) {
+      addSkill();
+    }
+  });
+}
+

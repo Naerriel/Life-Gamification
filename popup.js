@@ -12,5 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
   getSkills()
   .then(displayTable);
   handleSkillButtons();
-  handleUniqueButtons();
+  handleImportExportButtons();
+  handleAddSkillButton();
 });
