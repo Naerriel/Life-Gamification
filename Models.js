@@ -53,6 +53,7 @@ function getLevel(exp) {
 function addSkill () {
   /* Adds skill to storage and to current table.
    */
+  extension_log("adding a skill");
   var skillName = $('#skill_name').val();
   $('#skill_name').val('');
   if(skillName === ""){
@@ -67,7 +68,7 @@ function addSkill () {
   chrome.storage.sync.set(skillsDict);
   debugAddingSkill(skillName);
 
-  newSkillToTable(allSkills.length - 1);
+  skillToTable(allSkills.length - 1);
 }
 
 function setSkill (id) {
@@ -97,26 +98,21 @@ function increaseValue(skillNr){
    */
   var addedExp = $("#add_value_num" + skillNr).val();
   $("#add_value_num" + skillNr).val('');
-  updateExp(parseInt(addedExp), skillNr, displayExp);
+  updateExp(parseInt(addedExp), skillNr, displayLevelAndExp);
 }
 
 function handleSkillButtons () {
   /* Manages clicking on all buttons and submitting by enter.
  	 */
-  $('.remove_skill_buttons').click(function () {
+  $("#skills").on("click", ".add_value_buttons", function () {
+		increaseValue(this.id.replace('add_value_button', ''));
+  });
+  $("#skills").on("click", ".remove_skill_buttons", function () {
     removeSkill(this.id.replace('remove_skill_button', ''));
   });
-  $('.add_value_buttons').click(function () {
-    increaseValue(this.id.replace('add_value_button', ''));
-  });
-  $('.add_value_nums').keyup(function (event) {
+  $("#skills").on("keyup", ".add_value_nums", function (event) {
     if (event.keyCode === 13) {
       increaseValue(this.id.replace('add_value_num', ''));
-    }
-  });
-  $("#skill_name").keyup(function (event) {
-    if (event.keyCode === 13) {
-      addSkill();
     }
   });
 }
