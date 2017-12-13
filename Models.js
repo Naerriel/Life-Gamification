@@ -64,6 +64,13 @@ function getSkills () {
   });
 }
 
+function clearSkills () {
+  /* Erases all skills.
+   */
+  var emptyArray = [];
+  chrome.storage.sync.set({skillsArrayId: emptyArray});
+}
+
 function updateSkill(skillNr){
   /* Increases skill's exp by the amount in correspondent text area.
    */

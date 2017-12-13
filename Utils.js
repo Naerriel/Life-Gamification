@@ -7,13 +7,6 @@ function extension_log (message) {
   });
 }
 
-function clearSkills () {
-  /* Erases all skills.
-   */
-  var emptyArray = [];
-  chrome.storage.sync.set({skillsArrayId: emptyArray});
-}
-
 function debugAddingSkill(skillName) {
   /* Writes all skills' names and experience value of currently added skill.
    */
