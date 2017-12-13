@@ -1,23 +1,3 @@
-function updateExp(addedExp, skillNr, callback){
-  /* Increases skill's exp by a certain amount.
-   *    */
-  var skillName = allSkills[skillNr];
-  var updateStorage = function (result) {
-    var overallExp;
-    if (skillName in result) {
-      overallExp = result[skillName] + addedExp;
-    }
-    else {
-      overallExp = addedExp;
-    }
-    var skillsDict = {};
-    skillsDict[skillName] = overallExp;
-    chrome.storage.sync.set(skillsDict);
-    callback(skillNr);
-  };
-  chrome.storage.sync.get([skillName], updateStorage);
-}
-
 function getExp(skillName){
   /* Gets exp of a skill from storage.
    */
@@ -88,27 +68,50 @@ function getSkills () {
   });
 }
 
-function increaseValue(skillNr){
-  /* Increases value of a skill with certain number by value in input type text.
+function updateSkill(skillNr){
+  /* Increases skill's exp by a certain amount.
    */
-  extension_log("Try to increase value.");
-  var addedExp = $("#add_value_num" + skillNr).val();
-  $("#add_value_num" + skillNr).val('');
-  updateExp(parseInt(addedExp), skillNr, levelAndExpHTML);
+  return new Promise((resolve, reject) => {
+    var addedExp = parseInt($("#add_value_num" + skillNr).val());
+    $("add_value_num" + skillNr).val('');
+    var skillName = allSkills[skillNr];
+
+    var updateStorage = function (result) {
+      var overallExp = 0;
+      if (skillName in result) {
+        overallExp += result[skillName] + addedExp;
+      }
+      else {
+        overallExp += addedExp;
+      }
+      var skillsDict = {};
+      skillsDict[skillName] = overallExp;
+      chrome.storage.sync.set(skillsDict, function(){
+        resolve(skillNr);
+      });
+    };
+    chrome.storage.sync.get([skillName], updateStorage);
+  });
 }
 
 function handleSkillButtons () {
   /* Manages clicking on all buttons and submitting by enter.
  	 */
   $("#skills").on("click", ".add_value_buttons", function () {
-		increaseValue(this.id.replace('add_value_button', ''));
+		var skillNr = this.id.replace('add_value_button', '');
+    extension_log("I add skill");
+    updateSkill(skillNr)
+    .then(levelAndExpHTML);
   });
   $("#skills").on("click", ".remove_skill_buttons", function () {
     removeSkill(this.id.replace('remove_skill_button', ''));
   });
   $("#skills").on("keyup", ".add_value_nums", function (event) {
     if (event.keyCode === 13) {
-      increaseValue(this.id.replace('add_value_num', ''));
+      extension_log("I add exp by enter");
+      var skillNr = this.id.replace('add_value_num', '');
+      updateSkill(skillNr)
+      .then(levelAndExpHTML);
     }
   });
 }
