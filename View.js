@@ -4,7 +4,6 @@ function levelAndExpHTML(skillNr) {
    */
   getExp(allSkills[skillNr])
   .then(function (exp) {
-    extension_log("exp = " + exp);
     var toFillValues = getLevelAndLevelUpExp(exp);
     var HTMLCode = (`
       Level ` + toFillValues[0] + `: ` + toFillValues[1] + ` more.`

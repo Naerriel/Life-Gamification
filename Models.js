@@ -102,7 +102,6 @@ function handleSkillButtons () {
  	 */
   $("#skills").on("click", ".add_value_buttons", function () {
 		var skillNr = this.id.replace('add_value_button', '');
-    extension_log("I add skill");
     updateSkill(skillNr)
     .then(levelAndExpHTML);
   });
@@ -111,7 +110,6 @@ function handleSkillButtons () {
   });
   $("#skills").on("keyup", ".add_value_nums", function (event) {
     if (event.keyCode === 13) {
-      extension_log("I add exp by enter");
       var skillNr = this.id.replace('add_value_num', '');
       updateSkill(skillNr)
       .then(levelAndExpHTML);
