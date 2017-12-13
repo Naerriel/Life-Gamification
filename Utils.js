@@ -14,17 +14,11 @@ function debugAddingSkill(skillName) {
     extension_log("The array of skills' names: ");
     extension_log(JSON.stringify(result));
   };
-  var logValueResult = function (result) {
-    if (skillName in result) {
-      extension_log("Skill " + skillName + " experience value is ");
-      extension_log(result[skillName]);
-    }
-    else {
-      extension_log('Skill ' + skillName + ' is not in the base.');
-    }
-  };
   chrome.storage.sync.get([skillsArrayId], logResult);
-  chrome.storage.sync.get([skillName], logValueResult);
+  getExp(skillName)
+  .then( function(exp) {
+    extension_log("Skill " + skillName + " experience value is " + exp);
+  });
 }
 
 function debugSkillsExp(index) {
