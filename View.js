@@ -2,9 +2,14 @@ function levelAndExpHTML(skillNr) {
   /* Sets display of a skill with a certain level
    * and number of experience points needed to level up.
    */
-  getExp(allSkills[skillNr], function (exp) {
+  getExp(allSkills[skillNr])
+  .then(function (exp) {
+    extension_log("exp = " + exp);
     $(".exp" + skillNr).html(getLevel(exp));
   });
+  //getExp(allSkills[skillNr], function (exp) {
+  //  $(".exp" + skillNr).html(getLevel(exp));
+  //});
 }
 
 function rowTableHTML(skill) {
@@ -32,7 +37,7 @@ function skillToTable (skillNr) {
     skillNr: skillNr,
   };
   $('#skills').append(rowTableHTML(skill));
-  displayLevelAndExp(skillNr);
+  levelAndExpHTML(skillNr);
 }
 
 function displayTable () {

@@ -18,18 +18,20 @@ function updateExp(addedExp, skillNr, callback){
   chrome.storage.sync.get([skillName], updateStorage);
 }
 
-function getExp(skillName, callback){
+function getExp(skillName){
   /* Gets exp of a skill from storage.
    */
-  chrome.storage.sync.get([skillName], function (result) {
-    var overallExp;
-    if (skillName in result) {
-      overallExp = result[skillName];
-    }
-    else{
-      overallExp = 0;
-    }
-    callback(overallExp);
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get([skillName], function (result) {
+      var overallExp;
+      if (skillName in result) {
+        overallExp = result[skillName];
+      }
+      else{
+        overallExp = 0;
+      }
+      resolve(overallExp);
+    });
   });
 }
 
@@ -53,25 +55,20 @@ function getLevel(exp) {
 function addSkill () {
   /* Adds skill to storage and to current table.
    */
-  extension_log("adding a skill");
   var skillName = $('#skill_name').val();
   $('#skill_name').val('');
-  if(skillName === ""){
-    return;
-  }
-  // If not for this if, hundreds of empty skills would be created with Enter key.
-  // To fix.
+
   var skillsDict = {};
   skillsDict[skillName] = 0;
   allSkills.push(skillName);
+
   chrome.storage.sync.set({skillsArrayId: allSkills});
   chrome.storage.sync.set(skillsDict);
   debugAddingSkill(skillName);
-
   skillToTable(allSkills.length - 1);
 }
 
-function setSkill (id) {
+function setSkill () {
 
 }
 
@@ -96,9 +93,10 @@ function getSkills () {
 function increaseValue(skillNr){
   /* Increases value of a skill with certain number by value in input type text.
    */
+  extension_log("Try to increase value.");
   var addedExp = $("#add_value_num" + skillNr).val();
   $("#add_value_num" + skillNr).val('');
-  updateExp(parseInt(addedExp), skillNr, displayLevelAndExp);
+  updateExp(parseInt(addedExp), skillNr, levelAndExpHTML);
 }
 
 function handleSkillButtons () {
