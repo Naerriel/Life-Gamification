@@ -5,11 +5,12 @@ function levelAndExpHTML(skillNr) {
   getExp(allSkills[skillNr])
   .then(function (exp) {
     extension_log("exp = " + exp);
-    $(".exp" + skillNr).html(getLevel(exp));
+    var toFillValues = getLevelAndLevelUpExp(exp);
+    var HTMLCode = (`
+      Level ` + toFillValues[0] + `: ` + toFillValues[1] + ` more.`
+    );
+    $(".exp" + skillNr).html(HTMLCode);
   });
-  //getExp(allSkills[skillNr], function (exp) {
-  //  $(".exp" + skillNr).html(getLevel(exp));
-  //});
 }
 
 function rowTableHTML(skill) {

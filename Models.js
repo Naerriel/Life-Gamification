@@ -35,21 +35,19 @@ function getExp(skillName){
   });
 }
 
-function getLevel(exp) {
-    /* Calculates current level and exp needed to next level.
-     * O(max_level) - computational complexity
-     */
-    var level = 0;
-    while(exp >= expTable[level + 1]){
-            level++;
-        }
-    var levelExp = exp - expTable[level];
-    var totalExpNeeded = expTable[level + 1] - expTable[level];
-    var levelUpExp = totalExpNeeded - levelExp;
-    var htmlCode = (`
-          Level ` + level + `: ` + levelUpExp + ` more.
-          `);
-    return htmlCode;
+function getLevelAndLevelUpExp(exp) {
+  /* Calculates current level and exp needed to next level.
+   * O(max_level) - computational complexity
+   */
+  var level = 0;
+  while(exp >= expTable[level + 1]){
+    level++;
+  }
+  var levelExp = exp - expTable[level];
+  var totalExpNeeded = expTable[level + 1] - expTable[level];
+  var levelUpExp = totalExpNeeded - levelExp;
+  var returnObject = [level, levelUpExp];
+  return returnObject;
 }
 
 function addSkill () {
