@@ -34,7 +34,7 @@ function skillToTable (skillNr) {
   var skill = {
     skillName: allSkills[skillNr],
     expValue: -1,
-    // This value will be updated in the display function.
+    // This value will be updated in the levelAndExpHTML function.
     skillNr: skillNr,
   };
   $('#skills').append(rowTableHTML(skill));

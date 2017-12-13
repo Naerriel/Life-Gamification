@@ -46,10 +46,6 @@ function addSkill () {
   skillToTable(allSkills.length - 1);
 }
 
-function setSkill () {
-
-}
-
 function getSkills () {
   /*  Creates a local table by taking skills from chrome storage.
    */
@@ -69,7 +65,7 @@ function getSkills () {
 }
 
 function updateSkill(skillNr){
-  /* Increases skill's exp by a certain amount.
+  /* Increases skill's exp by the amount in correspondent text area.
    */
   return new Promise((resolve, reject) => {
     var addedExp = parseInt($("#add_value_num" + skillNr).val());
@@ -95,7 +91,7 @@ function updateSkill(skillNr){
 }
 
 function handleSkillButtons () {
-  /* Manages clicking on all buttons and submitting by enter.
+  /* Manages event listeners corresponding to skills.
  	 */
   $("#skills").on("click", ".add_value_buttons", function () {
 		var skillNr = this.id.replace('add_value_button', '');
@@ -117,11 +113,15 @@ function handleSkillButtons () {
 }
 
 function handleImportExportButtons () {
+  /* Manages event listeners corresponding to import & export functions.
+   */
   $('#export_storage_button').click(exportStorage);
   $('#import_storage_button').click(importStorage);
 }
 
 function handleAddSkillButton () {
+  /* Manages event listeners corresponding to adding new skills.
+   */
   $('#add_skill').click(addSkill);
   $("#skill_name").keyup(function (event) {
     if (event.keyCode === 13) {
@@ -129,4 +129,3 @@ function handleAddSkillButton () {
     }
   });
 }
-
