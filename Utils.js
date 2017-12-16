@@ -44,51 +44,23 @@ function removeSkill(skillNr) {
 }
 
 function exportStorage () {
+  /* Stringifies storage so it can be copied and later imported.
+   */
   let keyList = allSkills.slice();
   keyList.push("skillsArrayId");
-  extension_log("KEYLIST:");
-  extension_log(keyList);
   chrome.storage.sync.get(keyList, function (result) {
-    extension_log("Hi");
     $('#storage_stringified').html(JSON.stringify(result));
   });
 }
 
 function importStorage () {
-  var text = $('#storage_stringified').val();
-  var rightBracketPos = 0;
-  while(text[rightBracketPos] != "]" && rightBracketPos < text.length){
-    rightBracketPos++;
-  }
-  if(rightBracketPos < text.length && text[rightBracketPos] == "]"){
-    var toSkills = text.slice(0, rightBracketPos + 1);
-    var toExp = text.slice(rightBracketPos + 1, text.length);
-    var newSkills = JSON.parse(toSkills);
-    var newExp = JSON.parse(toExp);
-    chrome.storage.sync.set({skillsArrayId: newSkills}, function () {
-      allSkills = newSkills;
-      extension_log(allSkills.length);
-
-      function setExp (i) {
-        if(i < allSkills.length){
-          var skillName = allSkills[i];
-          var skillExp = newExp[i];
-          var skillsDict = {};
-          skillsDict[skillName] = skillExp;
-          chrome.storage.sync.set(skillsDict, setExp(i+ 1));
-        }
-        else{
-          setTimeout(function() {
-            resetHTMLTable();
-          },100);
-        }
-      }
-      setExp(0);
-    });
-  }
-  else{
-    extension_log("Incorrect JSONs.");
-  }
+  /* Gets stringified storage and saves it in chrome storage.
+   */
+  var storage = $("#storage_stringified").val();
+  chrome.storage.sync.set(JSON.parse(storage), function() {
+    getSkills()
+    .then(resetHTMLTable);
+  });
 }
 
 function fillExpTable() {
