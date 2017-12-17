@@ -41,9 +41,6 @@ function skillToTable (skillNr) {
 }
 
 function displayTable () {
-  /* Creates table of skills by adding every skill row by row
-   * and sets display of this skill.
-   */
   for(var i = 0; i < allSkills.length; i++){
     skillToTable(i);
   }

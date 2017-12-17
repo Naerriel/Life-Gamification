@@ -26,8 +26,7 @@ function getLevelAndLevelUpExp(exp) {
   var levelExp = exp - expTable[level];
   var totalExpNeeded = expTable[level + 1] - expTable[level];
   var levelUpExp = totalExpNeeded - levelExp;
-  var returnObject = [level, levelUpExp];
-  return returnObject;
+  return [level, levelUpExp];
 }
 
 function addSkill () {
@@ -56,7 +55,7 @@ function getSkills () {
         resolve();
       }
       else{
-        extension_log("There isn't any array of skills` names.");
+        extension_log("There isn't any array of skills names.");
         reject();
       }
     };
@@ -67,8 +66,7 @@ function getSkills () {
 function clearSkills () {
   /* Erases all skills.
    */
-  var emptyArray = [];
-  chrome.storage.sync.set({skillsArrayId: emptyArray});
+  chrome.storage.sync.set({skillsArrayId: []});
 }
 
 function updateSkill(skillNr){
