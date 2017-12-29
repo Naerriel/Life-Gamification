@@ -96,9 +96,9 @@ function updateSkill(skillNr){
 
 function handleSkillButtons () {
   /* Manages event listeners corresponding to skills.
- 	 */
+   */
   $("#skills").on("click", ".add_value_buttons", function () {
-		var skillNr = this.id.replace('add_value_button', '');
+    var skillNr = this.id.replace('add_value_button', '');
     updateSkill(skillNr)
     .then(levelAndExpHTML);
   });
