@@ -2,6 +2,9 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="popup.js"></script>
+    <script src="Models.js"></script>
+    <script src="View.js"></script>
+    <script src="Utils.js"></script>
     <style>
     .skill_name {
         display: inline;
@@ -11,6 +14,9 @@
     }
     .add_value_buttons {
         display: inline;
+    }
+    #storage_stringified{
+        display: block;
     }
     </style>
 </head>
@@ -23,7 +29,13 @@
     </div>
 
     <h3> Add skill: </h3>
-    <input id="skill_name" type="text" name"addSkill" value="">
-    <button id="add_skill" type="button">Add</button>
+    <div id="skill_adding">
+        <input id="skill_name" type="text" name"addSkill" value="">
+        <button id="add_skill" type="button">Add</button>
+    </div>
+
+    <a id="export_storage_button"><button>Export Storage</button></a>
+    <button id="import_storage_button" type="button">Import Storage</button>
+    <textarea id="storage_stringified"></textarea>
 </body>
 </html>
