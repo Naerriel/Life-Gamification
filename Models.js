@@ -42,7 +42,6 @@ function addSkill () {
   chrome.storage.sync.set({skillsArrayId: allSkills});
   chrome.storage.sync.set(skillsDict);
   debugAddingSkill(skillName);
-  skillToTable(allSkills.length - 1);
 }
 
 function getSkills () {
@@ -125,10 +124,14 @@ function handleImportExportButtons () {
 function handleAddSkillButton () {
   /* Manages event listeners corresponding to adding new skills.
    */
-  $('#add_skill').click(addSkill);
+  $('#add_skill').click(function(){
+    addSkill();
+    skillToTable(allSkills.length - 1);
+  });
   $("#skill_name").keyup(function (event) {
     if (event.keyCode === 13) {
       addSkill();
+      skillToTable(allSkills.length - 1);
     }
   });
 }
