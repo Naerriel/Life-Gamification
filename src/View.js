@@ -55,3 +55,39 @@ function resetHTMLTable() {
   displayTable();
   handleSkillButtons();
 }
+
+function handleSkillButtons () {
+  /* Manages event listeners corresponding to skills.
+   */
+  $("#skills").on("click", ".add_value_buttons", function () {
+    var skillNr = this.id.replace('add_value_button', ''); updateSkill(skillNr)
+    .then(levelAndExpHTML);
+  }); $("#skills").on("click", ".remove_skill_buttons", function () {
+    removeSkill(this.id.replace('remove_skill_button', ''));
+  }); $("#skills").on("keyup", ".add_value_nums", function (event) {
+    if (event.keyCode === 13) {
+      var skillNr = this.id.replace('add_value_num', ''); updateSkill(skillNr)
+      .then(levelAndExpHTML);
+    }
+  });
+}
+
+function handleImportExportButtons () {
+  /* Manages event listeners corresponding to import & export functions.
+   */
+  $('#export_storage_button').click(exportStorage);
+  $('#import_storage_button').click(importStorage);
+}
+
+function handleAddSkillButton () {
+  /* Manages event listeners corresponding to adding new skills.
+   */
+  $('#add_skill').click(function(){
+    addSkill(); skillToTable(allSkills.length - 1);
+  }); $("#skill_name").keyup(function (event) {
+    if (event.keyCode === 13) {
+      addSkill(); skillToTable(allSkills.length - 1);
+    }
+  });
+}
+

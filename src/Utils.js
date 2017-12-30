@@ -33,16 +33,6 @@ function debugSkillsExp(index) {
   }
 }
 
-function removeSkill(skillNr) {
-  /* Removes skill from allSkills table
-   * and stores modified table in Chrome Storage.
-   */
-  allSkills.splice(skillNr, 1);
-  extension_log("allSkills after splice: " + allSkills);
-  chrome.storage.sync.set({skillsArrayId: allSkills});
-  resetHTMLTable();
-}
-
 function exportStorage () {
   /* Stringifies storage so it can be copied and later imported.
    */
@@ -61,16 +51,4 @@ function importStorage () {
     getSkills()
     .then(resetHTMLTable);
   });
-}
-
-function fillExpTable() {
-  /* Fills expTable with numbers according to a certain formula.
-   */
-  expTable[1] = 0;
-  for (var i = 2; i < maxLevel; i++) {
-    expTable[i] = expTable[i - 1] + (4 + (i - 1) * (Math.log10(i - 1) + 1));
-  }
-  for (var i = 2; i < maxLevel; i++) {
-    expTable[i] = Math.floor(expTable[i]);
-  }
 }
