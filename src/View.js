@@ -2,13 +2,10 @@ function levelAndExpHTML(skillNr) {
   /* Sets display of a skill with a certain level
    * and number of experience points needed to level up.
    */
-  getExp(allSkills[skillNr])
-  .then(function (exp) {
-    var toFillValues = getLevelAndLevelUpExp(exp);
-    var HTMLCode = (`
-      Level ` + toFillValues[0] + `: ` + toFillValues[1] + ` more.`
-    );
-    $(".exp" + skillNr).html(HTMLCode);
+  getLevelAndLevelUpExp(skillNr)
+  .then(function (toFillValues) {
+    var HTMLCode = (`Level ${toFillValues[0]}: ${toFillValues[1]} more.`);
+    $(`.exp${skillNr}`).html(HTMLCode);
   });
 }
 
@@ -16,12 +13,12 @@ function rowTableHTML(skill) {
   /* Receiving parameters of a skill, creates HTML of a table row.
    */
   var HTMLCode = (`
-    <h4 class="skill_name"> ` + skill.skillName + `: </h4>
-    <a class="exp` + skill.skillNr + `"> ` + skill.expValue + ` </a>
+    <h4 class="skill_name">${skill.skillName}: </h4>
+    <a class="exp` + skill.skillNr + `">${skill.expValue}</a>
     <div>
-      <input id="add_value_num` + skill.skillNr + `" class="add_value_nums" type="number" name="addValue" value="">
-      <button id="add_value_button` + skill.skillNr + `" class="add_value_buttons" type="button">Add</button>
-      <button id="remove_skill_button` + skill.skillNr + `" class="remove_skill_buttons" type="button">Remove</button>
+      <input id="add_value_num${skill.skillNr}" class="add_value_nums" type="number" name="addValue" value="">
+      <button id="add_value_button${skill.skillNr}" class="add_value_buttons" type="button">Add</button>
+      <button id="remove_skill_button${skill.skillNr}" class="remove_skill_buttons" type="button">Remove</button>
     </div>
   `);
   return HTMLCode;
@@ -62,9 +59,12 @@ function handleSkillButtons () {
   $("#skills").on("click", ".add_value_buttons", function () {
     var skillNr = this.id.replace('add_value_button', ''); updateSkill(skillNr)
     .then(levelAndExpHTML);
-  }); $("#skills").on("click", ".remove_skill_buttons", function () {
-    removeSkill(this.id.replace('remove_skill_button', ''));
-  }); $("#skills").on("keyup", ".add_value_nums", function (event) {
+  });
+  $("#skills").on("click", ".remove_skill_buttons", function () {
+    removeSkill(this.id.replace('remove_skill_button', ''))
+    .then(resetHTMLTable());
+  });
+  $("#skills").on("keyup", ".add_value_nums", function (event) {
     if (event.keyCode === 13) {
       var skillNr = this.id.replace('add_value_num', ''); updateSkill(skillNr)
       .then(levelAndExpHTML);
@@ -83,10 +83,13 @@ function handleAddSkillButton () {
   /* Manages event listeners corresponding to adding new skills.
    */
   $('#add_skill').click(function(){
-    addSkill(); skillToTable(allSkills.length - 1);
-  }); $("#skill_name").keyup(function (event) {
+    addSkill()
+    .then(skillToTable(allSkills.length - 1));
+  });
+  $("#skill_name").keyup(function (event) {
     if (event.keyCode === 13) {
-      addSkill(); skillToTable(allSkills.length - 1);
+      addSkill()
+      .then(skillToTable(allSkills.length - 1));
     }
   });
 }
