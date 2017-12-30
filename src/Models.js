@@ -1,5 +1,5 @@
 function getLevelAndLevelUpExp(skillNr) {
-  /* Gets exp from storage andCalculates current level and exp
+  /* Gets exp from storage and Calculates current level and exp
    * needed to reach next level.
    * O(max_level) - computational complexity
    */
