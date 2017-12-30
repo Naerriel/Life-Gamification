@@ -88,50 +88,27 @@ function updateSkill(skillNr){
       skillsDict[skillName] = overallExp;
       chrome.storage.sync.set(skillsDict, function(){
         resolve(skillNr);
-      });
+ 	     });
     };
     chrome.storage.sync.get([skillName], updateStorage);
   });
 }
 
-function handleSkillButtons () {
-  /* Manages event listeners corresponding to skills.
+function fillExpTable() {
+  /* Fills expTable with numbers according to a certain formula.
    */
-  $("#skills").on("click", ".add_value_buttons", function () {
-    var skillNr = this.id.replace('add_value_button', '');
-    updateSkill(skillNr)
-    .then(levelAndExpHTML);
-  });
-  $("#skills").on("click", ".remove_skill_buttons", function () {
-    removeSkill(this.id.replace('remove_skill_button', ''));
-  });
-  $("#skills").on("keyup", ".add_value_nums", function (event) {
-    if (event.keyCode === 13) {
-      var skillNr = this.id.replace('add_value_num', '');
-      updateSkill(skillNr)
-      .then(levelAndExpHTML);
-    }
-  });
+  for (var i = 0; i < maxLevel; i++) {
+    expTable[i] = Math.floor(i * i / 2);
+  }
 }
 
-function handleImportExportButtons () {
-  /* Manages event listeners corresponding to import & export functions.
+function removeSkill(skillNr) {
+  /* Removes skill from allSkills table
+   * and stores modified table in Chrome Storage.
    */
-  $('#export_storage_button').click(exportStorage);
-  $('#import_storage_button').click(importStorage);
+  allSkills.splice(skillNr, 1);
+  extension_log("allSkills after splice: " + allSkills);
+  chrome.storage.sync.set({skillsArrayId: allSkills});
+  resetHTMLTable();
 }
 
-function handleAddSkillButton () {
-  /* Manages event listeners corresponding to adding new skills.
-   */
-  $('#add_skill').click(function(){
-    addSkill();
-    skillToTable(allSkills.length - 1);
-  });
-  $("#skill_name").keyup(function (event) {
-    if (event.keyCode === 13) {
-      addSkill();
-      skillToTable(allSkills.length - 1);
-    }
-  });
-}
