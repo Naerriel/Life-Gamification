@@ -66,7 +66,11 @@ function importStorage () {
 function fillExpTable() {
   /* Fills expTable with numbers according to a certain formula.
    */
-  for (var i = 0; i < maxLevel; i++) {
-    expTable[i] = Math.floor(i * i / 2);
+  expTable[1] = 0;
+  for (var i = 2; i < maxLevel; i++) {
+    expTable[i] = expTable[i - 1] + (4 + (i - 1) * (Math.log10(i - 1) + 1));
+  }
+  for (var i = 2; i < maxLevel; i++) {
+    expTable[i] = Math.floor(expTable[i]);
   }
 }
