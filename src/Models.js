@@ -60,7 +60,9 @@ function getSkills () {
 function clearSkills () {
   /* Erases all skills.
    */
-  chrome.storage.sync.set({skillsArrayId: []});
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.set({skillsArrayId: []});
+  });
 }
 
 function updateSkill(skillNr){
