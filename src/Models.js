@@ -3,7 +3,7 @@ function getExp(skillName){
    */
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get([skillName], function (result) {
-      var overallExp;
+      let overallExp;
       if (skillName in result) {
         overallExp = result[skillName];
       }
@@ -17,38 +17,41 @@ function getExp(skillName){
 
 function getLevelAndLevelUpExp(exp) {
   /* Calculates current level and exp needed to next level.
-   * O(max_level) - computational complexity
    */
-  var level = 0;
-  while(exp >= expTable[level + 1]){
-    level++;
-  }
-  var levelExp = exp - expTable[level];
-  var totalExpNeeded = expTable[level + 1] - expTable[level];
-  var levelUpExp = totalExpNeeded - levelExp;
-  return [level, levelUpExp];
+  return new Promise((resolve, reject) => {
+		let level = 0;
+		while(exp >= expTable[level + 1]){
+			level++;
+		}
+		let levelExp = exp - expTable[level];
+		let totalExpNeeded = expTable[level + 1] - expTable[level];
+		let levelUpExp = totalExpNeeded - levelExp;
+		resolve([level, levelUpExp]);
+	});
 }
 
 function addSkill () {
-  /* Adds skill to storage and to current table.
+  /* Adds skill to storage.
    */
-  var skillName = $('#skill_name').val();
-  $('#skill_name').val('');
+  return new Promise((resolve, reject) => {
+    let skillName = $('#skill_name').val();
+    $('#skill_name').val('');
 
-  var skillsDict = {};
-  skillsDict[skillName] = 0;
-  allSkills.push(skillName);
+    let skillsDict = {};
+    skillsDict[skillName] = 0;
+    allSkills.push(skillName);
 
-  chrome.storage.sync.set({skillsArrayId: allSkills});
-  chrome.storage.sync.set(skillsDict);
-  debugAddingSkill(skillName);
+    chrome.storage.sync.set({skillsArrayId: allSkills});
+    chrome.storage.sync.set(skillsDict);
+    debugAddingSkill(skillName);
+  });
 }
 
 function getSkills () {
   /*  Creates a local table by taking skills from chrome storage.
    */
   return new Promise((resolve, reject) => {
-    var setSkillsArray = function (result) {
+    let setSkillsArray = function (result) {
       if(skillsArrayId in result) {
         allSkills = result[skillsArrayId];
         resolve();
@@ -65,26 +68,28 @@ function getSkills () {
 function clearSkills () {
   /* Erases all skills.
    */
-  chrome.storage.sync.set({skillsArrayId: []});
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.set({skillsArrayId: []});
+  });
 }
 
 function updateSkill(skillNr){
   /* Increases skill's exp by the amount in correspondent text area.
    */
   return new Promise((resolve, reject) => {
-    var addedExp = parseInt($("#add_value_num" + skillNr).val());
+    let addedExp = parseInt($("#add_value_num" + skillNr).val());
     $("add_value_num" + skillNr).val('');
-    var skillName = allSkills[skillNr];
+    let skillName = allSkills[skillNr];
 
-    var updateStorage = function (result) {
-      var overallExp = 0;
+    let updateStorage = function (result) {
+      let overallExp = 0;
       if (skillName in result) {
         overallExp += result[skillName] + addedExp;
       }
       else {
         overallExp += addedExp;
       }
-      var skillsDict = {};
+      let skillsDict = {};
       skillsDict[skillName] = overallExp;
       chrome.storage.sync.set(skillsDict, function(){
         resolve(skillNr);
@@ -94,44 +99,25 @@ function updateSkill(skillNr){
   });
 }
 
-function handleSkillButtons () {
-  /* Manages event listeners corresponding to skills.
+function fillExpTable() {
+  /* Fills expTable with numbers according to a certain formula.
    */
-  $("#skills").on("click", ".add_value_buttons", function () {
-    var skillNr = this.id.replace('add_value_button', '');
-    updateSkill(skillNr)
-    .then(levelAndExpHTML);
-  });
-  $("#skills").on("click", ".remove_skill_buttons", function () {
-    removeSkill(this.id.replace('remove_skill_button', ''));
-  });
-  $("#skills").on("keyup", ".add_value_nums", function (event) {
-    if (event.keyCode === 13) {
-      var skillNr = this.id.replace('add_value_num', '');
-      updateSkill(skillNr)
-      .then(levelAndExpHTML);
-    }
-  });
+  expTable[1] = 0;
+  for (let i = 2; i < maxLevel; i++) {
+    expTable[i] = expTable[i - 1] + (4 + (i - 1) * (Math.log10(i - 1) + 1));
+  }
+  for (let i = 2; i < maxLevel; i++) {
+    expTable[i] = Math.floor(expTable[i]);
+  }
 }
 
-function handleImportExportButtons () {
-  /* Manages event listeners corresponding to import & export functions.
+function removeSkill(skillNr) {
+  /* Removes skill from allSkills table
+   * and stores modified table in Chrome Storage.
    */
-  $('#export_storage_button').click(exportStorage);
-  $('#import_storage_button').click(importStorage);
-}
-
-function handleAddSkillButton () {
-  /* Manages event listeners corresponding to adding new skills.
-   */
-  $('#add_skill').click(function(){
-    addSkill();
-    skillToTable(allSkills.length - 1);
-  });
-  $("#skill_name").keyup(function (event) {
-    if (event.keyCode === 13) {
-      addSkill();
-      skillToTable(allSkills.length - 1);
-    }
+  return new Promise((resolve, reject) => {
+    allSkills.splice(skillNr, 1);
+    extension_log("allSkills after splice: " + allSkills);
+    chrome.storage.sync.set({skillsArrayId: allSkills});
   });
 }
