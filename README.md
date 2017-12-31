@@ -21,3 +21,5 @@ Features to be added in upcoming versions:
  - Reminders.
  - Optimised to-do-list:
     - You will be able to only see the element on the top, so you can better concentrate on your current task. If you split your goal into small and easily achievable pieces like: "clean the desk", "open the books", "start the pomodoro", then you can avoid the procrastination associated with overwhelmingness of a task like "write the master thesis".
+
+Icon made by Freepik from www.flaticon.com.
