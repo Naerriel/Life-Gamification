@@ -16,14 +16,8 @@ function debugAddingSkill(skillName) {
   };
   chrome.storage.sync.get([skillsArrayId], logResult);
   getExp(skillName)
-  .then( function(exp) {
-    chrome.storage.sync.get([skillName], function(result) {
-      var exp = 0;
-      if(skillName in result){
-        exp = result[skillName];
-      }
-      extension_log(`Skill ${skillName} experience value is ${exp}`);
-    });
+  .then(function(exp) {
+    extension_log(`Skill ${skillName} experience value is ${exp}`);
   });
 }
 

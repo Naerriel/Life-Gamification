@@ -2,8 +2,9 @@ function levelAndExpHTML(skillNr) {
   /* Sets display of a skill with a certain level
    * and number of experience points needed to level up.
    */
-  getLevelAndLevelUpExp(skillNr)
-  .then(function (toFillValues) {
+  getExp(allSkills[skillNr])
+  .then(getLevelAndLevelUpExp)
+  .then(function (toFillValues){
     var HTMLCode = (`Level ${toFillValues[0]}: ${toFillValues[1]} more.`);
     $(`.exp${skillNr}`).html(HTMLCode);
   });

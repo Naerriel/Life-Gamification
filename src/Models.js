@@ -1,24 +1,33 @@
-function getLevelAndLevelUpExp(skillNr) {
-  /* Gets exp from storage and Calculates current level and exp
-   * needed to reach next level.
+function getExp(skillName){
+  /* Gets exp of a skill from storage.
    */
   return new Promise((resolve, reject) => {
-    var skillName = allSkills[skillNr];
     chrome.storage.sync.get([skillName], function (result) {
-      var exp = 0;
-      if(skillName in result) {
-        exp = result[skillName];
+      var overallExp;
+      if (skillName in result) {
+        overallExp = result[skillName];
       }
-      var level = 0;
-      while(exp >= expTable[level + 1]){
-        level++;
+      else{
+        overallExp = 0;
       }
-      var levelExp = exp - expTable[level];
-      var totalExpNeeded = expTable[level + 1] - expTable[level];
-      var levelUpExp = totalExpNeeded - levelExp;
-      resolve([level, levelUpExp]);
+      resolve(overallExp);
     });
   });
+}
+
+function getLevelAndLevelUpExp(exp) {
+  /* Calculates current level and exp needed to next level.
+   */
+  return new Promise((resolve, reject) => {
+		var level = 0;
+		while(exp >= expTable[level + 1]){
+			level++;
+		}
+		var levelExp = exp - expTable[level];
+		var totalExpNeeded = expTable[level + 1] - expTable[level];
+		var levelUpExp = totalExpNeeded - levelExp;
+		resolve([level, levelUpExp]);
+	});
 }
 
 function addSkill () {
