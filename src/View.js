@@ -5,7 +5,7 @@ function levelAndExpHTML(skillNr) {
   getExp(allSkills[skillNr])
   .then(getLevelAndLevelUpExp)
   .then(function (toFillValues){
-    var HTMLCode = (`Level ${toFillValues[0]}: ${toFillValues[1]} more.`);
+    let HTMLCode = (`Level ${toFillValues[0]}: ${toFillValues[1]} more.`);
     $(`.exp${skillNr}`).html(HTMLCode);
   });
 }
@@ -13,7 +13,7 @@ function levelAndExpHTML(skillNr) {
 function rowTableHTML(skill) {
   /* Receiving parameters of a skill, creates HTML of a table row.
    */
-  var HTMLCode = (`
+  let HTMLCode = (`
     <h4 class="skill_name">${skill.skillName}: </h4>
     <a class="exp` + skill.skillNr + `">${skill.expValue}</a>
     <div>
@@ -28,7 +28,7 @@ function rowTableHTML(skill) {
 function skillToTable (skillNr) {
   /* Adds a skill of a certain number to the HTML table.
    */
-  var skill = {
+  let skill = {
     skillName: allSkills[skillNr],
     expValue: -1,
     // This value will be updated in the levelAndExpHTML function.
@@ -39,7 +39,7 @@ function skillToTable (skillNr) {
 }
 
 function displayTable () {
-  for(var i = 0; i < allSkills.length; i++){
+  for(let i = 0; i < allSkills.length; i++){
     skillToTable(i);
   }
 }
@@ -58,7 +58,7 @@ function handleSkillButtons () {
   /* Manages event listeners corresponding to skills.
    */
   $("#skills").on("click", ".add_value_buttons", function () {
-    var skillNr = this.id.replace('add_value_button', ''); updateSkill(skillNr)
+    let skillNr = this.id.replace('add_value_button', ''); updateSkill(skillNr)
     .then(levelAndExpHTML);
   });
   $("#skills").on("click", ".remove_skill_buttons", function () {
@@ -67,7 +67,7 @@ function handleSkillButtons () {
   });
   $("#skills").on("keyup", ".add_value_nums", function (event) {
     if (event.keyCode === 13) {
-      var skillNr = this.id.replace('add_value_num', ''); updateSkill(skillNr)
+      let skillNr = this.id.replace('add_value_num', ''); updateSkill(skillNr)
       .then(levelAndExpHTML);
     }
   });
