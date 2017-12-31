@@ -1,7 +1,6 @@
 function getLevelAndLevelUpExp(skillNr) {
   /* Gets exp from storage and Calculates current level and exp
    * needed to reach next level.
-   * O(max_level) - computational complexity
    */
   return new Promise((resolve, reject) => {
     var skillName = allSkills[skillNr];
@@ -23,7 +22,7 @@ function getLevelAndLevelUpExp(skillNr) {
 }
 
 function addSkill () {
-  /* Adds skill to storage and to current table.
+  /* Adds skill to storage.
    */
   return new Promise((resolve, reject) => {
     var skillName = $('#skill_name').val();
