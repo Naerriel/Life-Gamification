@@ -85,7 +85,7 @@ function updateSkill(skillNr){
       skillsDict[skillName] = overallExp;
       chrome.storage.sync.set(skillsDict, function(){
         resolve(skillNr);
- 	     });
+      });
     };
     chrome.storage.sync.get([skillName], updateStorage);
   });
