@@ -19,15 +19,15 @@ function getLevelAndLevelUpExp(exp) {
   /* Calculates current level and exp needed to next level.
    */
   return new Promise((resolve, reject) => {
-		let level = 0;
-		while(exp >= expTable[level + 1]){
-			level++;
-		}
-		let levelExp = exp - expTable[level];
-		let totalExpNeeded = expTable[level + 1] - expTable[level];
-		let levelUpExp = totalExpNeeded - levelExp;
-		resolve([level, levelUpExp]);
-	});
+    let level = 0;
+    while(exp >= expTable[level + 1]){
+      level++;
+    }
+    let levelExp = exp - expTable[level];
+    let totalExpNeeded = expTable[level + 1] - expTable[level];
+    let levelUpExp = totalExpNeeded - levelExp;
+    resolve([level, levelUpExp]);
+  });
 }
 
 function addSkill () {
