@@ -27,4 +27,4 @@ Features to be added in upcoming versions:
  - Karol Górski - main developer
  - Andrzej Górski - team manager and code reviewer
  - Adrian Zniszczyński - front-end advisor and code reviewer
-Icon made by Freepik from www.flaticon.com.
+ - Icon made by Freepik from www.flaticon.com.
