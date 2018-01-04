@@ -58,7 +58,8 @@ function handleSkillButtons () {
   /* Manages event listeners corresponding to skills.
    */
   $("#skills").on("click", ".add_value_buttons", function () {
-    let skillNr = this.id.replace('add_value_button', ''); updateSkill(skillNr)
+    let skillNr = this.id.replace('add_value_button', '');
+    updateSkill(skillNr)
     .then(levelAndExpHTML);
   });
   $("#skills").on("click", ".remove_skill_buttons", function () {
@@ -67,7 +68,8 @@ function handleSkillButtons () {
   });
   $("#skills").on("keyup", ".add_value_nums", function (event) {
     if (event.keyCode === 13) {
-      let skillNr = this.id.replace('add_value_num', ''); updateSkill(skillNr)
+      let skillNr = this.id.replace('add_value_num', '');
+      updateSkill(skillNr)
       .then(levelAndExpHTML);
     }
   });

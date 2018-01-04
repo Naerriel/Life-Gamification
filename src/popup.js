@@ -7,7 +7,6 @@ const maxLevel = 210;
 document.addEventListener('DOMContentLoaded', function () {
   extension_log(" ");
   extension_log("Application begins.");
-
   fillExpTable();
   getSkills()
   .then(displayTable);
