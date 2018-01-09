@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   fillExpTable();
   getSkills()
-  .then(fillSkillArray)
+  .then(fillSkillsFullInfo)
   .then(function() {
     displayTable();
     extension_log(JSON.stringify(skillsFullInfo));

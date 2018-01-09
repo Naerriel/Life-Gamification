@@ -1,40 +1,56 @@
 class skill{
-  constructor(name, exp, level, expTillNextLevel){
+  constructor(name, nr, exp, level, expTillNextLevel){
     this.name = name;
+    this.nr = nr;
     this.exp = exp;
     this.level = level;
     this.expTillNextLevel = expTillNextLevel;
   }
 }
 
-function fillSkillArray() {
+function fillOneSkillFullInfo(i){
+  return new Promise((resolve, reject) => {
+    let name = skillsNames[i];
+    let nr = i;
+    let exp;
+    let level;
+    let expTillNextLevel;
+
+    getExp(name)
+    .then(function (expResult){
+      exp = expResult;
+    })
+    .then(function (){
+      getLevelAndExpTillNextLevel(exp)
+      .then(function (obj) {
+        level = obj[0];
+        expTillNextLevel = obj[1];
+      });
+    })
+    .then(function (){
+      let newSkill = new skill(name, nr, exp, level, expTillNextLevel);
+      skillsFullInfo.push(newSkill);
+      extension_log("heeere");
+      resolve();
+    });
+  });
+}
+
+function fillSkillsFullInfo() {
   return new Promise((resolve, reject) => {
     for (let i = 0; i < skillsNames.length; i++){
-      let name = skillsNames[i];
-      let exp;
-      let level;
-      let expTillNextLevel;
-      getExp(name)
-      .then(function (expResult){
-        exp = expResult;
-      })
-      .then(function (){
-        getLevelAndLevelUpExp(exp)
-        .then(function (obj) {
-          level = obj[0];
-          expTillNextLevel = obj[1];
-        });
-      })
-      .then(function (){
-        let newSkill = new skill(name, exp, level, expTillNextLevel);
-        skillsFullInfo.push(newSkill);
-        if(i + 1 === skillsNames.length) resolve();
+      extension_log("wtf " + i);
+      fillOneSkillFullInfo(i)
+      .then(function () {
+        if(i + 1 === skillsNames.length){
+          resolve();
+        }
       });
     }
   });
 }
 
-function getLevelAndLevelUpExp(exp) {
+function getLevelAndExpTillNextLevel(exp) {
   /* Calculates current level and exp needed to next level.
    */
   return new Promise((resolve, reject) => {
@@ -44,8 +60,8 @@ function getLevelAndLevelUpExp(exp) {
     }
     let levelExp = exp - expTable[level];
     let totalExpNeeded = expTable[level + 1] - expTable[level];
-    let levelUpExp = totalExpNeeded - levelExp;
-    resolve([level, levelUpExp]);
+    let expTillNextLevel = totalExpNeeded - levelExp;
+    resolve([level, expTillNextLevel]);
   });
 }
 
@@ -55,12 +71,18 @@ function updateExp(skillNr){
   return new Promise((resolve, reject) => {
     let addedExp = parseInt($("#add_value_num" + skillNr).val());
     $("#add_value_num" + skillNr).val('');
-    let skillName = skillsNames[skillNr];
 
-    getExp(skillName)
-    .then(function (exp){
-      setExp(skillName, addedExp + exp);
-    })
+    let skillName = skillsNames[skillNr];
+    let exp = skillsFullInfo[skillNr].exp;
+
+    skillsFullInfo[skillNr].exp += addedExp;
+    getLevelAndExpTillNextLevel(exp + addedExp)
+    .then(function (obj){
+      skillsFullInfo[skillNr].level = obj[0];
+      skillsFullInfo[skillNr].expTillNextLevel = obj[1];
+    });
+
+    setExp(skillName, addedExp + exp)
     .then(function (){
       return resolve(skillNr);
     });
@@ -73,11 +95,14 @@ function addSkill() {
     $('#skill_name').val('');
 
     skillsNames.push(skillName);
-    setExp(skillName, 0)
+    fillOneSkillFullInfo(skillsNames.length - 1)
+    .then(function() {
+      setExp(skillName, 0);
+    })
     .then(function() {
       setTable(skillsNames);
-    })
-    .then(resolve);
+      return resolve();
+    });
   });
 }
 
@@ -96,6 +121,7 @@ function fillExpTable() {
 function removeSkill(skillNr) {
   return new Promise((resolve, reject) => {
     skillsNames.splice(skillNr, 1);
+    skillsFullInfo.splice(skillNr, 1);
     setTable(skillsNames)
     .then(resolve);
   });

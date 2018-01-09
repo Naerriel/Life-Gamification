@@ -2,24 +2,22 @@ function levelAndExpHTML(skillNr) {
   /* Sets display of a skill with a certain level
    * and number of experience points needed to level up.
    */
-  getExp(skillsNames[skillNr])
-  .then(getLevelAndLevelUpExp)
-  .then(function (toFillValues){
-    let HTMLCode = (`Level ${toFillValues[0]}: ${toFillValues[1]} more.`);
-    $(`.exp${skillNr}`).html(HTMLCode);
-  });
+  let level = skillsFullInfo[skillNr].level;
+  let expTillNextLevel = skillsFullInfo[skillNr].expTillNextLevel;
+  let HTMLCode = (`Level ${level}: ${expTillNextLevel} more.`);
+  $(`.exp${skillNr}`).html(HTMLCode);
 }
 
 function rowTableHTML(skill) {
   /* Receiving parameters of a skill, creates HTML of a table row.
    */
   let HTMLCode = (`
-    <h4 class="skill_name">${skill.skillName}: </h4>
-    <a class="exp` + skill.skillNr + `">${skill.expValue}</a>
+    <h4 class="skill_name">${skill.name}: </h4>
+    <a class="exp` + skill.nr + `">${skill.exp}</a>
     <div>
-      <input id="add_value_num${skill.skillNr}" class="add_value_nums" type="number" name="addValue" value="">
-      <button id="add_value_button${skill.skillNr}" class="add_value_buttons" type="button">Add</button>
-      <button id="remove_skill_button${skill.skillNr}" class="remove_skill_buttons" type="button">Remove</button>
+      <input id="add_value_num${skill.nr}" class="add_value_nums" type="number" name="addValue" value="">
+      <button id="add_value_button${skill.nr}" class="add_value_buttons" type="button">Add</button>
+      <button id="remove_skill_button${skill.nr}" class="remove_skill_buttons" type="button">Remove</button>
     </div>
   `);
   return HTMLCode;
@@ -28,13 +26,8 @@ function rowTableHTML(skill) {
 function skillToTable (skillNr) {
   /* Adds a skill of a certain number to the HTML table.
    */
-  let skill = {
-    skillName: skillsNames[skillNr],
-    expValue: -1,
-    // This value will be updated in the levelAndExpHTML function.
-    skillNr: skillNr,
-  };
-  $('#skills').append(rowTableHTML(skill));
+  extension_log("In skillToTable");
+  $('#skills').append(rowTableHTML(skillsFullInfo[skillNr]));
   levelAndExpHTML(skillNr);
 }
 
@@ -87,12 +80,16 @@ function handleAddSkillButton () {
    */
   $('#add_skill').click(function(){
     addSkill()
-    .then(skillToTable(skillsNames.length - 1));
+    .then(function(){
+      skillToTable(skillsNames.length - 1)
+    });
   });
   $("#skill_name").keyup(function (event) {
     if (event.keyCode === 13) {
       addSkill()
-      .then(skillToTable(skillsNames.length - 1));
+      .then(function(){
+        skillToTable(skillsNames.length - 1)
+      });
     }
   });
 }
