@@ -6,9 +6,9 @@ Chrome extension which allows you to measure your progress in your real life ski
  - Adding and removing skills
  - Adding experience points to specific skills
  - Calculating and displaying current level in every skill and experience points needed to level up
- - Importing and exporting database [To be added]
+ - Importing and exporting database
 
-## Planned features
+## Planned features:
 Features to be added in upcoming versions:
  - Different types of skills:
     1. Daily habits which only count if you complete specific tasks on a particular day. 
@@ -22,4 +22,9 @@ Features to be added in upcoming versions:
  - Optimised to-do-list:
     - You will be able to only see the element on the top, so you can better concentrate on your current task. If you split your goal into small and easily achievable pieces like: "clean the desk", "open the books", "start the pomodoro", then you can avoid the procrastination associated with overwhelmingness of a task like "write the master thesis".
 
-Icon made by Freepik from www.flaticon.com.
+
+## Credits:
+ - Naerriel - main developer
+ - andrzejgorski - reviewer
+ - zniszcz - front-end advisor and reviewer
+ - Icon made by Freepik from www.flaticon.com.
