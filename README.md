@@ -24,7 +24,7 @@ Features to be added in upcoming versions:
 
 
 ## Credits:
- - Karol Górski - main developer
- - Andrzej Górski - team manager and code reviewer
- - Adrian Zniszczyński - front-end advisor and code reviewer
+ - Naerriel - main developer
+ - andrzejgorski - reviewer
+ - zniszcz - front-end advisor and reviewer
  - Icon made by Freepik from www.flaticon.com.
