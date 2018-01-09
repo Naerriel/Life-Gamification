@@ -1,15 +1,21 @@
 "use strict"
-var skillsArrayId = "skillsArrayId";
-var allSkills = [];
-var expTable = [];
+let skillsArrayId = "skillsArrayId";
+let skillsFullInfo = [];
+let skillsNames = [];
+let expTable = [];
 const maxLevel = 210;
 
 document.addEventListener('DOMContentLoaded', function () {
   extension_log(" ");
   extension_log("Application begins.");
+
   fillExpTable();
   getSkills()
-  .then(displayTable);
+  .then(fillSkillArray)
+  .then(function() {
+    displayTable();
+    extension_log(JSON.stringify(skillsFullInfo));
+  });
   handleSkillButtons();
   handleImportExportButtons();
   handleAddSkillButton();

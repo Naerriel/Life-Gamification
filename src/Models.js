@@ -7,6 +7,33 @@ class skill{
   }
 }
 
+function fillSkillArray() {
+  return new Promise((resolve, reject) => {
+    for (let i = 0; i < skillsNames.length; i++){
+      let name = skillsNames[i];
+      let exp;
+      let level;
+      let expTillNextLevel;
+      getExp(name)
+      .then(function (expResult){
+        exp = expResult;
+      })
+      .then(function (){
+        getLevelAndLevelUpExp(exp)
+        .then(function (obj) {
+          level = obj[0];
+          expTillNextLevel = obj[1];
+        });
+      })
+      .then(function (){
+        let newSkill = new skill(name, exp, level, expTillNextLevel);
+        skillsFullInfo.push(newSkill);
+        if(i + 1 === skillsNames.length) resolve();
+      });
+    }
+  });
+}
+
 function getLevelAndLevelUpExp(exp) {
   /* Calculates current level and exp needed to next level.
    */
@@ -22,13 +49,13 @@ function getLevelAndLevelUpExp(exp) {
   });
 }
 
-function updateSkill(skillNr){
+function updateExp(skillNr){
   /* Increases skill's exp by the amount in correspondent text area.
    */
   return new Promise((resolve, reject) => {
     let addedExp = parseInt($("#add_value_num" + skillNr).val());
-    $("add_value_num" + skillNr).val('');
-    let skillName = allSkills[skillNr];
+    $("#add_value_num" + skillNr).val('');
+    let skillName = skillsNames[skillNr];
 
     getExp(skillName)
     .then(function (exp){
@@ -45,10 +72,10 @@ function addSkill() {
     let skillName = $('#skill_name').val();
     $('#skill_name').val('');
 
-    allSkills.push(skillName);
+    skillsNames.push(skillName);
     setExp(skillName, 0)
     .then(function() {
-      setTable(allSkills);
+      setTable(skillsNames);
     })
     .then(resolve);
   });
@@ -68,8 +95,8 @@ function fillExpTable() {
 
 function removeSkill(skillNr) {
   return new Promise((resolve, reject) => {
-    allSkills.splice(skillNr, 1);
-    setTable(allSkills)
+    skillsNames.splice(skillNr, 1);
+    setTable(skillsNames)
     .then(resolve);
   });
 }

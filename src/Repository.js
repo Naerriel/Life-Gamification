@@ -21,7 +21,7 @@ function getSkills () {
   return new Promise((resolve, reject) => {
     let setSkillsArray = function (result) {
       if(skillsArrayId in result) {
-        allSkills = result[skillsArrayId];
+        skillsNames = result[skillsArrayId];
         resolve();
       }
       else{

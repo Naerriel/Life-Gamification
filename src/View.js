@@ -2,7 +2,7 @@ function levelAndExpHTML(skillNr) {
   /* Sets display of a skill with a certain level
    * and number of experience points needed to level up.
    */
-  getExp(allSkills[skillNr])
+  getExp(skillsNames[skillNr])
   .then(getLevelAndLevelUpExp)
   .then(function (toFillValues){
     let HTMLCode = (`Level ${toFillValues[0]}: ${toFillValues[1]} more.`);
@@ -29,7 +29,7 @@ function skillToTable (skillNr) {
   /* Adds a skill of a certain number to the HTML table.
    */
   let skill = {
-    skillName: allSkills[skillNr],
+    skillName: skillsNames[skillNr],
     expValue: -1,
     // This value will be updated in the levelAndExpHTML function.
     skillNr: skillNr,
@@ -39,7 +39,7 @@ function skillToTable (skillNr) {
 }
 
 function displayTable () {
-  for(let i = 0; i < allSkills.length; i++){
+  for(let i = 0; i < skillsNames.length; i++){
     skillToTable(i);
   }
 }
@@ -59,7 +59,7 @@ function handleSkillButtons () {
    */
   $("#skills").on("click", ".add_value_buttons", function () {
     let skillNr = this.id.replace('add_value_button', '');
-    updateSkill(skillNr)
+    updateExp(skillNr)
     .then(levelAndExpHTML);
   });
   $("#skills").on("click", ".remove_skill_buttons", function () {
@@ -69,7 +69,7 @@ function handleSkillButtons () {
   $("#skills").on("keyup", ".add_value_nums", function (event) {
     if (event.keyCode === 13) {
       let skillNr = this.id.replace('add_value_num', '');
-      updateSkill(skillNr)
+      updateExp(skillNr)
       .then(levelAndExpHTML);
     }
   });
@@ -87,12 +87,12 @@ function handleAddSkillButton () {
    */
   $('#add_skill').click(function(){
     addSkill()
-    .then(skillToTable(allSkills.length - 1));
+    .then(skillToTable(skillsNames.length - 1));
   });
   $("#skill_name").keyup(function (event) {
     if (event.keyCode === 13) {
       addSkill()
-      .then(skillToTable(allSkills.length - 1));
+      .then(skillToTable(skillsNames.length - 1));
     }
   });
 }

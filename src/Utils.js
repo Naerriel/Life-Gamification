@@ -24,11 +24,11 @@ function debugAddingSkill(skillName) {
 function debugSkillsExp(index) {
   /* Writes to consol all skills and it's exp.
    */
-  let skillName = allSkills[index];
+  let skillName = skillsNames[index];
   chrome.storage.sync.get([skillName], function (result) {
     extension_log(skillName + ": " + result[skillName]);
   });
-  if (index + 1 < allSkills.length) {
+  if (index + 1 < skillsNames.length) {
     debugSkillsExp(index + 1);
   }
 }
@@ -36,7 +36,7 @@ function debugSkillsExp(index) {
 function exportStorage () {
   /* Stringifies storage so it can be copied and later imported.
    */
-  let keyList = allSkills.slice();
+  let keyList = skillsNames.slice();
   keyList.push("skillsArrayId");
   chrome.storage.sync.get(keyList, function (result) {
     $('#storage_stringified').html(JSON.stringify(result));
