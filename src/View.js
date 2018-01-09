@@ -26,7 +26,6 @@ function rowTableHTML(skill) {
 function skillToTable (skillNr) {
   /* Adds a skill of a certain number to the HTML table.
    */
-  extension_log("In skillToTable");
   $('#skills').append(rowTableHTML(skillsFullInfo[skillNr]));
   levelAndExpHTML(skillNr);
 }

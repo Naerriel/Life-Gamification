@@ -30,7 +30,6 @@ function fillOneSkillFullInfo(i){
     .then(function (){
       let newSkill = new skill(name, nr, exp, level, expTillNextLevel);
       skillsFullInfo.push(newSkill);
-      extension_log("heeere");
       resolve();
     });
   });
@@ -39,7 +38,6 @@ function fillOneSkillFullInfo(i){
 function fillSkillsFullInfo() {
   return new Promise((resolve, reject) => {
     for (let i = 0; i < skillsNames.length; i++){
-      extension_log("wtf " + i);
       fillOneSkillFullInfo(i)
       .then(function () {
         if(i + 1 === skillsNames.length){
