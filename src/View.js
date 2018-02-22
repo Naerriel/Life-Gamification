@@ -2,8 +2,8 @@ function levelAndExpHTML(skillNr) {
   /* Sets display of a skill with a certain level
    * and number of experience points needed to level up.
    */
-  let level = skillsFullInfo[skillNr].level;
-  let expTillNextLevel = skillsFullInfo[skillNr].expTillNextLevel;
+  let level = skillsCollection[skillNr].level;
+  let expTillNextLevel = skillsCollection[skillNr].expTillNextLevel;
   let HTMLCode = (`Level ${level}: ${expTillNextLevel} more.`);
   $(`.exp${skillNr}`).html(HTMLCode);
 }
@@ -26,7 +26,7 @@ function rowTableHTML(skill) {
 function skillToTable (skillNr) {
   /* Adds a skill of a certain number to the HTML table.
    */
-  $('#skills').append(rowTableHTML(skillsFullInfo[skillNr]));
+  $('#skills').append(rowTableHTML(skillsCollection[skillNr]));
   levelAndExpHTML(skillNr);
 }
 
@@ -78,14 +78,18 @@ function handleAddSkillButton () {
   /* Manages event listeners corresponding to adding new skills.
    */
   $('#add_skill').click(function(){
-    addSkill()
+    let skillName = $('#skill_name').val();
+    $('#skill_name').val();
+    addSkill(skillName)
     .then(function(){
       skillToTable(skillsNames.length - 1)
     });
   });
   $("#skill_name").keyup(function (event) {
     if (event.keyCode === 13) {
-      addSkill()
+      let skillName = $('#skill_name').val();
+      $('#skill_name').val();
+      addSkill(skillName)
       .then(function(){
         skillToTable(skillsNames.length - 1)
       });

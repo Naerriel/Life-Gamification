@@ -8,10 +8,9 @@ class skill{
   }
 }
 
-function fillOneSkillFullInfo(i){
+function createSkill(skillNr){
   return new Promise((resolve, reject) => {
-    let name = skillsNames[i];
-    let nr = i;
+    let name = skillsNames[skillNr];
     let exp;
     let level;
     let expTillNextLevel;
@@ -28,19 +27,19 @@ function fillOneSkillFullInfo(i){
       });
     })
     .then(function (){
-      let newSkill = new skill(name, nr, exp, level, expTillNextLevel);
-      skillsFullInfo.push(newSkill);
+      let newSkill = new skill(name, skillNr, exp, level, expTillNextLevel);
+      skillsCollection.push(newSkill);
       resolve();
     });
   });
 }
 
-function fillSkillsFullInfo() {
+function createSkillsCollection() {
   return new Promise((resolve, reject) => {
-    for (let i = 0; i < skillsNames.length; i++){
-      fillOneSkillFullInfo(i)
+    for (let skillNr = 0; skillNr < skillsNames.length; skillNr++){
+      createSkill(skillNr)
       .then(function () {
-        if(i + 1 === skillsNames.length){
+        if(skillNr + 1 === skillsNames.length){
           resolve();
         }
       });
@@ -71,13 +70,13 @@ function updateExp(skillNr){
     $("#add_value_num" + skillNr).val('');
 
     let skillName = skillsNames[skillNr];
-    let exp = skillsFullInfo[skillNr].exp;
+    let exp = skillsCollection[skillNr].exp;
 
-    skillsFullInfo[skillNr].exp += addedExp;
+    skillsCollection[skillNr].exp += addedExp;
     getLevelAndExpTillNextLevel(exp + addedExp)
     .then(function (obj){
-      skillsFullInfo[skillNr].level = obj[0];
-      skillsFullInfo[skillNr].expTillNextLevel = obj[1];
+      skillsCollection[skillNr].level = obj[0];
+      skillsCollection[skillNr].expTillNextLevel = obj[1];
     });
 
     setExp(skillName, addedExp + exp)
@@ -87,13 +86,10 @@ function updateExp(skillNr){
   });
 }
 
-function addSkill() {
+function addSkill(skillName) {
   return new Promise((resolve, reject) => {
-    let skillName = $('#skill_name').val();
-    $('#skill_name').val('');
-
     skillsNames.push(skillName);
-    fillOneSkillFullInfo(skillsNames.length - 1)
+    createSkill(skillsNames.length - 1)
     .then(function() {
       setExp(skillName, 0);
     })
@@ -119,7 +115,7 @@ function fillExpTable() {
 function removeSkill(skillNr) {
   return new Promise((resolve, reject) => {
     skillsNames.splice(skillNr, 1);
-    skillsFullInfo.splice(skillNr, 1);
+    skillsCollection.splice(skillNr, 1);
     setTable(skillsNames)
     .then(resolve);
   });
