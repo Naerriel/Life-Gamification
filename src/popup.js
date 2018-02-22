@@ -6,15 +6,15 @@ let expTable = [];
 const maxLevel = 210;
 
 document.addEventListener('DOMContentLoaded', function () {
-  extension_log(" ");
-  extension_log("Application begins.");
+  console.log(" ");
+  console.log("Application begins.");
 
   fillExpTable();
   getSkills()
   .then(fillSkillsFullInfo)
   .then(function() {
     displayTable();
-    extension_log(JSON.stringify(skillsFullInfo));
+    console.log(JSON.stringify(skillsFullInfo));
   });
   handleSkillButtons();
   handleImportExportButtons();

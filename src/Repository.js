@@ -25,7 +25,7 @@ function getSkills () {
         resolve();
       }
       else{
-        extension_log("There isn't any array of skills names.");
+        console.log("There isn't any array of skills names.");
         reject();
       }
     };

@@ -1,23 +1,14 @@
-function extension_log (message) {
-  /* Writes to console argument.
-   */
-  let script = 'console.log(`' + message + '`);';
-  chrome.tabs.executeScript({
-    code: script
-  });
-}
-
 function debugAddingSkill(skillName) {
   /* Writes all skills' names and experience value of currently added skill.
    */
   let logResult = function (result) {
-    extension_log("The array of skills' names: ");
-    extension_log(JSON.stringify(result));
+    console.log("The array of skills' names: ");
+    console.log(JSON.stringify(result));
   };
   chrome.storage.sync.get([skillsArrayId], logResult);
   getExp(skillName)
   .then(function(exp) {
-    extension_log(`Skill ${skillName} experience value is ${exp}`);
+    console.log(`Skill ${skillName} experience value is ${exp}`);
   });
 }
 
@@ -26,7 +17,7 @@ function debugSkillsExp(index) {
    */
   let skillName = skillsNames[index];
   chrome.storage.sync.get([skillName], function (result) {
-    extension_log(skillName + ": " + result[skillName]);
+    console.log(skillName + ": " + result[skillName]);
   });
   if (index + 1 < skillsNames.length) {
     debugSkillsExp(index + 1);
