@@ -1,4 +1,6 @@
-function getExp(skillName){
+LifeGamification.repository = {};
+
+LifeGamification.repository.getExp = function (skillName){
   /* Gets exp of a skill from storage.
    */
   return new Promise((resolve, reject) => {
@@ -15,7 +17,7 @@ function getExp(skillName){
   });
 }
 
-function getSkills () {
+LifeGamification.repository.getSkills = function () {
   /*  Creates a local table by taking skills from chrome storage.
    */
   return new Promise((resolve, reject) => {
@@ -33,7 +35,7 @@ function getSkills () {
   });
 }
 
-function setTable (table) {
+LifeGamification.repository.setTable = function (table) {
   /* Sets table of skills to repository.
    */
   return new Promise((resolve, reject) => {
@@ -41,7 +43,7 @@ function setTable (table) {
   });
 }
 
-function setExp(skillName, exp) {
+LifeGamification.repository.setExp = function (skillName, exp) {
   /* Sets exp of a skill of a certain name to repository.
    */
   return new Promise((resolve, reject) => {

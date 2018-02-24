@@ -1,4 +1,6 @@
-function debugAddingSkill(skillName) {
+LifeGamification.utils = {};
+
+LifeGamification.utils.debugAddingSkill = function(skillName) {
   /* Writes all skills' names and experience value of currently added skill.
    */
   let logResult = function (result) {
@@ -12,7 +14,7 @@ function debugAddingSkill(skillName) {
   });
 }
 
-function debugSkillsExp(index) {
+LifeGamification.utils.debugSkillsExp = function(index) {
   /* Writes to consol all skills and it's exp.
    */
   let skillName = skillsNames[index];
@@ -20,11 +22,11 @@ function debugSkillsExp(index) {
     console.log(skillName + ": " + result[skillName]);
   });
   if (index + 1 < skillsNames.length) {
-    debugSkillsExp(index + 1);
+    LifeGamification.utils.debugSkillsExp(index + 1);
   }
 }
 
-function exportStorage () {
+LifeGamification.utils.exportStorage = function () {
   /* Stringifies storage so it can be copied and later imported.
    */
   let keyList = skillsNames.slice();
@@ -34,12 +36,12 @@ function exportStorage () {
   });
 }
 
-function importStorage () {
+LifeGamification.utils.importStorage = function () {
   /* Gets stringified storage and saves it in chrome storage.
    */
   let storage = $("#storage_stringified").val();
   chrome.storage.sync.set(JSON.parse(storage), function() {
-    getSkills()
-    .then(resetHTMLTable);
+    LifeGamification.repository.getSkills()
+    .then(LifeGamification.view.resetHTMLTable);
   });
 }
