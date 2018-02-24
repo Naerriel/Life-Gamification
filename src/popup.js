@@ -1,17 +1,22 @@
 "use strict"
-var skillsArrayId = "skillsArrayId";
-var allSkills = [];
-var expTable = [];
+const LifeGamification = {};
+let skillsArrayId = "skillsArrayId";
+let skillsNames = [];
+let expTable = [];
 const maxLevel = 210;
 
 document.addEventListener('DOMContentLoaded', function () {
-  extension_log(" ");
-  extension_log("Application begins.");
+  console.log(" ");
+  console.log("Application begins.");
 
-  fillExpTable();
-  getSkills()
-  .then(displayTable);
-  handleSkillButtons();
-  handleImportExportButtons();
-  handleAddSkillButton();
+  LifeGamification.skillsCollection = [];
+  LifeGamification.models.fillExpTable();
+  LifeGamification.repository.getSkills()
+  .then(LifeGamification.models.createSkillsCollection)
+  .then(function() {
+    LifeGamification.view.displayTable();
+  });
+  LifeGamification.view.handleSkillButtons();
+  LifeGamification.view.handleImportExportButtons();
+  LifeGamification.view.handleAddSkillButton();
 });
