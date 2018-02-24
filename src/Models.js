@@ -121,7 +121,7 @@
     return new Promise((resolve, reject) => {
       skillsNames.splice(skillNr, 1);
       LifeGamification.skillsCollection.splice(skillNr, 1);
-      setTable(skillsNames)
+      LifeGamification.repository.setTable(skillsNames)
       .then(resolve);
     });
   }
