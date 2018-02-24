@@ -1,6 +1,5 @@
 "use strict"
 const LifeGamification = {};
-let skillsArrayId = "skillsArrayId";
 let skillsNames = [];
 let expTable = [];
 const maxLevel = 210;

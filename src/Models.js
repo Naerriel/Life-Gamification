@@ -1,5 +1,6 @@
 (function(){
   LifeGamification.models = {};
+  const expTable = [];
 
   class skill{
     constructor(name, nr, exp, level, expTillNextLevel){
