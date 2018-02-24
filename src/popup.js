@@ -1,7 +1,6 @@
 "use strict"
 const LifeGamification = {};
 let skillsNames = [];
-let expTable = [];
 const maxLevel = 210;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -13,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   LifeGamification.repository.getSkills()
   .then(LifeGamification.models.createSkillsCollection)
   .then(function() {
-    LifeGamification.view.displayTable();
+    LifeGamification.view.viewSkills(LifeGamification.skillsCollection);
   });
   LifeGamification.view.handleSkillButtons();
   LifeGamification.view.handleImportExportButtons();
