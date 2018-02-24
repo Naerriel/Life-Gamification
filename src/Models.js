@@ -1,121 +1,79 @@
 (function(){
   LifeGamification.models = {};
   const expTable = [];
+  const skillsCollection = {};
+  LifeGamification.skillsCollection = skillsCollection;
 
   class Skill{
-    constructor(name, nr, exp, level, expTillNextLevel){
+    constructor(name, exp){
       this.name = name;
-      this.nr = nr;
       this.exp = exp;
-      this.level = level;
-      this.expTillNextLevel = expTillNextLevel;
+      this.calcLevel();
+      this.calcExpTillNextLevel();
     }
-  }
 
-  LifeGamification.models.createSkill = function (skillNr){
-    return new Promise((resolve, reject) => {
-      let name = skillsNames[skillNr];
-      let exp;
-      let level;
-      let expTillNextLevel;
+    addExp(exp) {
+      this.exp += exp;
+      this.calcLevel();
+      this.calcExpTillNextLevel();
+    }
 
-      LifeGamification.repository.getExp(name)
-      .then(function (expResult){
-        exp = expResult;
-      })
-      .then(function (){
-        LifeGamification.models.
-          getLevelAndExpTillNextLevel(exp)
-        .then(function (obj) {
-          level = obj[0];
-          expTillNextLevel = obj[1];
-        });
-      })
-      .then(function (){
-        let newSkill = new Skill(name, skillNr, exp, level, expTillNextLevel);
-        LifeGamification.skillsCollection.push(newSkill);
-        resolve();
-      });
-    });
-  }
-
-  LifeGamification.models.createSkillsCollection = function () {
-    return new Promise((resolve, reject) => {
-      for (let skillNr = 0; skillNr < skillsNames.length; skillNr++){
-        LifeGamification.models.createSkill(skillNr)
-        .then(function () {
-          if(skillNr + 1 === skillsNames.length){
-            resolve();
-          }
-        });
-      }
-    });
-  }
-
-  LifeGamification.models.getLevelAndExpTillNextLevel = function (exp) {
-    /* Calculates current level and exp needed to next level.
-     */
-    return new Promise((resolve, reject) => {
-      let level = 0;
-      while(exp >= expTable[level + 1]){
+    calcLevel() {
+      // TODO calc it in the better way.
+      const level = 0;
+      while(this.exp >= expTable[level + 1]){
         level++;
       }
-      let levelExp = exp - expTable[level];
-      let totalExpNeeded = expTable[level + 1] - expTable[level];
-      let expTillNextLevel = totalExpNeeded - levelExp;
-      resolve([level, expTillNextLevel]);
-    });
+      this.level = level;
+    }
+
+    calcExpTillNextLevel() {
+      const levelExp = this.exp - expTable[this.level];
+      const totalExpNeeded = expTable[this.level + 1] - expTable[this.level];
+      this.expTillNextLevel = totalExpNeeded - levelExp;
+    }
+
   }
 
-  skillByNumber = function (skillNr) {
-    let skill = null;
-    LifeGamification.skillsCollection.forEach(function(elem){
-      if (parseInt(elem.nr) === parseInt(skillNr)) {
-        skill = elem;
-      }
-    });
-    return skill;
-  }
-
-  LifeGamification.models.updateExp = function (skillNr, addedExp){
-    /* Increases Skill's exp by the amount in correspondent text area.
-     */
+  LifeGamification.models.createSkillsCollection = function (skillsJSON) {
     return new Promise((resolve, reject) => {
-      let skill = skillByNumber(skillNr);
-      let skillName = skill.name;
+      for (let skillName in skillsJSON) {
+        const skillData = skillsJSON[skillName];
+        const newSkill = new Skill(skillName, skillData.exp);
+        skillsCollection[skillName] = newSkill;
+      }
+      resolve(skillsCollection);
+    });
+  }
 
-      skill.exp += addedExp;
-      LifeGamification.models.getLevelAndExpTillNextLevel(skill.exp)
-      .then(function (obj){
-        skill.level = obj[0];
-        skill.expTillNextLevel = obj[1];
-      });
+  LifeGamification.models.updateExp = function (skill, addedExp){
+    return new Promise((resolve, reject) => {
+      skill.addExp(addedExp);
+      saveSkillsCollection()
+        .then(function (){
+          return resolve(skill);
+        });
+    });
+  }
 
-      LifeGamification.repository.setExp(skillName, skill.exp)
-      .then(function (){
-        return resolve(skill);
-      });
+  const saveSkillsCollection = function () {
+    return new Promise((resolve, reject) => {
+      LifeGamification.repository.updateSkills(skillsCollection).then(resolve);
     });
   }
 
   LifeGamification.models.addSkill = function (skillName) {
     return new Promise((resolve, reject) => {
-      skillsNames.push(skillName);
-      LifeGamification.models.createSkill(skillsNames.length - 1)
-      .then(function() {
-        LifeGamification.repository.setExp(skillName, 0);
-      })
-      .then(function() {
-        LifeGamification.repository.setTable(skillsNames);
-        let skill = LifeGamification.skillsCollection[skillsNames.length - 1];
-        return resolve(skill);
-      });
+      const newSkill = new Skill(skillName, 0);
+      skillsCollection[skillName] = newSkill;
+      saveSkillsCollection()
+        .then(function() {
+          resolve(newSkill);
+        });
     });
   }
 
   LifeGamification.models.fillExpTable = function () {
-    /* Fills expTable with numbers according to a certain formula.
-     */
     expTable[1] = 0;
     for (let i = 2; i < maxLevel; i++) {
       expTable[i] = expTable[i - 1] + (4 + (i - 1) * (Math.log10(i - 1) + 1));
@@ -125,12 +83,19 @@
     }
   }
 
-  LifeGamification.models.removeSkill = function (skillNr) {
+  LifeGamification.models.removeSkill = function (skill) {
     return new Promise((resolve, reject) => {
-      skillsNames.splice(skillNr, 1);
-      LifeGamification.skillsCollection.splice(skillNr, 1);
-      LifeGamification.repository.setTable(skillsNames)
-      .then(resolve);
+      skillName = skill.name;
+      delete skillsCollection[skillName];
+      LifeGamification.repository.updateSkills(skillsCollection);
+      saveSkillsCollection
+        .then(resolve());
     });
+  }
+
+  LifeGamification.models.clearCollection = function () {
+    for (let name in skillsCollection) {
+      delete skillsCollection[name];
+    }
   }
 })();
