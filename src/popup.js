@@ -1,7 +1,6 @@
 "use strict"
 const LifeGamification = {};
 let skillsNames = [];
-let expTable = [];
 const maxLevel = 210;
 
 document.addEventListener('DOMContentLoaded', function () {
