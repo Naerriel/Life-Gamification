@@ -1,5 +1,6 @@
 (function(){
   LifeGamification.repository = {};
+  const skillsArrayId = "skillsArrayId";
 
   LifeGamification.repository.getExp = function (skillName){
     /* Gets exp of a skill from storage.
