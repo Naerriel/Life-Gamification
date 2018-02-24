@@ -67,27 +67,33 @@
     });
   }
 
-  LifeGamification.models.updateExp = function (skillNr){
+  skillByNumber = function (skillNr) {
+    let skill = null;
+    LifeGamification.skillsCollection.forEach(function(elem){
+      if (parseInt(elem.nr) === parseInt(skillNr)) {
+        skill = elem;
+      }
+    });
+    return skill;
+  }
+
+  LifeGamification.models.updateExp = function (skillNr, addedExp){
     /* Increases Skill's exp by the amount in correspondent text area.
      */
     return new Promise((resolve, reject) => {
-      let addedExp = parseInt($("#add_value_num" + skillNr).val());
-      $("#add_value_num" + skillNr).val('');
+      let skill = skillByNumber(skillNr);
+      let skillName = skill.name;
 
-      let skillName = skillsNames[skillNr];
-      let exp = LifeGamification.skillsCollection[skillNr].exp;
-
-      LifeGamification.skillsCollection[skillNr].exp += addedExp;
-      LifeGamification.models.
-        getLevelAndExpTillNextLevel(exp + addedExp)
+      skill.exp += addedExp;
+      LifeGamification.models.getLevelAndExpTillNextLevel(skill.exp)
       .then(function (obj){
-        LifeGamification.skillsCollection[skillNr].level = obj[0];
-        LifeGamification.skillsCollection[skillNr].expTillNextLevel = obj[1];
+        skill.level = obj[0];
+        skill.expTillNextLevel = obj[1];
       });
 
-      LifeGamification.repository.setExp(skillName, addedExp + exp)
+      LifeGamification.repository.setExp(skillName, skill.exp)
       .then(function (){
-        return resolve(skillNr);
+        return resolve(skill);
       });
     });
   }
@@ -101,7 +107,8 @@
       })
       .then(function() {
         LifeGamification.repository.setTable(skillsNames);
-        return resolve();
+        let skill = LifeGamification.skillsCollection[skillsNames.length - 1];
+        return resolve(skill);
       });
     });
   }
