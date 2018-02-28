@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log("Application begins.");
 
   LifeGamification.models.fillExpTable();
-  LifeGamification.view.createSkill();
+  LifeGamification.view.startView();
   LifeGamification.view.handleSkillButtons();
   LifeGamification.view.handleImportExportButtons();
   LifeGamification.view.handleAddSkillButton();
