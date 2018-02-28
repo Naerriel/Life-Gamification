@@ -20,7 +20,7 @@
 
     calcLevel() {
       // TODO calc it in the better way.
-      const level = 0;
+      let level = 0;
       while(this.exp >= expTable[level + 1]){
         level++;
       }
