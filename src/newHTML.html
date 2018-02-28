@@ -2,12 +2,11 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 <style>
 body {margin:0;}
 
 * {
-      font-family: Roboto;
+      font-family: "Roboto", sans-serif;
 }
 
 .header-bar {
@@ -16,25 +15,24 @@ body {margin:0;}
     overflow: auto;
 }
 
-.header-bar__text {
+.header-bar__menu-item {
     float: left;
-    width: 13%;
+    width: 20%;
     text-align: center;
     padding: 12px 0;
     transition: all 0.3s ease;
     color: white;
-    font-size: 24px;
+    font-size: 2em;
+    border-style: solid;
+    border-color: #00A67F;
+    border-width: 1px;
+    box-sizing: border-box;
 }
 
-.header-bar__icon {
-    float: left;
-    width: 10%;
-    text-align: center;
-    padding: 12px 0;
-    transition: all 0.3s ease;
-    color: white;
-    font-size: 36px;
-
+.header-bar__menu-icon {
+    max-width: 100%;
+    max-height: 2em;
+    height: auto;
 }
 
 .header-bar a:hover {
@@ -44,10 +42,10 @@ body {margin:0;}
 <body>
 
 <div class="header-bar">
-  	<a class="header-bar__icon"><img src="../assets/icon32.png"</a>
-  	<a class="header-bar__text">Home</a>
-  	<a class="header-bar__text">Edit skills</a>
-  	<a class="header-bar__text">Import / Export</a>
+    <a class="header-bar__menu-item header-bar__menu-icon"><img src="../assets/icon128.png"</a>
+  	<a class="header-bar__menu-item">Home</a>
+  	<a class="header-bar__menu-item">Edit skills</a>
+  	<a class="header-bar__menu-item">Import / Export</a>
 </div>
 
 </body>
