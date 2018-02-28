@@ -110,7 +110,7 @@
     });
   }
 
-  LifeGamification.view.createSkill = function () {
+  LifeGamification.view.startView = function () {
     LifeGamification.repository.getSkills()
       .then(LifeGamification.models.createSkillsCollection)
       .then(LifeGamification.view.viewSkills);
