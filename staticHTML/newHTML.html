@@ -19,33 +19,143 @@ body {margin:0;}
     float: left;
     width: 20%;
     text-align: center;
-    padding: 12px 0;
     transition: all 0.3s ease;
     color: white;
     font-size: 2em;
-    border-style: solid;
-    border-color: #00A67F;
-    border-width: 1px;
     box-sizing: border-box;
 }
 
+.header-bar__menu-text {
+    padding: 0.6em;
+}
+
 .header-bar__menu-icon {
-    max-width: 100%;
+    padding: 0.1em;
     max-height: 2em;
-    height: auto;
+}
+
+.header-bar__menu-icon
+img {
+    height: 100%;
 }
 
 .header-bar a:hover {
     background-color: #00D1A0;
 }
+
+.all-skills {
+    margin: 3em 18em 3em 18em;
+}
+
+.skill {
+    border-radius: 2em;
+    border: 2px solid #C8E8E0;
+    padding: 1em;
+}
+
+.skill__level-number {
+    padding: 0.5em 0 0 0.5em;
+    font-size: 3em;
+    font-weight: bold;
+    color: #00D1A0;
+}
+
+.skill__name {
+    padding: 0 0 0 0.5em;
+    font-size: 2em;
+    line-height: 3;
+}
+
+.progress-bar__container {
+    display: block;
+    float: left;
+    border-radius: 2em 0 0 2em;
+    border: 1px solid white;
+    background-color: #C8E8E0;
+    height: 2.2em;
+    width: 85%;
+    box-sizing: border-box;
+}
+
+.progress-bar__container-fill {
+    display: block;
+    border-radius: 2em 0 0 2em;
+    background-color: #00D1A0;
+    height: 2.2em;
+    text-align: center;
+    padding: 0.6em;
+    color: white;
+    width: 60%;
+    box-sizing: border-box;
+}
+
+.progress-bar__buttons {
+    display: block;
+    float: left;
+    width: 14%;
+}
+
+.progress-bar__add-experience {
+    float: left;
+    background-color: #00D1A0;
+    border: 1px solid white;
+    height: 2.2em;
+    width: 65%;
+    text-align: center;
+    padding: 0.6em;
+    color: white;
+    box-sizing: border-box;
+}
+
+.progress-bar__arrow {
+    float: left;
+    background-color: #00D1A0;
+    border: 1px solid white;
+    height: 2.2em;
+    width: 30%;
+    text-align: center;
+    padding: 0.6em;
+    color: white;
+    box-sizing: border-box;
+}
+
+.progress-bar__wrapper:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.skill__experience {
+    font-style: italic;
+    font-weight: lighter;
+}
+
 </style>
 <body>
 
 <div class="header-bar">
-    <a class="header-bar__menu-item header-bar__menu-icon"><img src="../assets/icon128.png"</a>
-  	<a class="header-bar__menu-item">Home</a>
-  	<a class="header-bar__menu-item">Edit skills</a>
-  	<a class="header-bar__menu-item">Import / Export</a>
+    <a class="header-bar__menu-item header-bar__menu-icon"><img src="../assets/icon128.png" class="header-bar__menu-icon"></a>
+  	<a class="header-bar__menu-item header-bar__menu-text">Home</a>
+  	<a class="header-bar__menu-item header-bar__menu-text">Edit skills</a>
+  	<a class="header-bar__menu-item header-bar__menu-text">Import / Export</a>
+</div>
+
+<div class="all-skills">
+    <div class="skill">
+        <a class="skill__level-number">73</a>
+        <a class="skill__level-text">lvl</a>
+        <a class="skill__name">Jeżdżenie na rowerze bez spodni</a>
+        <div class="progress-bar__wrapper">
+            <span class="progress-bar__container">
+                <span class="progress-bar__container-fill">60%</span>
+            </span>
+            <span class="progress-bar__buttons">
+                <span class="progress-bar__add-experience"> +1 </span>
+                <span class="progress-bar__arrow"> \/ </span>
+            </span>
+        </div>
+        <a class="skill__experience">1024/1858</a>
+    </div>
 </div>
 
 </body>
