@@ -8,6 +8,17 @@
     });
     $(`.exp${number}`).html(
       `Level ${skill.level}: ${skill.expTillNextLevel} more.`);
+    $(`.level${number}`).html(`${skill.level}`);
+    $(`.name${number}`).html(`${skill.name}`);
+    $(`.exp${number}`).html(`
+      ${skill.expTillNextLevel[0]}/${skill.expTillNextLevel[1]}`);
+    let percent = Math.floor(
+      100 * skill.expTillNextLevel[0] / skill.expTillNextLevel[1]);
+    $(`.fill${number}`).html(`${percent}%`);
+
+    console.log(`percents are = ${percent}%`);
+    $(`.fill${number}`).css('width', `${percent}%`);
+    console.log(JSON.stringify(skill));
   }
 
   const rowTableHTML = function (skill, number) {
@@ -19,11 +30,26 @@
         <button id="add_value_button${number}" class="add_value_buttons" type="button">Add</button>
         <button id="remove_skill_button${number}" class="remove_skill_buttons" type="button">Remove</button>
       </div>
-    `);
+			<div class="skill">
+				<a class="skill__level-number level${number}">73</a>
+				<a class="skill__level-text">lvl</a>
+				<a class="skill__name name${number}">Jeżdżenie na rowerze bez spodni</a>
+				<div class="progress-bar__wrapper">
+				    <span class="progress-bar__container">
+						    <span class="progress-bar__container-fill fill${number}">60%</span>
+						</span>
+						<span class="progress-bar__buttons">
+								<span class="progress-bar__add-experience"> +1 </span>
+								<span class="progress-bar__arrow"> \/ </span>
+							</span>
+					</div>
+					<a class="skill__experience exp${number}">1024/1858</a>
+			</div>
+		`);
   }
 
   const appendSkill = function (skill) {
-    $('#skills').append(rowTableHTML(skill, skillsView.length));
+    $('.all-skills').append(rowTableHTML(skill, skillsView.length));
     skillsView.push(skill);
     viewLevelAndExp(skill);
   }
@@ -34,13 +60,13 @@
     }
   }
 
+  LifeGamification.view.viewImportExport = function() {
+
+  }
+
   const resetSkills = function () {
     skillsView = [];
-    $("#skills").remove();
-    $("#skillBody").append(`
-      <div id="skills">
-      </div>
-    `);
+    $(".all-skills").html("");
     LifeGamification.view.viewSkills(LifeGamification.skillsCollection);
     LifeGamification.view.handleSkillButtons();
   }
@@ -50,21 +76,21 @@
       const addedExp = parseInt($("#add_value_num" + skillNr).val());
       $("#add_value_num" + skillNr).val('');
       const skill = skillsView[skillNr];
-
       LifeGamification.models.updateExp(skill, addedExp)
         .then(viewLevelAndExp);
     }
-    $("#skills").on("click", ".add_value_buttons", function () {
+    $(".all-skills").on("click", ".add_value_buttons", function () {
       const skillNr = this.id.replace('add_value_button', '');
       update_exp(skillNr);
     });
-    $("#skills").on("keyup", ".add_value_nums", function (event) {
+    $(".all-skills").on("keyup", ".add_value_nums", function (event) {
       if (event.keyCode === 13) {
         const skillNr = this.id.replace('add_value_num', '');
+        console.log("I try to add exp.");
         update_exp(skillNr);
       }
     });
-    $("#skills").on("click", ".remove_skill_buttons", function () {
+    $(".all-skills").on("click", ".remove_skill_buttons", function () {
       const skillNr = this.id.replace('remove_skill_button', '');
       LifeGamification.models.removeSkill(skillsView[skillNr])
         .then(resetSkills);
@@ -113,6 +139,8 @@
   LifeGamification.view.startView = function () {
     LifeGamification.repository.getSkills()
       .then(LifeGamification.models.createSkillsCollection)
-      .then(LifeGamification.view.viewSkills);
+      .then(function(skills){
+        LifeGamification.view.viewSkills(skills);
+      });
   }
 })();

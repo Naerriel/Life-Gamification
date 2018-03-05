@@ -30,7 +30,7 @@
     calcExpTillNextLevel() {
       const levelExp = this.exp - expTable[this.level];
       const totalExpNeeded = expTable[this.level + 1] - expTable[this.level];
-      this.expTillNextLevel = totalExpNeeded - levelExp;
+      this.expTillNextLevel = [levelExp, totalExpNeeded];
     }
 
   }
