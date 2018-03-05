@@ -123,8 +123,8 @@ img {
 
 .progress-bar__add-experience {
     float: left;
+    margin: 0 1px 0 2px;
     background-color: #00D1A0;
-    border: 1px solid white;
     height: 2.2em;
     width: 65%;
     text-align: center;
@@ -136,7 +136,7 @@ img {
 .progress-bar__arrow {
     float: left;
     background-color: #00D1A0;
-    border: 1px solid white;
+    border-radius: 0 2em 2em 0;
     height: 2.2em;
     width: 30%;
     text-align: center;

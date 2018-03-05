@@ -40,7 +40,7 @@
 						</span>
 						<span class="progress-bar__buttons">
 								<span class="progress-bar__add-experience"> +1 </span>
-								<span class="progress-bar__arrow"> \/ </span>
+								<span class="progress-bar__arrow"> "\\/" </span>
 							</span>
 					</div>
 					<a class="skill__experience exp${number}">1024/1858</a>
@@ -61,7 +61,11 @@
   }
 
   LifeGamification.view.viewImportExport = function() {
-
+		$('.import-export').html(`
+			<span class="import-export__button">Import</span>
+			<span class="import-export__button">Export</span>
+    	<textarea class="import-export__json">Place JSON here</textarea>
+			`);
   }
 
   const resetSkills = function () {
@@ -141,6 +145,7 @@
       .then(LifeGamification.models.createSkillsCollection)
       .then(function(skills){
         LifeGamification.view.viewSkills(skills);
+				LifeGamification.view.viewImportExport();
       });
   }
 })();
