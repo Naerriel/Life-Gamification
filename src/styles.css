@@ -69,6 +69,7 @@ img {
     font-size: 1.5em;
     color: #DFDDDD;
     box-sizing: border-box;
+    resize: none;
 }
 
 .all-skills {
@@ -76,9 +77,16 @@ img {
 }
 
 .skill {
-    border-radius: 2em;
+    border-radius: 1em;
     border: 2px solid #C8E8E0;
     padding: 1em;
+}
+
+.skill__remove {
+    display: block;
+    float: right;
+    height: 2em;
+    width: auto;
 }
 
 .skill__level-number {
@@ -97,7 +105,7 @@ img {
 .progress-bar__container {
     display: block;
     float: left;
-    border-radius: 2em 0 0 2em;
+    border-radius: 1em 0 0 1em;
     background-color: #C8E8E0;
     height: 2.2em;
     width: 85%;
@@ -106,7 +114,7 @@ img {
 
 .progress-bar__container-fill {
     display: block;
-    border-radius: 2em 0 0 2em;
+    border-radius: 1em 0 0 1em;
     background-color: #00D1A0;
     height: 2.2em;
     text-align: center;
@@ -136,7 +144,7 @@ img {
 .progress-bar__arrow {
     float: left;
     background-color: #00D1A0;
-    border-radius: 0 2em 2em 0;
+    border-radius: 0 1em 1em 0;
     height: 2.2em;
     width: 30%;
     text-align: center;
@@ -154,4 +162,51 @@ img {
 .skill__experience {
     font-style: italic;
     font-weight: lighter;
+}
+
+.add-skill {
+    margin: 3em 18em 3em 18em;
+    /*border-radius: 2em;
+    border: 2px solid #C8E8E0;
+    padding: 1em;
+    box-sizing: border-box;*/
+}
+
+.add-skill__name {
+    float: left;
+    border-radius: 1em 0 0 1em;
+    border: 2px solid #C8E8E0;
+    width: 90%;
+    height: 4em;
+    padding: 1em;
+    resize: none;
+    padding: 1.3em;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: grey;
+    font-style: italic;
+}
+
+.add-skill__button {
+    float: left;
+    border-radius: 0 1em 1em 0;
+    height: 4em;
+    width: 10%;
+    border: 2px solid #C8E8E0;
+    box-sizing: border-box;
+}
+
+.add-skill__button-icon {
+    display: block;
+    height: 3em;
+    width: auto;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-skill:after {
+    content: "";
+    display: table;
+    clear: both;
 }
