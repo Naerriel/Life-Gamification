@@ -6,13 +6,13 @@
     const number = skillsView.findIndex(function (element) {
       return element === skill;
     });
-		$(`.level${number}`).html(`${skill.level}`);
-    $(`.name${number}`).html(`${skill.name}`);
+	$(`.level${number}`).html(`${skill.level}`);
+	$(`.name${number}`).html(`${skill.name}`);
     $(`.exp${number}`).html(`
       ${skill.expTillNextLevel[0]}/${skill.expTillNextLevel[1]}`);
 
-		let percent = Math.floor(
-      100 * skill.expTillNextLevel[0] / skill.expTillNextLevel[1]);
+	let percent = Math.floor(
+    100 * skill.expTillNextLevel[0] / skill.expTillNextLevel[1]);
     $(`.fill${number}`).html(`${percent}%`);
     $(`.fill${number}`).css('width', `${percent}%`);
   }
@@ -37,15 +37,13 @@
   }
 
   const skillHomeHTML = function (number) {
-    return (`
-			<div class="skill">
-		`) + skillHTML(number);
+    return (`<div class="skill">`) + skillHTML(number);
   }
 
   const skillEditHTML = function (number) {
     return (`
     	<div class="skill">
-				<a class="skill__remove"><img src="../assets/removeSkill.png"class="skill__remove" id="remove${number}"></a>
+		    <a class="skill__remove"><img src="../assets/removeSkill.png"class="skill__remove" id="remove${number}"></a>
       `) + skillHTML(number);
   }
 
@@ -68,9 +66,9 @@
   }
 
   LifeGamification.view.viewImportExport = function () {
-		$('.import-export').html(`
-			<button class="import-export__button import">Import</button>
-			<button class="import-export__button export">Export</button>
+	$('.import-export').html(`
+		<button class="import-export__button import">Import</button>
+		<button class="import-export__button export">Export</button>
     	<textarea class="import-export__json">Place JSON here</textarea>
     `);
     LifeGamification.view.handleImportExportButtons();
@@ -80,10 +78,10 @@
     for (let name in skills) {
       appendEditSkill(skills[name]);
     }
-		$('.add-skill').html(`
-     	<textarea class="add-skill__name">New skill name</textarea>
-	    <div class="add-skill__button"><img src="../assets/plus.png" class="add-skill__button-icon"></div>
-      `);
+	$('.add-skill').html(`
+     	    <textarea class="add-skill__name">New skill name</textarea>
+	        <div class="add-skill__button"><img src="../assets/plus.png" class="add-skill__button-icon"></div>
+        `);
     LifeGamification.view.handleAddSkillButton();
   }
 
