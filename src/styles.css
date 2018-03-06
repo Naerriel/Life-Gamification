@@ -72,6 +72,11 @@ img {
     resize: none;
 }
 
+.import-export__json:focus {
+    color: black;
+    font-style: normal;
+}
+
 .all-skills {
     margin: 3em 18em 3em 18em;
 }
@@ -187,6 +192,11 @@ img {
     font-size: 1em;
     color: grey;
     font-style: italic;
+}
+
+.add-skill__name:focus {
+    color: black;
+    font-style: normal;
 }
 
 .add-skill__button {
