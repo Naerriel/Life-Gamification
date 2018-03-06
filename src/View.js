@@ -27,8 +27,8 @@
               <span class="progress-bar__container-fill fill${number}">60%</span>
           </span>
           <span class="progress-bar__buttons">
-              <span class="progress-bar__add-experience"> +1 </span>
-              <span class="progress-bar__arrow"> "\\/" </span>
+              <input class="progress-bar__add-input" id="addVal${number}" type="number" value="1">
+              <span class="progress-bar__add-button" id="add${number}"> +</span>
             </span>
         </div>
         <a class="skill__experience exp${number}">1024/1858</a>
@@ -38,12 +38,6 @@
 
   const skillHomeHTML = function (number) {
     return (`
-      <a class="exp${number}"></a>
-      <div>
-        <input id="add_value_num${number}" class="add_value_nums" type="number" name="addValue" value="">
-        <button id="add_value_button${number}" class="add_value_buttons" type="button">Add</button>
-        <button id="remove_skill_button${number}" class="remove_skill_buttons" type="button">Remove</button>
-      </div>
 			<div class="skill">
 		`) + skillHTML(number);
   }
@@ -79,6 +73,7 @@
 			<button class="import-export__button export">Export</button>
     	<textarea class="import-export__json">Place JSON here</textarea>
     `);
+    LifeGamification.view.handleImportExportButtons();
   }
 
   LifeGamification.view.viewEdit = function (skills) {
@@ -102,20 +97,19 @@
 
   LifeGamification.view.handleSkillButtons = function () {
     const update_exp = function (skillNr) {
-      const addedExp = parseInt($("#add_value_num" + skillNr).val());
-      $("#add_value_num" + skillNr).val('');
+      const addedExp = parseInt($("#addVal" + skillNr).val());
+      $("#addVal" + skillNr).val('1');
       const skill = skillsView[skillNr];
       LifeGamification.models.updateExp(skill, addedExp)
         .then(viewLevelAndExp);
     }
-    $(".all-skills").on("click", ".add_value_buttons", function () {
-      const skillNr = this.id.replace('add_value_button', '');
+    $(".all-skills").on("click", ".progress-bar__add-button", function () {
+      const skillNr = this.id.replace('add', '');
       update_exp(skillNr);
     });
-    $(".all-skills").on("keyup", ".add_value_nums", function (event) {
+    $(".all-skills").on("keyup", ".progress-bar__add-input", function (event) {
       if (event.keyCode === 13) {
-        const skillNr = this.id.replace('add_value_num', '');
-        console.log("I try to add exp.");
+        const skillNr = this.id.replace('addVal', '');
         update_exp(skillNr);
       }
     });
@@ -142,8 +136,9 @@
   }
 
   LifeGamification.view.handleImportExportButtons = function () {
+    console.log("ImportExport");
     $('.export').click(function() {
-      console.log("click on export");
+      console.log("whyyy");
       LifeGamification.repository.getSkills()
         .then(function(skills){
           $('.import-export__json').html(JSON.stringify(skills));
@@ -167,7 +162,6 @@
 
   LifeGamification.view.handleAddSkillButton = function () {
     const add_skill = function () {
-      console.log("I add a skill.");
       const skillName = $('.add-skill__name').val();
       $('.add-skill__name').val('');
       LifeGamification.models.addSkill(skillName)
