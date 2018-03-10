@@ -37,9 +37,7 @@
   }
 
   const skillHomeHTML = function (number) {
-    return (`
-			<div class="skill">
-		`) + skillHTML(number);
+    return (`<div class="skill">`) + skillHTML(number);
   }
 
   const skillEditHTML = function (number) {
@@ -68,9 +66,9 @@
   }
 
   LifeGamification.view.viewImportExport = function () {
-		$('.import-export').html(`
-			<button class="import-export__button import">Import</button>
-			<button class="import-export__button export">Export</button>
+	$('.import-export').html(`
+		<button class="import-export__button import">Import</button>
+		<button class="import-export__button export">Export</button>
     	<textarea class="import-export__json">Place JSON here</textarea>
     `);
     LifeGamification.view.handleImportExportButtons();
