@@ -6,7 +6,7 @@
     const number = skillsView.findIndex(function (element) {
       return element === skill;
     });
-	$(`.level${number}`).html(`${skill.level}`);
+    $(`.level${number}`).html(`${skill.level}`);
     $(`.name${number}`).html(`${skill.name}`);
     $(`.exp${number}`).html(`
       ${skill.expTillNextLevel[0]}/${skill.expTillNextLevel[1]}`);
