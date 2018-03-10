@@ -210,11 +210,9 @@ img {
 
 .add-skill__button-icon {
     display: block;
-    height: 3em;
+    height: 2.5em;
     width: auto;
-    margin-top: auto;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 0.6em 2em 0.6em 2em;
 }
 
 .add-skill:after {

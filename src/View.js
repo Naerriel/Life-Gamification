@@ -6,12 +6,12 @@
     const number = skillsView.findIndex(function (element) {
       return element === skill;
     });
-		$(`.level${number}`).html(`${skill.level}`);
+	$(`.level${number}`).html(`${skill.level}`);
     $(`.name${number}`).html(`${skill.name}`);
     $(`.exp${number}`).html(`
       ${skill.expTillNextLevel[0]}/${skill.expTillNextLevel[1]}`);
 
-		let percent = Math.floor(
+    let percent = Math.floor(
       100 * skill.expTillNextLevel[0] / skill.expTillNextLevel[1]);
     $(`.fill${number}`).html(`${percent}%`);
     $(`.fill${number}`).css('width', `${percent}%`);
@@ -45,7 +45,7 @@
   const skillEditHTML = function (number) {
     return (`
     	<div class="skill">
-				<a class="skill__remove"><img src="../assets/removeSkill.png"class="skill__remove" id="remove${number}"></a>
+				<a class="skill__remove"><img src="../assets/x.svg"class="skill__remove" id="remove${number}"></a>
       `) + skillHTML(number);
   }
 
@@ -80,9 +80,9 @@
     for (let name in skills) {
       appendEditSkill(skills[name]);
     }
-		$('.add-skill').html(`
+	$('.add-skill').html(`
      	<textarea class="add-skill__name">New skill name</textarea>
-	    <div class="add-skill__button"><img src="../assets/plus.png" class="add-skill__button-icon"></div>
+	    <div class="add-skill__button"><img src="../assets/plus.svg" class="add-skill__button-icon"></div>
       `);
     LifeGamification.view.handleAddSkillButton();
   }
