@@ -49,8 +49,8 @@
   LifeGamification.models.updateExp = function (skill, addedExp){
     return new Promise((resolve, reject) => {
       if(!addedExp) {
-        console.log("Error: AddedExp is NULL or 0.");
-        return reject(skill);
+        console.log("Error: Added experience is NULL or 0.");
+        return reject(addedExp);
       }
       if(addedExp + skill.exp < 0){
         addedExp = -skill.exp;
@@ -72,6 +72,7 @@
   LifeGamification.models.addSkill = function (skillName) {
     return new Promise((resolve, reject) => {
       if(!skillName){
+        console.log("Error: Skill name is NULL or 0.");
         return reject();
       }
       const newSkill = new Skill(skillName, 0);
