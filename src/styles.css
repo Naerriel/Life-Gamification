@@ -1,7 +1,7 @@
 body {margin:0;}
 
 * {
-      font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .header-bar {
@@ -45,11 +45,11 @@ img {
 
 .import-export__button {
     display: inline-block;
-	height: 1.5em;
+    height: 1.5em;
     width: 7em;
     border-radius: 0.3em;
     border: 1px solid #00D1A0;
-	background-color: #00D1A0;
+    background-color: #00D1A0;
     text-align: center;
     color: white;
     font-size: 2em;

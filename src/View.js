@@ -9,29 +9,29 @@
     $(`.level${number}`).html(`${skill.level}`);
     $(`.name${number}`).html(`${skill.name}`);
     $(`.exp${number}`).html(`
-      ${skill.expTillNextLevel[0]}/${skill.expTillNextLevel[1]}`);
+      ${skill.expInThisLevel}/${skill.expTillNextLevel}`);
 
     let percent = Math.floor(
-      100 * skill.expTillNextLevel[0] / skill.expTillNextLevel[1]);
+      100 * skill.expInThisLevel / skill.expTillNextLevel);
     $(`.fill${number}`).html(`${percent}%`);
     $(`.fill${number}`).css('width', `${percent}%`);
   }
 
   const skillHTML = function (number) {
     return (`
-      <a class="skill__level-number level${number}">73</a>
+      <a class="skill__level-number level${number}">-1</a>
       <a class="skill__level-text">lvl</a>
-      <a class="skill__name name${number}">Jeżdżenie na rowerze bez spodni</a>
+      <a class="skill__name name${number}">Skillname</a>
       <div class="progress-bar__wrapper">
           <span class="progress-bar__container">
-              <span class="progress-bar__container-fill fill${number}">60%</span>
+              <span class="progress-bar__container-fill fill${number}">-1%</span>
           </span>
           <span class="progress-bar__buttons">
               <input class="progress-bar__add-input" id="addVal${number}" type="number" value="1">
               <span class="progress-bar__add-button" id="add${number}"> +</span>
             </span>
         </div>
-        <a class="skill__experience exp${number}">1024/1858</a>
+        <a class="skill__experience exp${number}">-1/-1</a>
     </div>
     `);
   }
@@ -43,7 +43,7 @@
   const skillEditHTML = function (number) {
     return (`
     	<div class="skill">
-				<a class="skill__remove"><img src="../assets/x.svg"class="skill__remove" id="remove${number}"></a>
+        <a class="skill__remove"><img src="../assets/x.svg"class="skill__remove" id="remove${number}"></a>
       `) + skillHTML(number);
   }
 
@@ -67,10 +67,10 @@
 
   LifeGamification.view.viewImportExport = function () {
 	$('.import-export').html(`
-		<button class="import-export__button import">Import</button>
-		<button class="import-export__button export">Export</button>
-    	<textarea class="import-export__json">Place JSON here</textarea>
-    `);
+    <button class="import-export__button import">Import</button>
+    <button class="import-export__button export">Export</button>
+    <textarea class="import-export__json">Place JSON here</textarea>
+  `);
     LifeGamification.view.handleImportExportButtons();
   }
 
@@ -79,9 +79,9 @@
       appendEditSkill(skills[name]);
     }
 	$('.add-skill').html(`
-     	<textarea class="add-skill__name">New skill name</textarea>
-	    <div class="add-skill__button"><img src="../assets/plus.svg" class="add-skill__button-icon"></div>
-      `);
+    <textarea class="add-skill__name">New skill name</textarea>
+	  <div class="add-skill__button"><img src="../assets/plus.svg" class="add-skill__button-icon"></div>
+  `);
     LifeGamification.view.handleAddSkillButton();
   }
 
@@ -120,23 +120,21 @@
 
   LifeGamification.view.handleHeaderButtons = function () {
     $('#Home').click(function () {
-      LifeGamification.currentView = "Home";
+      LifeGamification.view.currentView = "Home";
       resetView();
     });
     $('#Edit').click(function () {
-      LifeGamification.currentView = "Edit";
+      LifeGamification.view.currentView = "Edit";
       resetView();
     });
     $('#Import-Export').click(function () {
-      LifeGamification.currentView = "Import/Export";
+      LifeGamification.view.currentView = "Import/Export";
       resetView();
     });
   }
 
   LifeGamification.view.handleImportExportButtons = function () {
-    console.log("ImportExport");
     $('.export').click(function() {
-      console.log("whyyy");
       LifeGamification.repository.getSkills()
         .then(function(skills){
           $('.import-export__json').html(JSON.stringify(skills));
@@ -175,13 +173,13 @@
   }
 
   LifeGamification.view.render = function (skills) {
-    if(LifeGamification.currentView === "Home"){
+    if(LifeGamification.view.currentView === "Home"){
       LifeGamification.view.viewHome(skills);
     }
-    if(LifeGamification.currentView === "Edit"){
+    if(LifeGamification.view.currentView === "Edit"){
       LifeGamification.view.viewEdit(skills);
     }
-    if(LifeGamification.currentView === "Import/Export"){
+    if(LifeGamification.view.currentView === "Import/Export"){
       LifeGamification.view.viewImportExport();
     }
   }
