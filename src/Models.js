@@ -48,6 +48,13 @@
 
   LifeGamification.models.updateExp = function (skill, addedExp){
     return new Promise((resolve, reject) => {
+      if(!addedExp) {
+        console.log("Error: AddedExp is NULL or 0.");
+        return reject(skill);
+      }
+      if(addedExp + skill.exp < 0){
+        addedExp = -skill.exp;
+      }
       skill.addExp(addedExp);
       saveSkillsCollection()
         .then(function (){
@@ -64,6 +71,9 @@
 
   LifeGamification.models.addSkill = function (skillName) {
     return new Promise((resolve, reject) => {
+      if(!skillName){
+        return reject();
+      }
       const newSkill = new Skill(skillName, 0);
       skillsCollection[skillName] = newSkill;
       saveSkillsCollection()
