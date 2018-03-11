@@ -69,7 +69,7 @@
 	$('.import-export').html(`
     <button class="import-export__button import">Import</button>
     <button class="import-export__button export">Export</button>
-    <textarea class="import-export__json">Place JSON here</textarea>
+    <textarea class="import-export__json" placeholder="Place JSON here"></textarea>
   `);
     LifeGamification.view.handleImportExportButtons();
   }
@@ -79,7 +79,7 @@
       appendEditSkill(skills[name]);
     }
 	$('.add-skill').html(`
-    <textarea class="add-skill__name">New skill name</textarea>
+    <textarea class="add-skill__name" placeholder="New skill name"></textarea>
 	  <div class="add-skill__button">
       <span class="add-skill__button-helper"></span><img src="../assets/plus.svg" class="add-skill__button-icon">
     </div>

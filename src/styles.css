@@ -88,16 +88,9 @@ img {
     border-radius: 1em;
     border: 0.1em solid #00D1A0;
     padding: 1em;
-    font-style: italic;
     font-size: 1.5em;
-    color: #DFDDDD;
     box-sizing: border-box;
     resize: none;
-}
-
-.import-export__json:focus {
-    color: black;
-    font-style: normal;
 }
 
 .all-skills {
@@ -216,14 +209,7 @@ img {
     padding: 1.3em;
     box-sizing: border-box;
     font-size: 1em;
-    color: grey;
-    font-style: italic;
     overflow: hidden;
-}
-
-.add-skill__name:focus {
-    color: black;
-    font-style: normal;
 }
 
 .add-skill__button {
