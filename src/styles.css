@@ -188,6 +188,7 @@ img {
     font-size: 1em;
     color: grey;
     font-style: italic;
+    overflow: hidden;
 }
 
 .add-skill__name:focus {
