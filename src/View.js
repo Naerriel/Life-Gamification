@@ -121,6 +121,10 @@
   }
 
   LifeGamification.view.handleHeaderButtons = function () {
+    $('.header-bar__menu-icon').click(function () {
+      LifeGamification.view.currentView = "Home";
+      resetView();
+    });
     $('#Home').click(function () {
       LifeGamification.view.currentView = "Home";
       resetView();
