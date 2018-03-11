@@ -4,6 +4,12 @@ body {margin:0;}
     font-family: "Roboto", sans-serif;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .header-bar {
     width: 100%;
     background-color: #00A67F;
@@ -135,6 +141,7 @@ img {
 }
 
 .progress-bar__add-input {
+    display: inline;
     resize: none;
     overflow: hidden;
     float: left;
@@ -146,16 +153,19 @@ img {
     padding: 0.6em;
     color: white;
     box-sizing: border-box;
+    margin: auto;
 }
 
 .progress-bar__add-button {
+    display: inline;
     float: left;
     background-color: #00D1A0;
     border-radius: 0 1em 1em 0;
     height: 2.2em;
     width: 30%;
     text-align: center;
-    padding: 0.6em;
+    padding: 0.55em;
+    font-weight: bold;
     color: white;
     box-sizing: border-box;
 }

@@ -26,10 +26,10 @@
           <span class="progress-bar__container">
               <span class="progress-bar__container-fill fill${number}">-1%</span>
           </span>
-          <span class="progress-bar__buttons">
+          <div class="progress-bar__buttons">
               <input class="progress-bar__add-input" id="addVal${number}" type="number" value="1">
               <span class="progress-bar__add-button" id="add${number}"> +</span>
-            </span>
+          </div>
         </div>
         <a class="skill__experience exp${number}">-1/-1</a>
     </div>
