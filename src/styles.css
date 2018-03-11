@@ -4,6 +4,10 @@ body {margin:0;}
     font-family: "Roboto", sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -13,26 +17,30 @@ input[type=number]::-webkit-outer-spin-button {
 .header-bar {
     width: 100%;
     background-color: #00A67F;
-    overflow: auto;
+    overflow: hidden;
 }
 
-.header-bar__menu-item {
+.header-bar a {
     float: left;
-    width: 20%;
-    text-align: center;
-    transition: all 0.3s ease;
     color: white;
-    font-size: 2em;
+    text-align: center;
+    font-size: 2.5em;
+    border-radius: 4px;
     box-sizing: border-box;
+    line-height: 1em;
+}
+
+.header-right {
+    float: left;
 }
 
 .header-bar__menu-text {
-    padding: 0.6em;
+    padding: 1em;
 }
 
 .header-bar__menu-icon {
-    padding: 0.1em;
-    max-height: 2em;
+    padding: 0.3em;
+    max-height: 3.4em;
 }
 
 .header-bar__menu-icon
@@ -42,6 +50,20 @@ img {
 
 .header-bar a:hover {
     background-color: #00D1A0;
+}
+
+@media screen and (max-width: 610px) {
+  .header-bar a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-bar__menu-text{
+    padding: 0.3em;
+  }
+  .header-right {
+    float: none;
+  }
 }
 
 .import-export {
