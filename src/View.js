@@ -87,8 +87,15 @@
     LifeGamification.view.handleAddSkillButton();
   }
 
+  const resetActives = function() {
+    $('#Home').removeClass('active');
+    $('#Edit').removeClass('active');
+    $('#Import-Export').removeClass('active');
+  }
+
   const resetView = function () {
     skillsView = [];
+    resetActives();
     $(".all-skills").html("");
     $(".import-export").html("");
     $(".add-skill").html("");
@@ -181,12 +188,15 @@
   LifeGamification.view.render = function (skills) {
     if(LifeGamification.view.currentView === "Home"){
       LifeGamification.view.viewHome(skills);
+      $('#Home').addClass('active');
     }
     if(LifeGamification.view.currentView === "Edit"){
       LifeGamification.view.viewEdit(skills);
+      $('#Edit').addClass('active');
     }
     if(LifeGamification.view.currentView === "Import/Export"){
       LifeGamification.view.viewImportExport();
+      $('#Import-Export').addClass('active');
     }
   }
 

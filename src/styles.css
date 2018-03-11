@@ -46,6 +46,10 @@ img {
     vertical-align: middle;
 }
 
+.active {
+    background-color: #00D1A0;
+}
+
 .header-bar a:hover {
     background-color: #00D1A0;
 }
