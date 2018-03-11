@@ -202,13 +202,21 @@ img {
     width: 10%;
     border: 2px solid #C8E8E0;
     box-sizing: border-box;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.add-skill__button-helper{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
 }
 
 .add-skill__button-icon {
-    display: block;
     height: 2.5em;
     width: auto;
-    padding: 0.6em 2em 0.6em 2em;
+    margin: auto;
+    vertical-align: middle;
 }
 
 .add-skill:after {

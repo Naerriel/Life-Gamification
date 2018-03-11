@@ -80,7 +80,9 @@
     }
 	$('.add-skill').html(`
     <textarea class="add-skill__name">New skill name</textarea>
-	  <div class="add-skill__button"><img src="../assets/plus.svg" class="add-skill__button-icon"></div>
+	  <div class="add-skill__button">
+      <span class="add-skill__button-helper"></span><img src="../assets/plus.svg" class="add-skill__button-icon">
+    </div>
   `);
     LifeGamification.view.handleAddSkillButton();
   }
