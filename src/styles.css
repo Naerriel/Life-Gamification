@@ -67,7 +67,8 @@ img {
 }
 
 .import-export {
-    margin: 10% 25% 25% 25%;
+    margin: auto;
+    margin-top: 3em;
     width: 50%;
 }
 
@@ -106,7 +107,9 @@ img {
 }
 
 .all-skills {
-    margin: 3em 18em 3em 18em;
+    margin: auto;
+    margin-top: 3em;
+    width: 60%;
 }
 
 .skill {
@@ -204,7 +207,8 @@ img {
 }
 
 .add-skill {
-    margin: 3em 18em 3em 18em;
+    margin: auto;
+    width: 60%;
 }
 
 .add-skill__name {
