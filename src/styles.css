@@ -18,34 +18,32 @@ input[type=number]::-webkit-outer-spin-button {
     width: 100%;
     background-color: #00A67F;
     overflow: hidden;
+    max-height: 10em;
 }
 
 .header-bar a {
-    float: left;
+    display: inline-block;
     color: white;
     text-align: center;
     font-size: 2.5em;
     border-radius: 4px;
     box-sizing: border-box;
-    line-height: 1em;
-}
-
-.header-right {
-    float: left;
+    height: 4em;
 }
 
 .header-bar__menu-text {
-    padding: 1em;
+    padding: 1.5em;
 }
 
 .header-bar__menu-icon {
     padding: 0.3em;
-    max-height: 3.4em;
 }
 
 .header-bar__menu-icon
 img {
     height: 100%;
+    max-height: 3.4em;
+    vertical-align: middle;
 }
 
 .header-bar a:hover {
@@ -54,15 +52,11 @@ img {
 
 @media screen and (max-width: 610px) {
   .header-bar a {
-    float: none;
     display: block;
     text-align: left;
   }
   .header-bar__menu-text{
     padding: 0.3em;
-  }
-  .header-right {
-    float: none;
   }
 }
 
