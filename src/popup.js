@@ -7,9 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log(" ");
   console.log("Application begins.");
 
+  LifeGamification.view.currentView = "Home"; //Home, Edit, Import/Export
+
   LifeGamification.models.fillExpTable();
   LifeGamification.view.startView();
   LifeGamification.view.handleSkillButtons();
-  LifeGamification.view.handleImportExportButtons();
-  LifeGamification.view.handleAddSkillButton();
+  LifeGamification.view.handleHeaderButtons();
 });

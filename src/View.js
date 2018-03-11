@@ -6,80 +6,142 @@
     const number = skillsView.findIndex(function (element) {
       return element === skill;
     });
-    $(`.exp${number}`).html(
-      `Level ${skill.level}: ${skill.expTillNextLevel} more.`);
+    $(`.level${number}`).html(`${skill.level}`);
+    $(`.name${number}`).html(`${skill.name}`);
+    $(`.exp${number}`).html(`
+      ${skill.expInThisLevel}/${skill.expTillNextLevel}`);
+
+    let percent = Math.floor(
+      100 * skill.expInThisLevel / skill.expTillNextLevel);
+    $(`.fill${number}`).html(`${percent}%`);
+    $(`.fill${number}`).css('width', `${percent}%`);
   }
 
-  const rowTableHTML = function (skill, number) {
+  const skillHTML = function (number) {
     return (`
-      <h4 class="skill_name">${skill.name}: </h4>
-      <a class="exp${number}"></a>
-      <div>
-        <input id="add_value_num${number}" class="add_value_nums" type="number" name="addValue" value="">
-        <button id="add_value_button${number}" class="add_value_buttons" type="button">Add</button>
-        <button id="remove_skill_button${number}" class="remove_skill_buttons" type="button">Remove</button>
-      </div>
+      <a class="skill__level-number level${number}">-1</a>
+      <a class="skill__level-text">lvl</a>
+      <a class="skill__name name${number}">Skillname</a>
+      <div class="progress-bar__wrapper">
+          <span class="progress-bar__container">
+              <span class="progress-bar__container-fill fill${number}">-1%</span>
+          </span>
+          <span class="progress-bar__buttons">
+              <input class="progress-bar__add-input" id="addVal${number}" type="number" value="1">
+              <span class="progress-bar__add-button" id="add${number}"> +</span>
+            </span>
+        </div>
+        <a class="skill__experience exp${number}">-1/-1</a>
+    </div>
     `);
   }
 
-  const appendSkill = function (skill) {
-    $('#skills').append(rowTableHTML(skill, skillsView.length));
+  const skillHomeHTML = function (number) {
+    return (`<div class="skill">`) + skillHTML(number);
+  }
+
+  const skillEditHTML = function (number) {
+    return (`
+    	<div class="skill">
+        <a class="skill__remove"><img src="../assets/x.svg"class="skill__remove" id="remove${number}"></a>
+      `) + skillHTML(number);
+  }
+
+  const appendHomeSkill = function (skill) {
+    $('.all-skills').append(skillHomeHTML(skillsView.length));
     skillsView.push(skill);
     viewLevelAndExp(skill);
   }
 
-  LifeGamification.view.viewSkills = function (skills) {
+  const appendEditSkill = function (skill) {
+    $('.all-skills').append(skillEditHTML(skillsView.length));
+    skillsView.push(skill);
+    viewLevelAndExp(skill);
+  }
+
+  LifeGamification.view.viewHome = function (skills) {
     for (let name in skills) {
-      appendSkill(skills[name]);
+      appendHomeSkill(skills[name]);
     }
   }
 
-  const resetSkills = function () {
+  LifeGamification.view.viewImportExport = function () {
+	$('.import-export').html(`
+    <button class="import-export__button import">Import</button>
+    <button class="import-export__button export">Export</button>
+    <textarea class="import-export__json">Place JSON here</textarea>
+  `);
+    LifeGamification.view.handleImportExportButtons();
+  }
+
+  LifeGamification.view.viewEdit = function (skills) {
+    for (let name in skills) {
+      appendEditSkill(skills[name]);
+    }
+	$('.add-skill').html(`
+    <textarea class="add-skill__name">New skill name</textarea>
+	  <div class="add-skill__button"><img src="../assets/plus.svg" class="add-skill__button-icon"></div>
+  `);
+    LifeGamification.view.handleAddSkillButton();
+  }
+
+  const resetView = function () {
     skillsView = [];
-    $("#skills").remove();
-    $("#skillBody").append(`
-      <div id="skills">
-      </div>
-    `);
-    LifeGamification.view.viewSkills(LifeGamification.skillsCollection);
-    LifeGamification.view.handleSkillButtons();
+    $(".all-skills").html("");
+    $(".import-export").html("");
+    $(".add-skill").html("");
+    LifeGamification.view.render(LifeGamification.skillsCollection);
   }
 
   LifeGamification.view.handleSkillButtons = function () {
     const update_exp = function (skillNr) {
-      const addedExp = parseInt($("#add_value_num" + skillNr).val());
-      $("#add_value_num" + skillNr).val('');
+      const addedExp = parseInt($("#addVal" + skillNr).val());
+      $("#addVal" + skillNr).val('1');
       const skill = skillsView[skillNr];
-
       LifeGamification.models.updateExp(skill, addedExp)
         .then(viewLevelAndExp);
     }
-    $("#skills").on("click", ".add_value_buttons", function () {
-      const skillNr = this.id.replace('add_value_button', '');
+    $(".all-skills").on("click", ".progress-bar__add-button", function () {
+      const skillNr = this.id.replace('add', '');
       update_exp(skillNr);
     });
-    $("#skills").on("keyup", ".add_value_nums", function (event) {
+    $(".all-skills").on("keyup", ".progress-bar__add-input", function (event) {
       if (event.keyCode === 13) {
-        const skillNr = this.id.replace('add_value_num', '');
+        const skillNr = this.id.replace('addVal', '');
         update_exp(skillNr);
       }
     });
-    $("#skills").on("click", ".remove_skill_buttons", function () {
-      const skillNr = this.id.replace('remove_skill_button', '');
+    $(".all-skills").on("click", ".skill__remove", function () {
+      const skillNr = this.id.replace('remove', '');
       LifeGamification.models.removeSkill(skillsView[skillNr])
-        .then(resetSkills);
+        .then(resetView);
+    });
+  }
+
+  LifeGamification.view.handleHeaderButtons = function () {
+    $('#Home').click(function () {
+      LifeGamification.view.currentView = "Home";
+      resetView();
+    });
+    $('#Edit').click(function () {
+      LifeGamification.view.currentView = "Edit";
+      resetView();
+    });
+    $('#Import-Export').click(function () {
+      LifeGamification.view.currentView = "Import/Export";
+      resetView();
     });
   }
 
   LifeGamification.view.handleImportExportButtons = function () {
-    $('#export_storage_button').click(function() {
+    $('.export').click(function() {
       LifeGamification.repository.getSkills()
         .then(function(skills){
-          $('#storage_stringified').html(JSON.stringify(skills));
+          $('.import-export__json').html(JSON.stringify(skills));
         })
     });
-    $('#import_storage_button').click(function() {
-      const storage = $("#storage_stringified").val();
+    $('.import').click(function() {
+      const storage = $(".import-export__json").val();
       if (storage === "") {
         return;
       }
@@ -89,30 +151,42 @@
       LifeGamification.repository.updateSkills(skills)
         .then(function () {
           LifeGamification.models.createSkillsCollection(skills);
-          resetSkills();
+          resetView();
         });
     });
   }
 
   LifeGamification.view.handleAddSkillButton = function () {
     const add_skill = function () {
-      const skillName = $('#skill_name').val();
-      $('#skill_name').val('');
+      const skillName = $('.add-skill__name').val();
+      $('.add-skill__name').val('');
       LifeGamification.models.addSkill(skillName)
-        .then(appendSkill);
+        .then(appendEditSkill);
     }
 
-    $('#add_skill').click(add_skill);
-    $("#skill_name").keyup(function (event) {
+    $('.add-skill__button-icon').click(add_skill);
+    $('.add-skill__name').keyup(function (event) {
       if (event.keyCode === 13) {
         add_skill();
       }
     });
   }
 
+  LifeGamification.view.render = function (skills) {
+    if(LifeGamification.view.currentView === "Home"){
+      LifeGamification.view.viewHome(skills);
+    }
+    if(LifeGamification.view.currentView === "Edit"){
+      LifeGamification.view.viewEdit(skills);
+    }
+    if(LifeGamification.view.currentView === "Import/Export"){
+      LifeGamification.view.viewImportExport();
+    }
+  }
+
   LifeGamification.view.startView = function () {
     LifeGamification.repository.getSkills()
       .then(LifeGamification.models.createSkillsCollection)
-      .then(LifeGamification.view.viewSkills);
+      .then(LifeGamification.view.render);
   }
 })();
