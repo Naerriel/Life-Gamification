@@ -26,10 +26,10 @@
           <span class="progress-bar__container">
               <span class="progress-bar__container-fill fill${number}">-1%</span>
           </span>
-          <span class="progress-bar__buttons">
+          <div class="progress-bar__buttons">
               <input class="progress-bar__add-input" id="addVal${number}" type="number" value="1">
               <span class="progress-bar__add-button" id="add${number}"> +</span>
-            </span>
+          </div>
         </div>
         <a class="skill__experience exp${number}">-1/-1</a>
     </div>
@@ -69,7 +69,7 @@
 	$('.import-export').html(`
     <button class="import-export__button import">Import</button>
     <button class="import-export__button export">Export</button>
-    <textarea class="import-export__json">Place JSON here</textarea>
+    <textarea class="import-export__json" placeholder="Place JSON here"></textarea>
   `);
     LifeGamification.view.handleImportExportButtons();
   }
@@ -78,15 +78,24 @@
     for (let name in skills) {
       appendEditSkill(skills[name]);
     }
-	$('.add-skill').html(`
-    <textarea class="add-skill__name">New skill name</textarea>
-	  <div class="add-skill__button"><img src="../assets/plus.svg" class="add-skill__button-icon"></div>
-  `);
+    $('.add-skill').html(`
+      <textarea class="add-skill__name" placeholder="New skill name"></textarea>
+      <div class="add-skill__button">
+        <span class="add-skill__button-helper"></span><img src="../assets/plus.svg" class="add-skill__button-icon">
+      </div>
+    `);
     LifeGamification.view.handleAddSkillButton();
+  }
+
+  const resetActives = function() {
+    $('#Home').removeClass('active');
+    $('#Edit').removeClass('active');
+    $('#Import-Export').removeClass('active');
   }
 
   const resetView = function () {
     skillsView = [];
+    resetActives();
     $(".all-skills").html("");
     $(".import-export").html("");
     $(".add-skill").html("");
@@ -119,6 +128,10 @@
   }
 
   LifeGamification.view.handleHeaderButtons = function () {
+    $('.header-bar__menu-icon').click(function () {
+      LifeGamification.view.currentView = "Home";
+      resetView();
+    });
     $('#Home').click(function () {
       LifeGamification.view.currentView = "Home";
       resetView();
@@ -175,12 +188,15 @@
   LifeGamification.view.render = function (skills) {
     if(LifeGamification.view.currentView === "Home"){
       LifeGamification.view.viewHome(skills);
+      $('#Home').addClass('active');
     }
     if(LifeGamification.view.currentView === "Edit"){
       LifeGamification.view.viewEdit(skills);
+      $('#Edit').addClass('active');
     }
     if(LifeGamification.view.currentView === "Import/Export"){
       LifeGamification.view.viewImportExport();
+      $('#Import-Export').addClass('active');
     }
   }
 
