@@ -1,6 +1,6 @@
 {
   "name": "Life Gamification",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Measure your progress in your real life skills!",
   "permissions": [
     "storage",
