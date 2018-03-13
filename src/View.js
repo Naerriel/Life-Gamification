@@ -60,8 +60,13 @@
   }
 
   LifeGamification.view.viewHome = function (skills) {
+    let skillsEmpty = true;
     for (let name in skills) {
+      skillsEmpty = false;
       appendHomeSkill(skills[name]);
+    }
+    if(skillsEmpty === true){
+      $('.welcome-message').css("display", "block");
     }
   }
 
@@ -99,6 +104,7 @@
     $(".all-skills").html("");
     $(".import-export").html("");
     $(".add-skill").html("");
+    $(".welcome-message").css("display", "none");
     LifeGamification.view.render(LifeGamification.skillsCollection);
   }
 
