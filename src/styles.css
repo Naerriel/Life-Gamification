@@ -8,6 +8,19 @@ body {margin:0;}
     box-sizing: border-box;
 }
 
+::-webkit-input-placeholder {
+   font-style: italic;
+}
+:-moz-placeholder {
+   font-style: italic;  
+}
+::-moz-placeholder {
+   font-style: italic;  
+}
+:-ms-input-placeholder {  
+   font-style: italic; 
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -15,59 +28,51 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .header-bar {
-    width: 100%;
+    display: inline-block;
+    min-width: 100%;
     background-color: #00A67F;
     overflow: hidden;
-    max-height: 10em;
+    height:3.5em;
 }
 
 .header-bar a {
-    display: inline-block;
     color: white;
     text-align: center;
-    font-size: 2.5em;
-    border-radius: 4px;
-    box-sizing: border-box;
-    height: 4em;
+    font-size: 1.7em;
+    box-sizing: content-box;
+    cursor: pointer;
 }
 
 .header-bar__menu-text {
-    padding: 1.5em;
+    padding: 0.6em 1.2em;
+    margin: 0;
 }
 
 .header-bar__menu-icon {
-    padding: 0.3em;
+    height: 2em;
+    padding: 0.2em;
+    margin-right: 0.2em;
 }
 
 .header-bar__menu-icon
 img {
     height: 100%;
-    max-height: 3.4em;
     vertical-align: middle;
 }
 
-.active {
+.header-bar__menu-text.active {
     background-color: #00D1A0;
 }
 
-.header-bar a:hover {
+.header-bar__menu-text:hover {
     background-color: #00D1A0;
-}
-
-@media screen and (max-width: 610px) {
-  .header-bar a {
-    display: block;
-    text-align: left;
-  }
-  .header-bar__menu-text{
-    padding: 0.3em;
-  }
 }
 
 .import-export {
     margin: auto;
     margin-top: 3em;
     width: 50%;
+    min-width: 30em;
 }
 
 .import-export__button {
@@ -82,6 +87,7 @@ img {
     font-size: 2em;
     padding: 0.1em;
     box-sizing: border-box;
+    margin-bottom: 0.1em;
 }
 
 .import-export__json {
@@ -103,10 +109,12 @@ img {
     width: 60%;
 }
 
+
 .skill {
     border-radius: 1em;
     border: 2px solid #C8E8E0;
     padding: 1em;
+    min-width: 30em;
 }
 
 .skill__remove {
@@ -201,6 +209,7 @@ img {
     margin: auto;
     margin-bottom: 7em;
     width: 60%;
+    min-width: 30em;
 }
 
 .add-skill__name {
@@ -245,4 +254,30 @@ img {
     content: "";
     display: table;
     clear: both;
+}
+
+@media screen and (max-width: 500px) {
+    .header-bar {
+        height: auto;
+    }
+    .header-bar a {
+        display: block;
+        text-align: left;
+    }
+    .header-bar__menu-text{
+        padding: 0.3em;
+    }
+    a.header-bar__menu-icon{
+        display: none;
+    }
+    .import-export{
+        width: 95%;
+        overflow-x: hidden;
+    }
+    .add-skill{
+        width: 100%;
+    }
+    .all-skills{
+        width: 100%;
+    }
 }
