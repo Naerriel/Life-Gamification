@@ -76,6 +76,10 @@
         console.log("Error: Skill name is NULL or 0.");
         return reject();
       }
+      if(skillName in skillsCollection){
+        console.log(`Error: skill ${skillName} already exits.`);
+        return reject();
+      }
       const newSkill = new Skill(skillName, 0);
       skillsCollection[skillName] = newSkill;
       saveSkillsCollection()
