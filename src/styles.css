@@ -12,13 +12,13 @@ body {margin:0;}
    font-style: italic;
 }
 :-moz-placeholder {
-   font-style: italic;  
+   font-style: italic;
 }
 ::-moz-placeholder {
-   font-style: italic;  
+   font-style: italic;
 }
-:-ms-input-placeholder {  
-   font-style: italic; 
+:-ms-input-placeholder {
+   font-style: italic;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -66,6 +66,19 @@ img {
 
 .header-bar__menu-text:hover {
     background-color: #00D1A0;
+}
+
+.welcome-message {
+    display: none;
+    margin: auto;
+    margin-top: 3em;
+    width: 60%;
+    min-width: 20em;
+    border-radius: 1em;
+    padding: 0 1em;
+    border: 2px solid #C8E8E0;
+    font-size: 2em;
+    text-align: center;
 }
 
 .import-export {
