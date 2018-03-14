@@ -26,7 +26,7 @@
   LifeGamification.utils.endTiming = function () {
     const skill = LifeGamification.
       skillsCollection[LifeGamification.work.name];
-    const expToAdd = calcTime();
+    const expToAdd = Math.floor(calcTime() / 60);
     LifeGamification.models.updateExp(skill, expToAdd);
 
     LifeGamification.repository.setWork({});
