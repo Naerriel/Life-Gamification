@@ -26,7 +26,7 @@
   LifeGamification.utils.endTiming = function () {
     const skill = LifeGamification.
       skillsCollection[LifeGamification.work.name];
-    const expToAdd = parseInt($('.timer__time').text());
+    const expToAdd = calcTime();
     LifeGamification.models.updateExp(skill, expToAdd);
 
     LifeGamification.repository.setWork({});
@@ -34,9 +34,28 @@
     LifeGamification.view.finishTimer();
   }
 
-  calcWhatTimeIsIt = function () {
+  displayTime = function(time) {
+    console.log("here, time = " + time);
+    let hours = Math.floor(time / 3600);
+    time %= 3600;
+    let minutes = Math.floor(time / 60);
+    time %= 60;
+    let seconds = time;
+    if(hours < 10){
+      hours = "0" + hours;
+    }
+    if(minutes < 10){
+      minutes = "0" + minutes;
+    }
+    if(seconds < 10){
+      seconds = "0" + seconds;
+    }
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  calcTime = function () {
     let currentTime = new Date().getTime();
-    const timeDiff = Math.floor(
+    let timeDiff = Math.floor(
       (currentTime - LifeGamification.work.startTime) / 1000);
     return timeDiff;
   }
@@ -46,9 +65,9 @@
     .then(function() {
       if(LifeGamification.work.startTime){
         LifeGamification.view.startTimer(LifeGamification.work.name);
-        LifeGamification.view.setTimerTime(calcWhatTimeIsIt);
+        LifeGamification.view.setTimerTime(displayTime(calcTime()));
         LifeGamification.refreshTimer = setInterval(function() {
-          LifeGamification.view.setTimerTime(calcWhatTimeIsIt);
+          LifeGamification.view.setTimerTime(displayTime(calcTime()));
         }, 1000);
       }
     });
