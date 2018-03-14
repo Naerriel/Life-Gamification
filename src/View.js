@@ -94,22 +94,39 @@
 
   LifeGamification.view.viewTimer = function (skills) {
     let code = `
-      <button class="timer__start-button">Start</button>
-      <button class="timer__end-button">End</button>
-      <p class="timer__time">0</p>
+      <button class="timer__button">Start</button>
       <select class="timer__select-skill">
     `;
     for (let name in skills){
       code += `<option value="${name}">${name}</option>`;
     }
-    code += `</select>`;
+    code += `</select>
+      <div>
+        <span class="timer__time"></span>
+        <span class="timer__skill-name"></span>
+      </div>
+      `;
     $(".timer").html(code);
     LifeGamification.view.handleTimerButtons();
     LifeGamification.utils.handleTimer();
   }
 
-  LifeGamification.view.setTimerTime = function(time) {
+  LifeGamification.view.setTimerTime = function (time) {
     $('.timer__time').html(time);
+  }
+
+  LifeGamification.view.startTimer = function (name) {
+    $(".timer__button").html("Finish");
+    $(".timer__select-skill").css("display", "none");
+    $(".timer__skill-name").html(`
+        Working on: ${name}
+    `);
+  }
+
+  LifeGamification.view.finishTimer = function (){
+    $(".timer__skill-name").html("");
+    $(".timer__select-skill").css("display", "inline");
+    $(".timer__time").html("");
   }
 
   const resetActives = function() {
@@ -127,6 +144,7 @@
     $(".add-skill").html("");
     $(".timer").html("");
     $(".welcome-message").css("display", "none");
+    clearInterval(LifeGamification.refreshTimer);
     LifeGamification.view.render(LifeGamification.skillsCollection);
   }
 
@@ -218,8 +236,16 @@
   }
 
   LifeGamification.view.handleTimerButtons = function () {
-    $('.timer__start-button').click(LifeGamification.utils.startTiming);
-    $('.timer__end-button').click(LifeGamification.utils.endTiming);
+    $('.timer__button').click(function () {
+      if($('.timer__button').text() === "Start"){
+        $('.timer__button').html("Finish");
+        LifeGamification.utils.startTiming();
+      }
+      else{
+        $('.timer__button').html("Start");
+        LifeGamification.utils.endTiming();
+      }
+    });
   }
 
   LifeGamification.view.render = function (skills) {

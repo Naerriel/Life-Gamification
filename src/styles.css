@@ -274,6 +274,19 @@ img {
     margin-top: 3em;
 }
 
+.timer__select-skill {
+    display: inline-block;
+}
+
+.timer__time {
+    display: inline-block;
+    font-size: 2em;
+}
+
+.timer__skill-name {
+    display: inline-block;
+}
+
 @media screen and (max-width: 500px) {
     .header-bar {
         height: auto;

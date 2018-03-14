@@ -1,14 +1,14 @@
 (function(){
   LifeGamification.utils = {};
-  LifeGamification.startTime = 0;
-  var refreshTimer;
+  LifeGamification.work = {};
+  LifeGamification.refreshTimer;
 
   LifeGamification.utils.setStartTime = function () {
     return new Promise((resolve, reject) => {
-      LifeGamification.repository.getTime()
-      .then(function(time){
-        if(time){
-          LifeGamification.startTime = time;
+      LifeGamification.repository.getWork()
+      .then(function(work){
+        if(work){
+          LifeGamification.work = work;
           resolve();
         }
       });
@@ -17,33 +17,37 @@
 
   LifeGamification.utils.startTiming = function () {
     let currentTime = new Date().getTime();
-    LifeGamification.repository.setTime(currentTime)
+    let skillName = $('.timer__select-skill').val();
+    LifeGamification.repository
+      .setWork({startTime: currentTime, name: skillName})
     .then(LifeGamification.utils.handleTimer());
   }
 
   LifeGamification.utils.endTiming = function () {
-    const name = $('.timer__select-skill').val();
-    const skill = LifeGamification.skillsCollection[name];
+    const skill = LifeGamification.
+      skillsCollection[LifeGamification.work.name];
     const expToAdd = parseInt($('.timer__time').text());
     LifeGamification.models.updateExp(skill, expToAdd);
 
-    LifeGamification.repository.setTime(0);
-    clearInterval(refreshTimer);
-    LifeGamification.view.setTimerTime("0");
+    LifeGamification.repository.setWork({});
+    clearInterval(LifeGamification.refreshTimer);
+    LifeGamification.view.finishTimer();
   }
 
   calcWhatTimeIsIt = function () {
     let currentTime = new Date().getTime();
-    const timeDiff = Math.floor((currentTime - LifeGamification.startTime) / 1000);
+    const timeDiff = Math.floor(
+      (currentTime - LifeGamification.work.startTime) / 1000);
     return timeDiff;
   }
 
   LifeGamification.utils.handleTimer = function () {
     LifeGamification.utils.setStartTime()
     .then(function() {
-      if(LifeGamification.startTime != 0){
+      if(LifeGamification.work.startTime){
+        LifeGamification.view.startTimer(LifeGamification.work.name);
         LifeGamification.view.setTimerTime(calcWhatTimeIsIt);
-        refreshTimer = setInterval(function() {
+        LifeGamification.refreshTimer = setInterval(function() {
           LifeGamification.view.setTimerTime(calcWhatTimeIsIt);
         }, 1000);
       }

@@ -1,7 +1,7 @@
 (function(){
   LifeGamification.repository = {};
   const skillsCollectionId = "skillsCollectionId";
-  const startTimeId = "startTimeId";
+  const workId = "workId";
 
   LifeGamification.repository.getSkills = function () {
     return new Promise((resolve, reject) => {
@@ -26,24 +26,24 @@
     });
   }
 
-  LifeGamification.repository.setTime = function (time) {
+  LifeGamification.repository.setWork = function (time) {
     return new Promise((resolve, reject) => {
-      chrome.storage.sync.set({startTimeId: time}, resolve);
+      chrome.storage.sync.set({workId: time}, resolve);
     });
   }
 
-  LifeGamification.repository.getTime = function () {
+  LifeGamification.repository.getWork = function () {
     return new Promise((resolve, reject) => {
       let handleResult = function (result) {
-        if(startTimeId in result){
-          resolve(result[startTimeId]);
+        if(workId in result){
+          resolve(result[workId]);
         }
         else{
-          console.log("There is no stored time.");
+          console.log("There is no stored work.");
           resolve({});
         }
       }
-      chrome.storage.sync.get([startTimeId], handleResult);
+      chrome.storage.sync.get([workId], handleResult);
     });
   }
 })();
