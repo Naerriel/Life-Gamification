@@ -122,7 +122,6 @@ img {
     width: 60%;
 }
 
-
 .skill {
     border-radius: 1em;
     border: 2px solid #C8E8E0;
@@ -267,6 +266,12 @@ img {
     content: "";
     display: table;
     clear: both;
+}
+
+.timer {
+    width: 60%;
+    margin: auto;
+    margin-top: 3em;
 }
 
 @media screen and (max-width: 500px) {
