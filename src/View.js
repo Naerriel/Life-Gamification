@@ -183,7 +183,7 @@
         .then(appendEditSkill);
     }
 
-    $('.add-skill__button-icon').click(add_skill);
+    $('.add-skill__button').click(add_skill);
     $('.add-skill__name').keyup(function (event) {
       if (event.keyCode === 13) {
         add_skill();

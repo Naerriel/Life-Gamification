@@ -31,6 +31,10 @@ input[type=number]::-webkit-outer-spin-button {
     outline: 0;
 }
 
+button {
+    cursor: pointer;
+}
+
 .header-bar {
     display: inline-block;
     min-width: 100%;
@@ -139,6 +143,7 @@ img {
     float: right;
     height: 2em;
     width: auto;
+    cursor: pointer;
 }
 
 .skill__level-number {
@@ -209,6 +214,7 @@ img {
     font-weight: bold;
     color: white;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .progress-bar__wrapper:after {
@@ -252,6 +258,7 @@ img {
     box-sizing: border-box;
     white-space: nowrap;
     text-align: center;
+    cursor: pointer;
 }
 
 .add-skill__button-helper{
