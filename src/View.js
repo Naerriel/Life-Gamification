@@ -94,16 +94,17 @@
 
   LifeGamification.view.viewTimer = function (skills) {
     let code = `
-      <button class="timer__button">Start</button>
-      <select class="timer__select-skill">
+      <div class="timer__wrapper">
+        <span class="timer__message">Select skill:</span>
+        <select class="timer__select-skill">
     `;
     for (let name in skills){
       code += `<option value="${name}">${name}</option>`;
     }
     code += `</select>
-      <div>
         <span class="timer__time"></span>
         <span class="timer__skill-name"></span>
+        <button class="timer__button">Start</button>
       </div>
       `;
     $(".timer").html(code);
@@ -118,6 +119,7 @@
   LifeGamification.view.startTimer = function (name) {
     $(".timer__button").html("Finish");
     $(".timer__select-skill").css("display", "none");
+    $(".timer__message").css("display", "none");
     $(".timer__skill-name").html(`
         Working on: ${name}
     `);
@@ -126,6 +128,7 @@
   LifeGamification.view.finishTimer = function (){
     $(".timer__skill-name").html("");
     $(".timer__select-skill").css("display", "inline");
+    $(".timer__message").css("display", "inline");
     $(".timer__time").html("");
   }
 

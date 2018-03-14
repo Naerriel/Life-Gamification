@@ -274,20 +274,46 @@ img {
     margin-top: 3em;
 }
 
-.timer__select-skill {
+.timer__wrapper {
+    border-radius: 1em;
+    border: 1px solid #C8E8E0;
+    padding: 2em 1em;
+}
+
+.timer__button {
     display: inline-block;
+    width: 7em;
+    border-radius: 0.3em;
+    border: 1px solid #00D1A0;
+    background-color: #00D1A0;
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    padding: 0.1em;
+    margin: 1em 0.5em;
+}
+
+.timer__message {
+    font-size: 2em;
+    padding: 1em;
+}
+
+.timer__select-skill {
+    font-size: 1.5em;
+    height: 1.5em;
+    border-radius: 1em;
 }
 
 .timer__time {
-    display: inline-block;
     font-size: 2em;
+    padding: 1em;
 }
 
 .timer__skill-name {
-    display: inline-block;
+    font-size: 2em;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .header-bar {
         height: auto;
     }
@@ -309,6 +335,9 @@ img {
         width: 100%;
     }
     .all-skills{
+        width: 100%;
+    }
+    .timer{
         width: 100%;
     }
 }
