@@ -112,7 +112,7 @@
     LifeGamification.utils.handleTimer();
   }
 
-  LifeGamification.view.setTimerTime = function (time) {
+  LifeGamification.view.displayWorkingTime = function (time) {
     $('.timer__time').html(time);
   }
 

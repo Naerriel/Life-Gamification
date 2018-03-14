@@ -26,9 +26,9 @@
     });
   }
 
-  LifeGamification.repository.setWork = function (time) {
+  LifeGamification.repository.setWork = function (work) {
     return new Promise((resolve, reject) => {
-      chrome.storage.sync.set({workId: time}, resolve);
+      chrome.storage.sync.set({workId: work}, resolve);
     });
   }
 

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log(" ");
   console.log("Application begins.");
 
-  LifeGamification.view.currentView = "Home"; //Home, Edit, Import/Export
+  LifeGamification.view.currentView = "Home"; //Home, Edit, Import/Export, Timer
 
   LifeGamification.models.fillExpTable();
   LifeGamification.view.startView();

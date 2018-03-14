@@ -6,9 +6,9 @@
   LifeGamification.utils.setStartTime = function () {
     return new Promise((resolve, reject) => {
       LifeGamification.repository.getWork()
-      .then(function(work){
-        if(work){
-          LifeGamification.work = work;
+      .then(function(result){
+        if(result){
+          LifeGamification.work = result;
           resolve();
         }
       });
@@ -68,9 +68,9 @@
     .then(function() {
       if(LifeGamification.work.startTime){
         LifeGamification.view.startTimer(LifeGamification.work.name);
-        LifeGamification.view.setTimerTime(displayTime(calcTime()));
+        LifeGamification.view.displayWorkingTime(displayTime(calcTime()));
         LifeGamification.refreshTimer = setInterval(function() {
-          LifeGamification.view.setTimerTime(displayTime(calcTime()));
+          LifeGamification.view.displayWorkingTime(displayTime(calcTime()));
         }, 1000);
       }
     });
