@@ -16,6 +16,10 @@
   }
 
   LifeGamification.utils.startTiming = function () {
+    if(!($('.timer__select-skill').val())){
+      console.log("Error: Add a skill first.");
+      return;
+    }
     let currentTime = new Date().getTime();
     let skillName = $('.timer__select-skill').val();
     LifeGamification.repository
@@ -35,7 +39,6 @@
   }
 
   displayTime = function(time) {
-    console.log("here, time = " + time);
     let hours = Math.floor(time / 3600);
     time %= 3600;
     let minutes = Math.floor(time / 60);

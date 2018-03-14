@@ -126,9 +126,10 @@
   }
 
   LifeGamification.view.finishTimer = function (){
-    $(".timer__skill-name").html("");
+    $(".timer__button").html("Start");
     $(".timer__select-skill").css("display", "inline");
     $(".timer__message").css("display", "inline");
+    $(".timer__skill-name").html("");
     $(".timer__time").html("");
   }
 
@@ -241,11 +242,9 @@
   LifeGamification.view.handleTimerButtons = function () {
     $('.timer__button').click(function () {
       if($('.timer__button').text() === "Start"){
-        $('.timer__button').html("Finish");
         LifeGamification.utils.startTiming();
       }
       else{
-        $('.timer__button').html("Start");
         LifeGamification.utils.endTiming();
       }
     });
