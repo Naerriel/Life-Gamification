@@ -22,6 +22,11 @@
   }
 
   LifeGamification.utils.endTiming = function () {
+    const name = $('.timer__select-skill').val();
+    const skill = LifeGamification.skillsCollection[name];
+    const expToAdd = parseInt($('.timer__time').text());
+    LifeGamification.models.updateExp(skill, expToAdd);
+
     LifeGamification.repository.setTime(0);
     clearInterval(refreshTimer);
     LifeGamification.view.setTimerTime("0");

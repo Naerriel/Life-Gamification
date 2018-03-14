@@ -92,12 +92,18 @@
     LifeGamification.view.handleImportExportButtons();
   }
 
-  LifeGamification.view.viewTimer = function () {
-    $('.timer').html(`
+  LifeGamification.view.viewTimer = function (skills) {
+    let code = `
       <button class="timer__start-button">Start</button>
       <button class="timer__end-button">End</button>
       <p class="timer__time">0</p>
-    `);
+      <select class="timer__select-skill">
+    `;
+    for (let name in skills){
+      code += `<option value="${name}">${name}</option>`;
+    }
+    code += `</select>`;
+    $(".timer").html(code);
     LifeGamification.view.handleTimerButtons();
     LifeGamification.utils.handleTimer();
   }
@@ -230,7 +236,7 @@
       $('#Import-Export').addClass('active');
     }
     if(LifeGamification.view.currentView === "Timer"){
-      LifeGamification.view.viewTimer();
+      LifeGamification.view.viewTimer(skills);
       $('#Timer').addClass('active');
     }
   }
