@@ -12,5 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
   LifeGamification.models.fillExpTable();
   LifeGamification.view.startView();
   LifeGamification.view.handleSkillButtons();
+  LifeGamification.view.handleTimerFinishButtons();
   LifeGamification.view.handleHeaderButtons();
 });

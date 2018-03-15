@@ -92,23 +92,42 @@
     LifeGamification.view.handleImportExportButtons();
   }
 
+  appendSkillTimer = function(skill, number){
+    if(skill.timer.startTime){
+      return `
+        <p>
+          <span class="timer__time-worked" id="time${number}">HH:MM:SS</span>
+          <span>Working on: ${skill.name}</span>
+          <button class="timer__finish-button" id="finish${number}">Finish</button>
+        </p>
+      `;
+    }
+    return "";
+  }
+
   LifeGamification.view.viewTimer = function (skills) {
     let code = `
       <div class="timer__wrapper">
+        <p>Current Timers</p>
+      `;
+    for (let name in skills){
+      code += appendSkillTimer(skills[name], skillsView.length);
+      skillsView.push(skills[name]);
+    }
+    code += `
         <span class="timer__message">Select skill:</span>
         <select class="timer__select-skill">
     `;
     for (let name in skills){
       code += `<option value="${name}">${name}</option>`;
     }
-    code += `</select>
-        <span class="timer__time"></span>
-        <span class="timer__skill-name"></span>
-        <button class="timer__button">Start</button>
+    code += `
+        </select>
+        <button class="timer__start-button">Start</button>
       </div>
-      `;
+    `;
     $(".timer").html(code);
-    LifeGamification.view.handleTimerButtons();
+    LifeGamification.view.handleTimerStartButton();
     LifeGamification.utils.handleTimer();
   }
 
@@ -239,13 +258,25 @@
     });
   }
 
-  LifeGamification.view.handleTimerButtons = function () {
-    $('.timer__button').click(function () {
-      if($('.timer__button').text() === "Start"){
-        LifeGamification.utils.startTiming();
+  LifeGamification.view.handleTimerFinishButtons = function () {
+    $(".timer").on("click", ".timer__finish-button", function (){
+      const skillNr = this.id.replace('finish', '');
+      const skill = skillsView[skillNr];
+      LifeGamification.models.finishWork(skill)
+        .then(resetView);
+    });
+  }
+
+  LifeGamification.view.handleTimerStartButton = function () {
+    $(".timer__start-button").click(function(){
+      const skillName = $(".timer__select-skill").val();
+      const skill = LifeGamification.skillsCollection[skillName];
+      if(skill.timer.startTime === 0){
+        LifeGamification.models.startWork(skill, "normal")
+          .then(resetView);
       }
       else{
-        LifeGamification.utils.endTiming();
+        console.log("Finish your current work first!");
       }
     });
   }

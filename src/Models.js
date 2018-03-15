@@ -5,11 +5,12 @@
   LifeGamification.skillsCollection = skillsCollection;
 
   class Skill{
-    constructor(name, exp){
+    constructor(name, exp, timerData){
       this.name = name;
       this.exp = exp;
       this.calcLevel();
       this.calcExpTillNextLevel();
+      this.timer = new Timer(timerData);
     }
 
     addExp(exp) {
@@ -33,14 +34,50 @@
       this.expInThisLevel = levelExp;
       this.expTillNextLevel = totalExpNeeded;
     }
+  }
 
+  class Timer{
+    constructor(timerData){
+      this.history = timerData.history;
+      this.startTime = timerData.startTime;
+    }
+
+    startWork(workType) {
+      this.startTime = new Date().getTime();
+      this.history[this.startTime] = {type: workType, finishTime: 0};
+    }
+
+    finishWork() {
+      const finishTime = new Date().getTime();
+      this.history[this.startTime].finishTime = finishTime;
+      const type = this.history[this.startTime].type;
+      const timeWorked = finishTime - this.startTime;
+      this.startTime = 0;
+      return timeWorked;
+    }
+  }
+
+  LifeGamification.models.startWork = function (skill, type) {
+    return new Promise((resolve, reject) => {
+      skill.timer.startWork(type);
+      saveSkillsCollection()
+        .then(resolve);
+    });
+  }
+
+  LifeGamification.models.finishWork = function (skill) {
+    return new Promise((resolve, reject) => {
+      const addedExp = Math.floor(skill.timer.finishWork() / 60000);
+      LifeGamification.models.updateExp(skill, addedExp)
+        .then(resolve);
+    });
   }
 
   LifeGamification.models.createSkillsCollection = function (skillsJSON) {
     return new Promise((resolve, reject) => {
       for (let skillName in skillsJSON) {
         const skillData = skillsJSON[skillName];
-        const newSkill = new Skill(skillName, skillData.exp);
+        const newSkill = new Skill(skillName, skillData.exp, skillData.timer);
         skillsCollection[skillName] = newSkill;
       }
       resolve(skillsCollection);
@@ -80,7 +117,8 @@
         console.log(`Error: skill ${skillName} already exits.`);
         return reject();
       }
-      const newSkill = new Skill(skillName, 0);
+      const newTimerData = {startTime: 0, history: {}};
+      const newSkill = new Skill(skillName, 0, newTimerData);
       skillsCollection[skillName] = newSkill;
       saveSkillsCollection()
         .then(function() {
