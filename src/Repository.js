@@ -25,25 +25,4 @@
       });
     });
   }
-
-  LifeGamification.repository.setWork = function (work) {
-    return new Promise((resolve, reject) => {
-      chrome.storage.sync.set({workId: work}, resolve);
-    });
-  }
-
-  LifeGamification.repository.getWork = function () {
-    return new Promise((resolve, reject) => {
-      let handleResult = function (result) {
-        if(workId in result){
-          resolve(result[workId]);
-        }
-        else{
-          console.log("There is no stored work.");
-          resolve({});
-        }
-      }
-      chrome.storage.sync.get([workId], handleResult);
-    });
-  }
 })();

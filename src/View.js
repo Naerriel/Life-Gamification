@@ -131,27 +131,6 @@
     LifeGamification.utils.handleTimer();
   }
 
-  LifeGamification.view.displayWorkingTime = function (time) {
-    $('.timer__time').html(time);
-  }
-
-  LifeGamification.view.startTimer = function (name) {
-    $(".timer__button").html("Finish");
-    $(".timer__select-skill").css("display", "none");
-    $(".timer__message").css("display", "none");
-    $(".timer__skill-name").html(`
-        Working on: ${name}
-    `);
-  }
-
-  LifeGamification.view.finishTimer = function (){
-    $(".timer__button").html("Start");
-    $(".timer__select-skill").css("display", "inline");
-    $(".timer__message").css("display", "inline");
-    $(".timer__skill-name").html("");
-    $(".timer__time").html("");
-  }
-
   const resetActives = function() {
     $('#Home').removeClass('active');
     $('#Edit').removeClass('active');
