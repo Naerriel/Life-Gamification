@@ -2,7 +2,8 @@
   LifeGamification.utils = {};
   LifeGamification.refreshTimer;
 
-  const displayTime = function(time) {
+  const displayTimeText = function(time) {
+    time = Math.floor(time / 1000);
     let hours = Math.floor(time / 3600);
     time %= 3600;
     let minutes = Math.floor(time / 60);
@@ -20,18 +21,22 @@
     return `${hours}:${minutes}:${seconds}`;
   }
 
-  LifeGamification.utils.handleTimer = function () {
-    LifeGamification.utils.setStartTime()
-      .then(function() {
-        if(LifeGamification.work.startTime){
-          LifeGamification.view.startTimer(LifeGamification.work.skillName);
-          LifeGamification.view.displayWorkingTime(
-            displayTime(calcTime(LifeGamification.work.startTime)));
-          LifeGamification.refreshTimer = setInterval(function() {
-            LifeGamification.view.displayWorkingTime(
-              displayTime(calcTime(LifeGamification.work.startTime)));
-          }, 1000);
-        }
-      });
+  const calcTime = function(startTime){
+    const now = new Date().getTime();
+    return now - startTime;
+  }
+
+  LifeGamification.utils.handleTimer = function (skillsView) {
+    const updateTimes = function() {
+      for(let number = 0; number < skillsView.length; number++){
+        const skill = skillsView[number];
+        LifeGamification.view.displayWorkingTime(number,
+          displayTimeText(calcTime(skill.timer.startTime)));
+      }
+    }
+    updateTimes();
+    LifeGamification.refreshTimer = setInterval(function(){
+      updateTimes();
+    }, 1000);
   }
 })();

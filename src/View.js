@@ -111,8 +111,10 @@
         <p>Current Timers</p>
       `;
     for (let name in skills){
-      code += appendSkillTimer(skills[name], skillsView.length);
-      skillsView.push(skills[name]);
+      if(skills[name].timer.startTime){
+        code += appendSkillTimer(skills[name], skillsView.length);
+        skillsView.push(skills[name]);
+      }
     }
     code += `
         <span class="timer__message">Select skill:</span>
@@ -128,7 +130,11 @@
     `;
     $(".timer").html(code);
     LifeGamification.view.handleTimerStartButton();
-    LifeGamification.utils.handleTimer();
+    LifeGamification.utils.handleTimer(skillsView);
+  }
+
+  LifeGamification.view.displayWorkingTime = function (number, timeText){
+    $(`#time${number}`).html(timeText);
   }
 
   const resetActives = function() {
