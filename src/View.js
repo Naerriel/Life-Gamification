@@ -97,7 +97,8 @@
       return `
         <p>
           <span class="timer__time-worked" id="time${number}">HH:MM:SS</span>
-          <span>Working on: ${skill.name}</span>
+          <span>Working on:</span>
+          <span class="timer__skillName">${skill.name}</span>
           <button class="timer__finish-button" id="finish${number}">Finish</button>
         </p>
       `;
@@ -108,7 +109,7 @@
   LifeGamification.view.viewTimer = function (skills) {
     let code = `
       <div class="timer__wrapper">
-        <p>Current Timers</p>
+        <p class="timer__header">Current Timers:</p>
       `;
     for (let name in skills){
       if(skills[name].timer.startTime){

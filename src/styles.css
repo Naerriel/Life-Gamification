@@ -276,8 +276,29 @@ img {
 
 .timer__wrapper {
     border-radius: 1em;
-    border: 1px solid #C8E8E0;
+    border: 2px solid #C8E8E0;
     padding: 2em 1em;
+}
+
+.timer__header {
+    font-size: 2em;
+}
+
+.timer__time-worked {
+    font-size: 1.3em;
+}
+
+.timer__skillName {
+    font-size: 1.3em;
+    padding-left: 0.4em;
+}
+
+.timer__finish-button {
+    background-color: #00D1A0;
+    border: 1px solid #00D1A0;
+    border-radius: 0.3em;
+    margin: 0 1em;
+    color: white;
 }
 
 .timer__start-button {
@@ -293,9 +314,19 @@ img {
     margin: 1em 0.5em;
 }
 
+.timer p{
+    padding: 0 1em;
+    vertical-align: center;
+}
+
+.timer__time-worked {
+    padding: 0 2em;
+}
+
 .timer__message {
     font-size: 2em;
     padding: 1em;
+    margin-top: 1em;
 }
 
 .timer__select-skill {
