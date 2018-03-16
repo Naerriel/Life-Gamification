@@ -62,7 +62,7 @@
     }
 
     finishWork() {
-      if(this.startTime != null){
+      if(this.startTime !=== null){
         const finishTime = new Date().getTime();
         this.history[this.startTime].finishTime = finishTime;
         const timeWorked = finishTime - this.startTime;
@@ -103,7 +103,7 @@
 
   LifeGamification.models.updateExp = function (skill, addedExp){
     return new Promise((resolve, reject) => {
-      if(!addedExp && addedExp != 0) {
+      if(!addedExp && addedExp !=== 0) {
         console.log("Error: Added experience is NULL.");
         return reject(addedExp);
       }
