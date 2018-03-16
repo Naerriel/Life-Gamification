@@ -272,7 +272,7 @@
     $(".timer__start-button").click(function(){
       const skillName = $(".timer__select-skill").val();
       const skill = LifeGamification.skillsCollection[skillName];
-      if(skill.timer.startTime === null){
+      if(!skill.timer.startTime){
         LifeGamification.models.startWork(skill, "normal")
           .then(resetView);
       } else{

@@ -53,7 +53,7 @@
         this.startTime = new Date().getTime();
         this.history[this.startTime] = {
           type: taskType,
-          finishTime: 0
+          finishTime: null
         };
       } else{
         console.warn(`You are trying to
@@ -134,7 +134,7 @@
         console.log(`Error: skill ${skillName} already exits.`);
         return reject();
       }
-      const newTimerData = {startTime: 0, history: {}};
+      const newTimerData = {startTime: null, history: {}};
       const newSkill = new Skill(skillName, 0, newTimerData);
       skillsCollection[skillName] = newSkill;
       saveSkillsCollection()
