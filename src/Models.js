@@ -10,6 +10,12 @@
       this.exp = exp;
       this.calcLevel();
       this.calcExpTillNextLevel();
+      if(!timerData){
+        timerData = {
+          history: {},
+          startTime: null,
+        }
+      }
       this.timer = new Timer(timerData);
     }
 
@@ -42,18 +48,29 @@
       this.startTime = timerData.startTime;
     }
 
-    startWork(workType) {
-      this.startTime = new Date().getTime();
-      this.history[this.startTime] = {type: workType, finishTime: 0};
+    startWork(taskType) {
+      if(this.startTime === null){
+        this.startTime = new Date().getTime();
+        this.history[this.startTime] = {
+          type: taskType,
+          finishTime: 0
+        };
+      } else{
+        console.warn(`You are trying to
+          start new work without finishing previous one.`);
+      }
     }
 
     finishWork() {
-      const finishTime = new Date().getTime();
-      this.history[this.startTime].finishTime = finishTime;
-      const type = this.history[this.startTime].type;
-      const timeWorked = finishTime - this.startTime;
-      this.startTime = 0;
-      return timeWorked;
+      if(this.startTime != null){
+        const finishTime = new Date().getTime();
+        this.history[this.startTime].finishTime = finishTime;
+        const timeWorked = finishTime - this.startTime;
+        this.startTime = null;
+        return timeWorked;
+      } else {
+        console.warn(`You are trying to finish work without starting one.`);
+      }
     }
   }
 

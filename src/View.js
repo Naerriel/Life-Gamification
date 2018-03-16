@@ -131,11 +131,26 @@
     `;
     $(".timer").html(code);
     LifeGamification.view.handleTimerStartButton();
-    LifeGamification.utils.handleTimer(skillsView);
+    LifeGamification.view.handleTimer(skillsView);
   }
 
   LifeGamification.view.displayWorkingTime = function (number, timeText){
     $(`#time${number}`).html(timeText);
+  }
+
+  LifeGamification.view.handleTimer = function (skillsView) {
+    const updateTimes = function() {
+      for(let number = 0; number < skillsView.length; number++){
+        const skill = skillsView[number];
+        const timeLapsed = LifeGamification.utils.calcTime(skill.timer.startTime);
+        LifeGamification.view.displayWorkingTime(number,
+          LifeGamification.utils.displayTimeText(timeLapsed));
+      }
+    }
+    updateTimes();
+    LifeGamification.refreshTimer = setInterval(function(){
+      updateTimes();
+    }, 1000);
   }
 
   const resetActives = function() {
@@ -257,11 +272,10 @@
     $(".timer__start-button").click(function(){
       const skillName = $(".timer__select-skill").val();
       const skill = LifeGamification.skillsCollection[skillName];
-      if(skill.timer.startTime === 0){
+      if(skill.timer.startTime === null){
         LifeGamification.models.startWork(skill, "normal")
           .then(resetView);
-      }
-      else{
+      } else{
         console.log("Finish your current work first!");
       }
     });
