@@ -5,11 +5,18 @@
   LifeGamification.skillsCollection = skillsCollection;
 
   class Skill{
-    constructor(name, exp){
+    constructor(name, exp, timerData){
       this.name = name;
       this.exp = exp;
       this.calcLevel();
       this.calcExpTillNextLevel();
+      if(!timerData){
+        timerData = {
+          history: {},
+          startTime: null,
+        }
+      }
+      this.timer = new Timer(timerData);
     }
 
     addExp(exp) {
@@ -33,14 +40,61 @@
       this.expInThisLevel = levelExp;
       this.expTillNextLevel = totalExpNeeded;
     }
+  }
 
+  class Timer{
+    constructor(timerData){
+      this.history = timerData.history;
+      this.startTime = timerData.startTime;
+    }
+
+    startWork(taskType) {
+      if(this.startTime === null){
+        this.startTime = new Date().getTime();
+        this.history[this.startTime] = {
+          type: taskType,
+          finishTime: null
+        };
+      } else{
+        console.warn(`You are trying to
+          start new work without finishing previous one.`);
+      }
+    }
+
+    finishWork() {
+      if(this.startTime !=== null){
+        const finishTime = new Date().getTime();
+        this.history[this.startTime].finishTime = finishTime;
+        const timeWorked = finishTime - this.startTime;
+        this.startTime = null;
+        return timeWorked;
+      } else {
+        console.warn(`You are trying to finish work without starting one.`);
+      }
+    }
+  }
+
+  LifeGamification.models.startWork = function (skill, type) {
+    return new Promise((resolve, reject) => {
+      skill.timer.startWork(type);
+      saveSkillsCollection()
+        .then(resolve);
+    });
+  }
+
+  LifeGamification.models.finishWork = function (skill) {
+    return new Promise((resolve, reject) => {
+      const addedExp = Math.floor(skill.timer.finishWork() / 60000);
+      LifeGamification.models.updateExp(skill, addedExp)
+        .then(resolve);
+    });
   }
 
   LifeGamification.models.createSkillsCollection = function (skillsJSON) {
     return new Promise((resolve, reject) => {
       for (let skillName in skillsJSON) {
         const skillData = skillsJSON[skillName];
-        const newSkill = new Skill(skillName, skillData.exp);
+        const newSkill = new Skill(skillName, skillData.exp, skillData.timer);
         skillsCollection[skillName] = newSkill;
       }
       resolve(skillsCollection);
@@ -49,8 +103,8 @@
 
   LifeGamification.models.updateExp = function (skill, addedExp){
     return new Promise((resolve, reject) => {
-      if(!addedExp) {
-        console.log("Error: Added experience is NULL or 0.");
+      if(!addedExp && addedExp !=== 0) {
+        console.log("Error: Added experience is NULL.");
         return reject(addedExp);
       }
       if(addedExp + skill.exp < 0){
@@ -80,7 +134,8 @@
         console.log(`Error: skill ${skillName} already exits.`);
         return reject();
       }
-      const newSkill = new Skill(skillName, 0);
+      const newTimerData = {startTime: null, history: {}};
+      const newSkill = new Skill(skillName, 0, newTimerData);
       skillsCollection[skillName] = newSkill;
       saveSkillsCollection()
         .then(function() {

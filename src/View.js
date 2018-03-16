@@ -70,15 +70,6 @@
     }
   }
 
-  LifeGamification.view.viewImportExport = function () {
-	$('.import-export').html(`
-    <button class="import-export__button import">Import</button>
-    <button class="import-export__button export">Export</button>
-    <textarea class="import-export__json" placeholder="Place JSON here"></textarea>
-  `);
-    LifeGamification.view.handleImportExportButtons();
-  }
-
   LifeGamification.view.viewEdit = function (skills) {
     for (let name in skills) {
       appendEditSkill(skills[name]);
@@ -92,10 +83,81 @@
     LifeGamification.view.handleAddSkillButton();
   }
 
+  LifeGamification.view.viewImportExport = function () {
+	$('.import-export').html(`
+    <button class="import-export__button import">Import</button>
+    <button class="import-export__button export">Export</button>
+    <textarea class="import-export__json" placeholder="Place JSON here"></textarea>
+  `);
+    LifeGamification.view.handleImportExportButtons();
+  }
+
+  appendSkillTimer = function(skill, number){
+    if(skill.timer.startTime){
+      return `
+        <p>
+          <span class="timer__time-worked" id="time${number}">HH:MM:SS</span>
+          <span>Working on:</span>
+          <span class="timer__skillName">${skill.name}</span>
+          <button class="timer__finish-button" id="finish${number}">Finish</button>
+        </p>
+      `;
+    }
+    return "";
+  }
+
+  LifeGamification.view.viewTimer = function (skills) {
+    let code = `
+      <div class="timer__wrapper">
+        <p class="timer__header">Current Timers:</p>
+      `;
+    for (let name in skills){
+      if(skills[name].timer.startTime){
+        code += appendSkillTimer(skills[name], skillsView.length);
+        skillsView.push(skills[name]);
+      }
+    }
+    code += `
+        <span class="timer__message">Select skill:</span>
+        <select class="timer__select-skill">
+    `;
+    for (let name in skills){
+      code += `<option value="${name}">${name}</option>`;
+    }
+    code += `
+        </select>
+        <button class="timer__start-button">Start</button>
+      </div>
+    `;
+    $(".timer").html(code);
+    LifeGamification.view.handleTimerStartButton();
+    LifeGamification.view.handleTimer(skillsView);
+  }
+
+  LifeGamification.view.displayWorkingTime = function (number, timeText){
+    $(`#time${number}`).html(timeText);
+  }
+
+  LifeGamification.view.handleTimer = function (skillsView) {
+    const updateTimes = function() {
+      for(let number = 0; number < skillsView.length; number++){
+        const skill = skillsView[number];
+        const timeLapsed = LifeGamification.utils.calcTime(skill.timer.startTime);
+        LifeGamification.view.displayWorkingTime(number,
+          LifeGamification.utils.displayTimeText(timeLapsed));
+      }
+    }
+    updateTimes();
+    LifeGamification.refreshTimer = setInterval(function(){
+      updateTimes();
+    }, 1000);
+  }
+
   const resetActives = function() {
     $('#Home').removeClass('active');
     $('#Edit').removeClass('active');
     $('#Import-Export').removeClass('active');
+    $('#Timer').removeClass('active');
   }
 
   const resetView = function () {
@@ -104,8 +166,33 @@
     $(".all-skills").html("");
     $(".import-export").html("");
     $(".add-skill").html("");
+    $(".timer").html("");
     $(".welcome-message").css("display", "none");
+    clearInterval(LifeGamification.refreshTimer);
     LifeGamification.view.render(LifeGamification.skillsCollection);
+  }
+
+  LifeGamification.view.handleHeaderButtons = function () {
+    $('.header-bar__menu-icon').click(function () {
+      LifeGamification.view.currentView = "Home";
+      resetView();
+    });
+    $('#Home').click(function () {
+      LifeGamification.view.currentView = "Home";
+      resetView();
+    });
+    $('#Edit').click(function () {
+      LifeGamification.view.currentView = "Edit";
+      resetView();
+    });
+    $('#Import-Export').click(function () {
+      LifeGamification.view.currentView = "Import/Export";
+      resetView();
+    });
+    $('#Timer').click(function () {
+      LifeGamification.view.currentView = "Timer";
+      resetView();
+    });
   }
 
   LifeGamification.view.handleSkillButtons = function () {
@@ -133,22 +220,19 @@
     });
   }
 
-  LifeGamification.view.handleHeaderButtons = function () {
-    $('.header-bar__menu-icon').click(function () {
-      LifeGamification.view.currentView = "Home";
-      resetView();
-    });
-    $('#Home').click(function () {
-      LifeGamification.view.currentView = "Home";
-      resetView();
-    });
-    $('#Edit').click(function () {
-      LifeGamification.view.currentView = "Edit";
-      resetView();
-    });
-    $('#Import-Export').click(function () {
-      LifeGamification.view.currentView = "Import/Export";
-      resetView();
+  LifeGamification.view.handleAddSkillButton = function () {
+    const add_skill = function () {
+      const skillName = $('.add-skill__name').val();
+      $('.add-skill__name').val('');
+      LifeGamification.models.addSkill(skillName)
+        .then(appendEditSkill);
+    }
+
+    $('.add-skill__button-icon').click(add_skill);
+    $('.add-skill__name').keyup(function (event) {
+      if (event.keyCode === 13) {
+        add_skill();
+      }
     });
   }
 
@@ -175,18 +259,24 @@
     });
   }
 
-  LifeGamification.view.handleAddSkillButton = function () {
-    const add_skill = function () {
-      const skillName = $('.add-skill__name').val();
-      $('.add-skill__name').val('');
-      LifeGamification.models.addSkill(skillName)
-        .then(appendEditSkill);
-    }
+  LifeGamification.view.handleTimerFinishButtons = function () {
+    $(".timer").on("click", ".timer__finish-button", function (){
+      const skillNr = this.id.replace('finish', '');
+      const skill = skillsView[skillNr];
+      LifeGamification.models.finishWork(skill)
+        .then(resetView);
+    });
+  }
 
-    $('.add-skill__button').click(add_skill);
-    $('.add-skill__name').keyup(function (event) {
-      if (event.keyCode === 13) {
-        add_skill();
+  LifeGamification.view.handleTimerStartButton = function () {
+    $(".timer__start-button").click(function(){
+      const skillName = $(".timer__select-skill").val();
+      const skill = LifeGamification.skillsCollection[skillName];
+      if(!skill.timer.startTime){
+        LifeGamification.models.startWork(skill, "normal")
+          .then(resetView);
+      } else{
+        console.log("Finish your current work first!");
       }
     });
   }
@@ -203,6 +293,10 @@
     if(LifeGamification.view.currentView === "Import/Export"){
       LifeGamification.view.viewImportExport();
       $('#Import-Export').addClass('active');
+    }
+    if(LifeGamification.view.currentView === "Timer"){
+      LifeGamification.view.viewTimer(skills);
+      $('#Timer').addClass('active');
     }
   }
 
