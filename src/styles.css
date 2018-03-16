@@ -35,7 +35,7 @@ button {
     cursor: pointer;
 }
 
-.header-bar {
+header {
     display: inline-block;
     min-width: 100%;
     background-color: #00A67F;
@@ -43,7 +43,7 @@ button {
     height:3.5em;
 }
 
-.header-bar a {
+header a {
     color: white;
     text-align: center;
     font-size: 1.7em;
@@ -51,28 +51,28 @@ button {
     cursor: pointer;
 }
 
-.header-bar__menu-text {
+.header__menu-text {
     padding: 0.6em 1.2em;
     margin: 0;
 }
 
-.header-bar__menu-icon {
+.header__menu-icon {
     height: 2em;
     padding: 0.2em;
     margin-right: 0.2em;
 }
 
-.header-bar__menu-icon
+.header__menu-icon
 img {
     height: 100%;
     vertical-align: middle;
 }
 
-.header-bar__menu-text.active {
+.header__menu-text.active {
     background-color: #00D1A0;
 }
 
-.header-bar__menu-text:hover {
+.header__menu-text:hover {
     background-color: #00D1A0;
 }
 
