@@ -1,5 +1,5 @@
 # Life Gamification
-Version 0.2.1
+Version 0.2.2
 
 Chrome extension which allows you to measure your progress in your real life skills.
 ## Features:
@@ -8,6 +8,10 @@ Chrome extension which allows you to measure your progress in your real life ski
  - Calculating and displaying current level in every skill and experience points needed to level up
  - Importing and exporting database
  - Timer mechanism which calculates how much time you spend on a skill and gives you experience points.
+
+## Installation:
+Download the application as a user with link: https://chrome.google.com/webstore/detail/life-gamification/bohnadmaammojkcpeglphdocobnlnepi?hl=en-US.
+To install application as a contributor, pull the repository, go to Chrome Extensions on your Chrome Browser, click "Load unpacked extension" and select project directory.
 
 ## Planned features:
 Features to be added in upcoming versions:
