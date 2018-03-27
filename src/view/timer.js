@@ -80,7 +80,15 @@
       }
     });
     $('.timer__task-type').change(function(){
-      if($('.timer__task-type').val() === "pomodoro"){
+      if($('.timer__task_type').val() === "normal"){
+        $('.timer__pomodoro-options').html("");
+      }
+      else if($('.timer__task-type').val() === "countdown"){
+        $('.timer__pomodoro-options').html(`
+          <p>Countdown: <input id="countdown" type="number" value="60"> minutes</p>
+        `);
+      }
+      else if($('.timer__task-type').val() === "pomodoro"){
         $('.timer__pomodoro-options').html(`
           <p>Length of a pomodoro: <input id="pomodoro-length" type="number" value="25"> minutes</p>
           <p>Length of a break: <input id="pomodoro-break-length" type="number" value="5"> minutes</p>
@@ -88,12 +96,6 @@
           <p>Length of a big break: <input id="pomodoro-big-break-length" type="number" value="30"> minutes</p>
           <p>Number of pomodoros: <input id="pomodoro-number" type="number" value="8"></p>
         `);
-      } else if($('.timer__task-type').val() === "countdown"){
-        $('.timer__pomodoro-options').html(`
-          <p>Countdown: <input id="countdown" type="number" value="60"> minutes</p>
-        `);
-      } else {
-        $('.timer__pomodoro-options').html("");
       }
     });
   }
@@ -123,14 +125,17 @@
         else if (type.name === "pomodoro"){
           $(`#type${number}`).html("Pomodoro");
           let pomodorosFinished = 0;
-          let currentlyWork = true;
+          let currentlyWorking = true;
           let sinceBigBreak = 0;
           let nextTaskTime = 0;
+
           while(nextTaskTime <= timeLapsed){
-            if(currentlyWork){
+            if(currentlyWorking){
               nextTaskTime += type.info.length * 60000;
-              currentlyWork ^= 1;
-              pomodorosFinished++;
+              currentlyWorking ^= 1;
+              if(nextTaskTime <= timeLapsed){
+                pomodorosFinished++;
+              }
             } else {
               if(sinceBigBreak === type.info.between - 1){
                 nextTaskTime += type.info.bigbr * 60000;
@@ -139,7 +144,7 @@
                 nextTaskTime += type.info.br * 60000;
                 sinceBigBreak++;
               }
-              currentlyWork ^= 1;
+              currentlyWorking ^= 1;
             }
             if(pomodorosFinished == type.info.number){
               finishTask(number);
@@ -149,7 +154,7 @@
           if(4000 <= time && time < 5000){
             taskFinishSound();
           }
-          if(currentlyWork){
+          if(currentlyWorking){
             $(`#type${number}`).html("Pomodoro break");
           }
           else {
