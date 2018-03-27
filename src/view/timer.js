@@ -51,11 +51,39 @@
     $(".timer__start-button").click(function(){
       const skillName = $(".timer__select-skill").val();
       const skill = LifeGamification.skillsCollection[skillName];
+      const typeName = $('.timer__task-type').val();
+      let info = {};
+      if(typeName === "countdown"){
+        info["countdown"] = $('#countdown').val();
+      } else if (typeName === "pomodoro"){
+        info["length"] = $('#pomodoro-length').val();
+        info["break"] = $('#pomodoro-break-length').val();
+        info["number"] = $('#pomodoro-number').val();
+        info["big-break"] = $('#pomodoro-big-break-length').val();
+      }
+      const taskType = {"type": typeName, "info": info};
+
       if(!skill.timer.startTime){
-        LifeGamification.models.startWork(skill, "normal")
-          .then(LifeGamification.main.resetView);
+        LifeGamification.models.startWork(skill, taskType)
+          .then(resetView);
       } else{
         console.log("Finish your current work first!");
+      }
+    });
+    $('.timer__task-type').change(function(){
+      if($('.timer__task-type').val() === "pomodoro"){
+        $('.timer__pomodoro-options').html(`
+          <p>Length of a pomodoro: <input id="pomodoro-length" type="number" value="25"> minutes</p>
+          <p>Length of a break: <input id="pomodoro-break-length" type="number" value="5"> minutes</p>
+          <p>Number of pomodoros between big breaks: <input id="pomodoro-number" type="number" value="4"></p>
+          <p>Length of a big break: <input id="pomodoro-big-break-length" type="number" value="30"> minutes</p>
+        `);
+      } else if($('.timer__task-type').val() === "countdown"){
+        $('.timer__pomodoro-options').html(`
+          <p>Countdown: <input id="countdown" type="number" value="60"> minutes</p>
+        `);
+      } else {
+        $('.timer__pomodoro-options').html("");
       }
     });
   }
@@ -65,7 +93,7 @@
       for(let number = 0; number < skillsView.length; number++){
         const skill = skillsView[number];
         const timeLapsed = LifeGamification.utils.calcTime(skill.timer.startTime);
-        displayWorkingTime(number, 
+        displayWorkingTime(number,
           LifeGamification.utils.displayTimeText(timeLapsed));
       }
     }
