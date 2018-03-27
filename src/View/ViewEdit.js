@@ -1,5 +1,5 @@
 (function(){
-LifeGamification.view.edit = {};
+  LifeGamification.view.edit = {};
 
   const skillEditHTML = function (number) {
     return (`

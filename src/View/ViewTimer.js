@@ -43,7 +43,7 @@
     handleTimer(LifeGamification.skillsView);
   }
 
-  LifeGamification.view.displayWorkingTime = function (number, timeText){
+  const displayWorkingTime = function (number, timeText){
     $(`#time${number}`).html(timeText);
   }
 
@@ -65,7 +65,7 @@
       for(let number = 0; number < skillsView.length; number++){
         const skill = skillsView[number];
         const timeLapsed = LifeGamification.utils.calcTime(skill.timer.startTime);
-        LifeGamification.view.displayWorkingTime(number,
+        displayWorkingTime(number, 
           LifeGamification.utils.displayTimeText(timeLapsed));
       }
     }
@@ -83,5 +83,4 @@
         .then(LifeGamification.view.resetView);
     });
   }
-
 })();

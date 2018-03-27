@@ -1,7 +1,7 @@
 (function(){
   LifeGamification.view.home = {};
 
-//Functions to both Home and Edit views.
+  //Functions to both Home and Edit views.
 
   LifeGamification.view.viewLevelAndExp = function (skill) {
     const number = LifeGamification.skillsView.findIndex(function (element) {
@@ -62,7 +62,7 @@
     });
   }
 
-//End of functions to both Home and Edit views.
+  //End of functions to both Home and Edit views.
 
   const skillHomeHTML = function (number) {
     return (`<div class="skill">`) + LifeGamification.view.skillHTML(number);
@@ -74,7 +74,6 @@
     LifeGamification.view.viewLevelAndExp(skill);
   }
 
-
   LifeGamification.view.home.render = function (skills) {
     let skillsEmpty = true;
     for (let name in skills) {
@@ -85,5 +84,4 @@
       $('.welcome-message').css("display", "block");
     }
   }
-
 })();
