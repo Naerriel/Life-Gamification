@@ -1,5 +1,6 @@
 (function(){
   LifeGamification.timer = {};
+  const minute = 60000;
 
   const appendSkillTimer = function(skill, number){
     if(skill.timer.startTime){
@@ -113,7 +114,7 @@
         }
         else if (type.name === "countdown"){
           $(`#type${number}`).html("Countdown");
-          const time = type.info.countdown * 60000 - timeLapsed;
+          const time = type.info.countdown * minute - timeLapsed;
           text = LifeGamification.utils.displayTimeText(time);
           if(4000 <= time && time < 5000){
             taskFinishSound();
@@ -130,17 +131,17 @@
 
           while(nextTaskTime <= timeLapsed){
             if(currentlyWorking){
-              nextTaskTime += type.info.length * 60000;
+              nextTaskTime += type.info.length * minute;
               currentlyWorking ^= 1;
               if(nextTaskTime <= timeLapsed){
                 pomodorosFinished++;
               }
             } else {
               if(sinceBigBreak === type.info.between - 1){
-                nextTaskTime += type.info.bigbr * 60000;
+                nextTaskTime += type.info.bigbr * minute;
                 sinceBigBreak = 0;
               } else {
-                nextTaskTime += type.info.br * 60000;
+                nextTaskTime += type.info.br * minute;
                 sinceBigBreak++;
               }
               currentlyWorking ^= 1;
