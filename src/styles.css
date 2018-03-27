@@ -331,7 +331,7 @@ img {
 }
 
 .timer__time-worked {
-    padding: 0 2em;
+    padding: 0 0.3em;
 }
 
 .timer__message {
@@ -361,6 +361,13 @@ img {
 
 .timer .timer__pomodoro-options p{
     margin-left: 2em;
+}
+
+.timer__work-type{
+    margin-left: 2em;
+    display: inline-block;
+    font-size: 1.2em;
+    width: 120px;
 }
 
 @media screen and (max-width: 600px) {
