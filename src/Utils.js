@@ -2,7 +2,13 @@
   LifeGamification.utils = {};
   LifeGamification.refreshTimer;
 
-   LifeGamification.utils.displayTimeText = function(time) {
+  LifeGamification.utils.displayTimeText = function(time) {
+    let sign = "";
+    if(time < 0){
+      console.log(time);
+      sign = "-";
+      time *= -1;
+    }
     time = Math.floor(time / 1000);
     let hours = Math.floor(time / 3600);
     time %= 3600;
@@ -18,7 +24,7 @@
     if(seconds < 10){
       seconds = "0" + seconds;
     }
-    return `${hours}:${minutes}:${seconds}`;
+    return `${sign}${hours}:${minutes}:${seconds}`;
   }
 
   LifeGamification.utils.calcTime = function(startTime){

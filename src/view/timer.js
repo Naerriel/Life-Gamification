@@ -68,7 +68,7 @@
         info["number"] = $('#pomodoro-number').val();
         info["big-break"] = $('#pomodoro-big-break-length').val();
       }
-      const taskType = {"type": typeName, "info": info};
+      const taskType = {"name": typeName, "info": info};
 
       if(!skill.timer.startTime){
         LifeGamification.models.startWork(skill, taskType)
@@ -100,8 +100,23 @@
       for(let number = 0; number < skillsView.length; number++){
         const skill = skillsView[number];
         const timeLapsed = LifeGamification.utils.calcTime(skill.timer.startTime);
-        displayWorkingTime(number,
-          LifeGamification.utils.displayTimeText(timeLapsed));
+        const type = skill.timer.history[skill.timer.startTime].type;
+        console.log(type);
+        let text;
+        if(type.name === "normal"){
+          text = LifeGamification.utils.displayTimeText(timeLapsed);
+        }
+        else if (type.name === "countdown"){
+          const timeToLapse = type.info.countdown * 60000;
+          console.log("lapse = " + timeToLapse);
+          console.log(timeLapsed);
+          text = LifeGamification.utils.displayTimeText(timeToLapse - timeLapsed);
+        }
+        else if (type.name === "pomodoro"){
+          text = "To be added.";
+        }
+        //console.log("type is = " + type);
+        displayWorkingTime(number, text);
       }
     }
     updateTimes();
