@@ -1,27 +1,27 @@
 (function(){
-  LifeGamification.view.edit = {};
+  LifeGamification.edit = {};
 
   const skillEditHTML = function (number) {
     return (`
     	<div class="skill">
-        <a class="skill__remove"><img src="../assets/x.svg"class="skill__remove" id="remove${number}"></a>
-      `) + LifeGamification.view.skillHTML(number);
+        <a class="skill__remove"><img src="../../assets/x.svg"class="skill__remove" id="remove${number}"></a>
+      `) + LifeGamification.home.skillHTML(number);
   }
 
   const appendEditSkill = function (skill) {
     $('.all-skills').append(skillEditHTML(LifeGamification.skillsView.length));
     LifeGamification.skillsView.push(skill);
-    LifeGamification.view.viewLevelAndExp(skill);
+    LifeGamification.home.viewLevelAndExp(skill);
   }
 
-  LifeGamification.view.edit.render = function (skills) {
+  LifeGamification.edit.render = function (skills) {
     for (let name in skills) {
       appendEditSkill(skills[name]);
     }
     $('.add-skill').html(`
       <textarea class="add-skill__name" placeholder="New skill name"></textarea>
       <div class="add-skill__button">
-        <span class="add-skill__button-helper"></span><img src="../assets/plus.svg" class="add-skill__button-icon">
+        <span class="add-skill__button-helper"></span><img src="../../assets/plus.svg" class="add-skill__button-icon">
       </div>
     `);
     handleAddSkillButton();

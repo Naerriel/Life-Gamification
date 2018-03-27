@@ -1,7 +1,7 @@
 (function(){
-  LifeGamification.view.importExport = {};
+  LifeGamification.importExport = {};
 
-  LifeGamification.view.importExport.render = function () {
+  LifeGamification.importExport.render = function () {
 	$('.import-export').html(`
     <button class="import-export__button import">Import</button>
     <button class="import-export__button export">Export</button>
@@ -28,7 +28,7 @@
       LifeGamification.repository.updateSkills(skills)
         .then(function () {
           LifeGamification.models.createSkillsCollection(skills);
-          LifeGamification.view.resetView();
+          LifeGamification.main.resetView();
         });
     });
   }

@@ -1,5 +1,5 @@
 (function(){
-  LifeGamification.view.timer = {};
+  LifeGamification.timer = {};
 
   const appendSkillTimer = function(skill, number){
     if(skill.timer.startTime){
@@ -15,7 +15,7 @@
     return "";
   }
 
-  LifeGamification.view.timer.render = function (skills) {
+  LifeGamification.timer.render = function (skills) {
     let code = `
       <div class="timer__wrapper">
         <p class="timer__header">Current Timers:</p>
@@ -53,7 +53,7 @@
       const skill = LifeGamification.skillsCollection[skillName];
       if(!skill.timer.startTime){
         LifeGamification.models.startWork(skill, "normal")
-          .then(LifeGamification.view.resetView);
+          .then(LifeGamification.main.resetView);
       } else{
         console.log("Finish your current work first!");
       }
@@ -70,17 +70,17 @@
       }
     }
     updateTimes();
-    LifeGamification.view.timer.refreshTimer = setInterval(function(){
+    LifeGamification.timer.refreshTimer = setInterval(function(){
       updateTimes();
     }, 1000);
   }
 
-  LifeGamification.view.timer.handleTimerFinishButtons = function () {
+  LifeGamification.timer.handleTimerFinishButtons = function () {
     $(".timer").on("click", ".timer__finish-button", function (){
       const skillNr = this.id.replace('finish', '');
       const skill = LifeGamification.skillsView[skillNr];
       LifeGamification.models.finishWork(skill)
-        .then(LifeGamification.view.resetView);
+        .then(LifeGamification.main.resetView);
     });
   }
 })();
