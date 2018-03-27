@@ -5,6 +5,7 @@
     if(skill.timer.startTime){
       return `
         <p>
+          <span class="timer__work-type" id="type${number}">Type</span>
           <span class="timer__time-worked" id="time${number}">HH:MM:SS</span>
           <span>Working on:</span>
           <span class="timer__skillName">${skill.name}</span>
@@ -64,9 +65,10 @@
         info["countdown"] = $('#countdown').val();
       } else if (typeName === "pomodoro"){
         info["length"] = $('#pomodoro-length').val();
-        info["break"] = $('#pomodoro-break-length').val();
+        info["br"] = $('#pomodoro-break-length').val();
+        info["between"] = $('#pomodoro-between').val();
+        info["bigbr"] = $('#pomodoro-big-break-length').val();
         info["number"] = $('#pomodoro-number').val();
-        info["big-break"] = $('#pomodoro-big-break-length').val();
       }
       const taskType = {"name": typeName, "info": info};
 
@@ -82,8 +84,9 @@
         $('.timer__pomodoro-options').html(`
           <p>Length of a pomodoro: <input id="pomodoro-length" type="number" value="25"> minutes</p>
           <p>Length of a break: <input id="pomodoro-break-length" type="number" value="5"> minutes</p>
-          <p>Number of pomodoros between big breaks: <input id="pomodoro-number" type="number" value="4"></p>
+          <p>Number of pomodoros between big breaks: <input id="pomodoro-between" type="number" value="4"></p>
           <p>Length of a big break: <input id="pomodoro-big-break-length" type="number" value="30"> minutes</p>
+          <p>Number of pomodoros: <input id="pomodoro-number" type="number" value="8"></p>
         `);
       } else if($('.timer__task-type').val() === "countdown"){
         $('.timer__pomodoro-options').html(`
@@ -103,9 +106,11 @@
         const type = skill.timer.history[skill.timer.startTime].type;
         let text;
         if(type.name === "normal"){
+          $(`#type${number}`).html("Normal");
           text = LifeGamification.utils.displayTimeText(timeLapsed);
         }
         else if (type.name === "countdown"){
+          $(`#type${number}`).html("Countdown");
           const time = type.info.countdown * 60000 - timeLapsed;
           text = LifeGamification.utils.displayTimeText(time);
           if(4000 <= time && time < 5000){
@@ -116,7 +121,41 @@
           }
         }
         else if (type.name === "pomodoro"){
-          text = "To be added.";
+          $(`#type${number}`).html("Pomodoro");
+          let pomodorosFinished = 0;
+          let currentlyWork = true;
+          let sinceBigBreak = 0;
+          let nextTaskTime = 0;
+          while(nextTaskTime <= timeLapsed){
+            if(currentlyWork){
+              nextTaskTime += type.info.length * 60000;
+              currentlyWork ^= 1;
+              pomodorosFinished++;
+            } else {
+              if(sinceBigBreak === type.info.between - 1){
+                nextTaskTime += type.info.bigbr * 60000;
+                sinceBigBreak = 0;
+              } else {
+                nextTaskTime += type.info.br * 60000;
+                sinceBigBreak++;
+              }
+              currentlyWork ^= 1;
+            }
+            if(pomodorosFinished == type.info.number){
+              finishTask(number);
+            }
+          }
+          const time = nextTaskTime - timeLapsed;
+          if(4000 <= time && time < 5000){
+            taskFinishSound();
+          }
+          if(currentlyWork){
+            $(`#type${number}`).html("Pomodoro break");
+          }
+          else {
+            $(`#type${number}`).html("Pomodoro work");
+          }
+          text = LifeGamification.utils.displayTimeText(time);
         }
         displayWorkingTime(number, text);
       }
