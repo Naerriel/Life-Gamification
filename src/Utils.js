@@ -5,7 +5,6 @@
   LifeGamification.utils.displayTimeText = function(time) {
     let sign = "";
     if(time < 0){
-      console.log(time);
       sign = "-";
       time *= -1;
     }
