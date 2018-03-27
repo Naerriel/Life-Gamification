@@ -106,10 +106,13 @@
           text = LifeGamification.utils.displayTimeText(timeLapsed);
         }
         else if (type.name === "countdown"){
-          const timeToLapse = type.info.countdown * 60000;
-          text = LifeGamification.utils.displayTimeText(timeToLapse - timeLapsed);
-          if((0 <= timeToLapse - timeLapsed) && (timeToLapse - timeLapsed < 1000)){
+          const time = type.info.countdown * 60000 - timeLapsed;
+          text = LifeGamification.utils.displayTimeText(time);
+          if(4000 <= time && time < 5000){
             taskFinishSound();
+          }
+          if(time < 0){
+            finishTask(number);
           }
         }
         else if (type.name === "pomodoro"){
@@ -134,13 +137,20 @@
     }, 5000);
   }
 
+  const finishTask = function(skillNr){
+    if(typeof skillNr === "object"){
+      skillNr = this.id.replace('finish', '');
+    }
+    const skill = LifeGamification.skillsView[skillNr];
+    LifeGamification.models.finishWork(skill)
+      .then(function(timeWorked){
+        alert(`You have gained ${timeWorked} experience in ${skill.name}`);
+        LifeGamification.main.resetView();
+      });
+  }
+
   LifeGamification.timer.handleTimerFinishButtons = function () {
-    $(".timer").on("click", ".timer__finish-button", function (){
-      const skillNr = this.id.replace('finish', '');
-      const skill = LifeGamification.skillsView[skillNr];
-      LifeGamification.models.finishWork(skill)
-        .then(LifeGamification.main.resetView);
-    });
+    $(".timer").on("click", ".timer__finish-button", finishTask);
   }
 
   function beep() {
