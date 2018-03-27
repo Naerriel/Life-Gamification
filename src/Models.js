@@ -86,7 +86,9 @@
     return new Promise((resolve, reject) => {
       const addedExp = Math.floor(skill.timer.finishWork() / 60000);
       LifeGamification.models.updateExp(skill, addedExp)
-        .then(resolve);
+        .then(function(){
+          resolve(addedExp);
+        });
     });
   }
 
