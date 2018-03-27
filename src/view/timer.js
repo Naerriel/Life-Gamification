@@ -35,6 +35,13 @@
     }
     code += `
         </select>
+        <select class="timer__task-type">
+          <option value="normal">Normal</option>
+          <option value="countdown">Countdown</option>
+          <option value="pomodoro">Pomodoro</option>
+        </select>
+        <div class="timer__pomodoro-options">
+        </div>
         <button class="timer__start-button">Start</button>
       </div>
     `;
@@ -65,7 +72,7 @@
 
       if(!skill.timer.startTime){
         LifeGamification.models.startWork(skill, taskType)
-          .then(resetView);
+          .then(LifeGamification.main.resetView);
       } else{
         console.log("Finish your current work first!");
       }
