@@ -7,6 +7,7 @@
     $('#Edit').removeClass('active');
     $('#Import-Export').removeClass('active');
     $('#Timer').removeClass('active');
+    $('#History').removeClass('active');
   }
 
   LifeGamification.main.resetView = function () {
@@ -16,6 +17,7 @@
     $(".import-export").html("");
     $(".add-skill").html("");
     $(".timer").html("");
+    $(".history").html("");
     $(".welcome-message").css("display", "none");
     clearInterval(LifeGamification.timer.refreshTimer);
     LifeGamification.main.render(LifeGamification.skillsCollection);
@@ -42,6 +44,10 @@
       LifeGamification.currentView = "Timer";
       LifeGamification.main.resetView();
     });
+    $('#History').click(function () {
+      LifeGamification.currentView = "History";
+      LifeGamification.main.resetView();
+    });
   }
 
   LifeGamification.main.render = function (skills) {
@@ -60,6 +66,10 @@
     if(LifeGamification.currentView === "Timer"){
       LifeGamification.timer.render(skills);
       $('#Timer').addClass('active');
+    }
+    if(LifeGamification.currentView === "History"){
+      LifeGamification.history.render(skills)
+      $('#History').addClass('active');
     }
   }
 

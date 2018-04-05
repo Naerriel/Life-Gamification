@@ -74,6 +74,19 @@
       }
     }
 
+    findNumberOfSessions(minTime, maxTime){
+      //We have to change it to handle pomodoros as well
+      let sessionsNum = 0;
+      for (let startTime in this.history){
+        const finishTime = this.history[startTime].finishTime;
+        const totalTime = (finishTime - startTime) / minute;
+        if(minTime <= totalTime && totalTime <= maxTime){
+          sessionsNum++;
+        }
+      }
+      return sessionsNum;
+    }
+    
     getWorkInfo() {
       const type = this.history[this.startTime].type;
       const timeLapsed = LifeGamification.utils.calcTime(this.startTime);
