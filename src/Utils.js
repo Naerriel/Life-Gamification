@@ -2,7 +2,10 @@
   LifeGamification.utils = {};
   LifeGamification.refreshTimer;
 
-   LifeGamification.utils.displayTimeText = function(time) {
+  LifeGamification.utils.displayTimeText = function(time) {
+    if(time < 0){
+      time = 0;
+    }
     time = Math.floor(time / 1000);
     let hours = Math.floor(time / 3600);
     time %= 3600;
