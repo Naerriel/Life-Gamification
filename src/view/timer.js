@@ -168,6 +168,28 @@
       });
   }
 
+  const taskFinishSound = function() {
+    beep();
+    soundPlayer = setInterval(function(){
+      beep();
+    }, 1000);
+    setTimeout(function(){
+      clearInterval(soundPlayer);
+    }, 5000);
+  }
+
+  const finishTask = function(skillNr){
+    if(typeof skillNr === "object"){
+      skillNr = this.id.replace('finish', '');
+    }
+    const skill = LifeGamification.skillsView[skillNr];
+    LifeGamification.models.finishWork(skill)
+      .then(function(timeWorked){
+        alert(`You have gained ${timeWorked} experience in ${skill.name}`);
+        LifeGamification.main.resetView();
+      });
+  }
+
   LifeGamification.timer.handleTimerFinishButtons = function () {
     $(".timer").on("click", ".timer__finish-button", finishTask);
   }
