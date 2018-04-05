@@ -65,7 +65,7 @@
       for(let number = 0; number < skillsView.length; number++){
         const skill = skillsView[number];
         const timeLapsed = LifeGamification.utils.calcTime(skill.timer.startTime);
-        displayWorkingTime(number, 
+        displayWorkingTime(number,
           LifeGamification.utils.displayTimeText(timeLapsed));
       }
     }

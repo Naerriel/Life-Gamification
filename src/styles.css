@@ -356,6 +356,42 @@ img {
     font-size: 2em;
 }
 
+.history {
+    width: 60%;
+    margin: auto;
+    margin-top: 3em;
+}
+
+.history__wrapper {
+    border-radius: 1em;
+    border: 2px solid #C8E8E0;
+    padding: 2em 1em;
+}
+
+.history p {
+    padding: 0 1em;
+    font-size: 1.2em;
+}
+
+.history button {
+    display: inline-block;
+    border-radius: 0.3em;
+    border: 1px solid #00D1A0;
+    background-color: #00D1A0;
+    text-align: center;
+    color: white;
+    padding: 0.1em;
+}
+
+.history select {
+    height: 1.5em;
+    border-radius: 1em;
+}
+
+.history__wrapper input {
+    width: 40px;
+}
+
 @media screen and (max-width: 600px) {
     .header-bar {
         height: auto;
