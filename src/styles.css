@@ -64,6 +64,7 @@ header a {
 
 .header__menu-icon
 img {
+    padding: 0.3em;
     height: 100%;
     vertical-align: middle;
 }
