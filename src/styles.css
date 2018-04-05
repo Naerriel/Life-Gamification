@@ -332,16 +332,16 @@ img {
 }
 
 .timer__time-worked {
-    padding: 0 2em;
+    padding: 0 0.3em;
 }
 
 .timer__message {
     font-size: 2em;
     padding: 1em;
-    margin-top: 1em;
+    margin-top: 2em;
 }
 
-.timer__select-skill {
+.timer select {
     font-size: 1.5em;
     height: 1.5em;
     border-radius: 1em;
@@ -354,6 +354,21 @@ img {
 
 .timer__skill-name {
     font-size: 2em;
+}
+
+.timer input {
+    width: 30px;
+}
+
+.timer .timer__pomodoro-options p{
+    margin-left: 2em;
+}
+
+.timer__work-type{
+    margin-left: 2em;
+    display: inline-block;
+    font-size: 1.2em;
+    width: 120px;
 }
 
 @media screen and (max-width: 600px) {
