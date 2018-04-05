@@ -2,6 +2,7 @@
   LifeGamification.models = {};
   const expTable = [];
   const skillsCollection = {};
+  const minute = 60000;
   LifeGamification.skillsCollection = skillsCollection;
 
   class Skill{
@@ -71,6 +72,58 @@
       } else {
         console.warn(`You are trying to finish work without starting one.`);
       }
+    }
+
+    getWorkInfo() {
+      const type = this.history[this.startTime].type;
+      const timeLapsed = LifeGamification.utils.calcTime(this.startTime);
+      if(type.name === "normal"){
+        return {"type": type, "time": timeLapsed};
+      }
+      if(type.name === "countdown"){
+        const time = type.info.countdown * minute - timeLapsed;
+        return {"type": type, "time": time};
+      }
+      if(type.name === "pomodoro"){
+        let pomodorosFinished = 0;
+        let currentlyWorking = true;
+        let sinceBigBreak = 0;
+        let nextTaskTime = 0;
+        let finished = false;
+
+        //Iterating by each pomodoro and break
+        while(nextTaskTime <= timeLapsed){
+          if(currentlyWorking){ //pomodoro time
+            nextTaskTime += type.info.length * minute;
+            currentlyWorking ^= 1;
+            if(nextTaskTime <= timeLapsed){
+              pomodorosFinished++;
+            }
+          } else { // break time
+            if(sinceBigBreak === type.info.between - 1){ // big break
+              nextTaskTime += type.info.bigbr * minute;
+              sinceBigBreak = 0;
+            } else { //short break
+              nextTaskTime += type.info.br * minute;
+              sinceBigBreak++;
+            }
+            currentlyWorking ^= 1;
+          }
+          if(pomodorosFinished == type.info.number){
+            finished = true;
+          }
+        }
+        currentlyWorking ^= 1; /*Because it changes on entering a
+         pomodoro or break time, not on leaving and we need current state */
+        const time = nextTaskTime - timeLapsed;
+        return {
+          "type": type,
+          "time": time,
+          "currentlyWorking": currentlyWorking,
+          "finished": finished
+        };
+      }
+      return type;
     }
   }
 
