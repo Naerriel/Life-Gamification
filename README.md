@@ -1,5 +1,5 @@
 # Life Gamification
-Version 0.2.2
+Version 0.2.3
 
 Chrome extension which allows you to measure your progress in your real life skills.
 ## Features:
@@ -32,4 +32,3 @@ Features to be added in upcoming versions:
  - Naerriel - main developer
  - andrzejgorski - reviewer
  - zniszcz - front-end advisor and reviewer
- - Icon made by Freepik from www.flaticon.com.
