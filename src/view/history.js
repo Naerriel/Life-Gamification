@@ -29,7 +29,6 @@
       const skill = LifeGamification.skillsCollection[skillName];
       const minTime = $(".history__min-time").val();
       const maxTime = $(".history__max-time").val();
-      //Some code to get result
       const sessionsNum = skill.timer.findNumberOfSessions(minTime, maxTime);
       $(".history__result").html(`${sessionsNum} sessions`);
     });
