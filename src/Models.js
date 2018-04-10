@@ -224,7 +224,7 @@
 
   LifeGamification.models.removeSkill = function (skill) {
     return new Promise((resolve, reject) => {
-      skillName = skill.name;
+      const skillName = skill.name;
       delete skillsCollection[skillName];
       LifeGamification.repository.updateSkills(skillsCollection);
       saveSkillsCollection

@@ -4,7 +4,7 @@
   const skillEditHTML = function (number) {
     return (`
     	<div class="skill">
-        <a class="skill__remove"><img src="../../assets/x.svg"class="skill__remove" id="remove${number}"></a>
+        <img src="../../assets/x.svg"class="skill__remove" id="remove${number}">
       `) + LifeGamification.home.skillHTML(number);
   }
 
