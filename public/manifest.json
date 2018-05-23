@@ -1,15 +1,26 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    }
+  "name": "Life Gamification",
+  "version": "0.3",
+  "description": "Measure your progress in your real life skills!",
+  "permissions": [
+    "storage",
+    "activeTab"
   ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background": {
+    "scripts": ["event_page.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "Life Gamification",
+    "default_icon": "assets/icongreen16.png"
+  },
+  "icons": {
+    "16": "assets/icongreen16.png",
+    "32": "assets/icongreen32.png",
+    "48": "assets/icongreen48.png",
+    "64": "assets/icongreen64.png",
+    "128": "assets/icongreen128.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
 }
