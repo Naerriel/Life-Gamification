@@ -1,0 +1,23 @@
+@import "../../colors.sass"
+
+.header
+    width: 100%;
+    background-color: $main-color
+    height: 42px;
+    display: flex;
+    flex-direction: row;
+
+    .header__icon
+        img
+            height: 42px;
+            padding: 6px 10px;
+
+    .header__text
+        color: #FFFFFF;
+        padding: 8px 20px;
+        font-size: 21px;
+        height: 42px;
+        margin: 0 1px;
+
+    .header__text:hover, .active
+        background-color: $stronger-color

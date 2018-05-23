@@ -1,0 +1,23 @@
+.header {
+  width: 100%;
+  background-color: #00A67F;
+  height: 42px;
+  display: flex;
+  flex-direction: row;
+}
+.header .header__icon img {
+  height: 42px;
+  padding: 6px 10px;
+}
+.header .header__text {
+  color: #FFFFFF;
+  padding: 8px 20px;
+  font-size: 21px;
+  height: 42px;
+  margin: 0 1px;
+}
+.header .header__text:hover, .header .active {
+  background-color: #00D1A0;
+}
+
+/*# sourceMappingURL=Header.css.map */
