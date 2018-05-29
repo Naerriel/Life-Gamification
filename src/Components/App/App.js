@@ -1,4 +1,3 @@
-/*global chrome*/
 import React, { Component } from 'react';
 import Header from "../Header/Header";
 import Home from "../Home/Home";
@@ -10,15 +9,9 @@ import './App.css';
 import { connect } from "react-redux";
 import { getSkills } from "../../actions";
 
-const skillsCollectionId = "skillsCollectionId";
-
 class App extends Component {
-  componentDidMount() {// Temporary code - to move to repository
-    chrome.storage.sync.get([skillsCollectionId], (result) => {
-      if(skillsCollectionId in result){
-        this.props.getSkills(result[skillsCollectionId]);
-      }
-    });
+  componentDidMount() {
+    this.props.getSkills();
   }
 
   render() {
