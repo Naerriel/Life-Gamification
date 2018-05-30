@@ -21,7 +21,7 @@ class AddNewSkill extends Component {
   }
 
   addSkill = () => {
-    this.props.addSkill(this.state.skillName);
+    this.props.addSkill(this.props.skills, this.state.skillName);
   }
 
   render() {
@@ -42,7 +42,7 @@ class AddNewSkill extends Component {
 
 const mapStateToProps = state => {
   return {
-    addSkill: state.addSkill
+    skills: state.skills
   };
 };
 

@@ -1,20 +1,21 @@
-/* global chrome */
-const skillsCollectionId = "skillsCollectionId";
+import { getRepoSkills } from "../repository/skills.js";
+import { setRepoSkills } from "../repository/skills.js";
+import { createEmptySkill } from "../selectors/skills.js";
 
-export const succesfullyGotSkills = (skills) => ({
-  type: 'SKILLS_GOT_SUCCESS',
+export const setSkills = (skills) => ({
+  type: 'SET_SKILLS',
   skills
 });
 
-export const addSkill = (skillName) => ({
-  type: 'ADD_SKILL',
-  skillName
-});
+export const addSkill = (skills, skillName) => (dispatch) => {
+  const newSkills = [...skills, createEmptySkill(skillName)];
+  setRepoSkills(newSkills);
+  dispatch(setSkills(newSkills));
+}
 
 export const getSkills = () => (dispatch) => {
-  chrome.storage.sync.get([skillsCollectionId], (result) => {
-    if(skillsCollectionId in result){
-      dispatch(succesfullyGotSkills(result[skillsCollectionId]));
-    }
-  });
+  getRepoSkills()
+    .then((skills) => {
+      dispatch(setSkills(skills));
+    });
 }
