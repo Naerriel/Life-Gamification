@@ -37,8 +37,6 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("Hi, przyszedl state:");
-  console.log(state);
   return {
     skills: state.skills
   }

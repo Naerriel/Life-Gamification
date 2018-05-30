@@ -20,7 +20,6 @@ class Edit extends Component {
     }
     return (
       <div>
-        <p> Hi edit here! Those are skills!</p>
         {skills}
         <AddNewSkillContainer />
       </div>

@@ -1,0 +1,79 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+.skill {
+  margin: auto;
+  width: 60%;
+  border-radius: 12px;
+  border: 2px solid #C8E8E0;
+  padding: 1em;
+  min-width: 400px;
+  margin-top: 5px; }
+  .skill .level {
+    padding: 6px 0 0 6px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #00D1A0; }
+  .skill .skillName {
+    margin-left: 6px;
+    font-size: 24px;
+    line-height: 3; }
+  .skill .progressBarContainer {
+    display: block;
+    float: left;
+    border-radius: 12px 0 0 12px;
+    background-color: #C8E8E0;
+    height: 2.2em;
+    width: 85%; }
+    .skill .progressBarContainer .progressBarFill {
+      display: block;
+      border-radius: 12px 0 0 12px;
+      background-color: #00D1A0;
+      height: 2.2em;
+      text-align: center;
+      padding: 0.6em;
+      color: #FFFFFF;
+      width: 15%; }
+  .skill .progressBarBtns {
+    display: block;
+    width: 14%;
+    float: left; }
+  .skill .addExpInput {
+    display: inline;
+    resize: none;
+    overflow: hidden;
+    float: left;
+    margin: 0 1px 0 2px;
+    background-color: #00D1A0;
+    height: 2.2em;
+    width: 65%;
+    text-align: center;
+    padding: 0.6em;
+    color: #FFFFFF;
+    margin: auto; }
+  .skill .addBtn {
+    display: inline;
+    float: left;
+    background-color: #00D1A0;
+    border-radius: 0 12px 12px 0;
+    height: 2.2em;
+    width: 30%;
+    text-align: center;
+    padding: 0.55em;
+    font-weight: bold;
+    color: #FFFFFF;
+    cursor: pointer; }
+  .skill .progressBarWrapper:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .skill .experience {
+    font-style: italic;
+    font-weight: lighter; }
+
+.skill:first-child {
+  margin-top: 36px; }
+
+/*# sourceMappingURL=Skill.css.map */

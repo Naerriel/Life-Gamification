@@ -19,7 +19,6 @@ class Home extends Component {
     }
     return(
       <div>
-        Hi, Home here!
         {skills}
       </div>
     );

@@ -1,0 +1,95 @@
+@import "../../colors.sass"
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+    -webkit-appearance: none
+    margin: 0
+
+
+.skill
+    margin: auto
+    width: 60%
+    border-radius: 12px
+    border: 2px solid $secondary-color
+    padding: 1em
+    min-width: 400px
+    margin-top: 5px
+
+    .level
+        padding: 6px 0 0 6px
+        font-size: 36px
+        font-weight: bold
+        color: $stronger-color
+
+    .skillName
+        margin-left: 6px
+        font-size: 24px
+        line-height: 3
+
+    .progressBarContainer
+        display: block
+        float: left
+        border-radius: 12px 0 0 12px
+        background-color: $secondary-color
+        height: 2.2em
+        width: 85%
+
+        .progressBarFill
+            display: block
+            border-radius: 12px 0 0 12px
+            background-color: $stronger-color
+            height: 2.2em
+            text-align: center
+            padding: 0.6em
+            color: $background-color
+            width: 15%
+
+    .progressBarBtns
+        display: block
+        width: 14%
+        float: left
+
+    .addExpInput
+        display: inline
+        resize: none
+        overflow: hidden
+        float: left
+        margin: 0 1px 0 2px
+        background-color: $stronger-color
+        height: 2.2em
+        width: 65%
+        text-align: center
+        padding: 0.6em
+        color: $background-color
+        margin: auto
+
+    .addBtn
+        display: inline
+        float: left
+        background-color: $stronger-color
+        border-radius: 0 12px 12px 0
+        height: 2.2em
+        width: 30%
+        text-align: center
+        padding: 0.55em
+        font-weight: bold
+        color: $background-color
+        cursor: pointer
+
+        //Zupełnie nie czaję, dlaczego ten addExpInput się tak wykrzacza. To jest straszne.
+        //Poproś Jurka, aby pomógł to ogarnąć i ustawić to do dobrej wielkości.
+
+        //Popraw też paddingi - w levelu i w nazwie skilla
+
+    .progressBarWrapper:after
+        content: ""
+        display: table
+        clear: both
+
+    .experience
+        font-style: italic
+        font-weight: lighter
+
+
+.skill:first-child
+    margin-top: 36px
