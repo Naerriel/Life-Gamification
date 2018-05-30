@@ -22,6 +22,7 @@ class AddNewSkill extends Component {
 
   addSkill = () => {
     this.props.addSkill(this.props.skills, this.state.skillName);
+    this.setState({ skillName: ""});
   }
 
   render() {
@@ -31,6 +32,7 @@ class AddNewSkill extends Component {
             className="addSkillInput"
             type="text"
             placeholder="Your skill name"
+            value={this.state.skillName}
             onChange={this.handleTextChange}
             onKeyPress={this.handleKeyPress}
         />
