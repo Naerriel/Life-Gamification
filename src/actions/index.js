@@ -19,3 +19,8 @@ export const getSkills = () => (dispatch) => {
       dispatch(setSkills(skills));
     });
 }
+
+export const addExp = (exp, skillName) => (dispatch) => {
+  console.log("Siemano, dodaje expa!");
+  console.log(`exp = ${exp}, skillName = ${skillName} `);
+}

@@ -7,38 +7,39 @@ input[type=number]::-webkit-outer-spin-button
 
 
 .skill
-    margin: auto
+    margin: 5px auto 5px auto
     width: 60%
     border-radius: 12px
     border: 2px solid $secondary-color
     padding: 1em
     min-width: 400px
-    margin-top: 5px
 
     .level
-        padding: 6px 0 0 6px
+        padding: 6px 0 0 16px
         font-size: 36px
         font-weight: bold
         color: $stronger-color
 
     .skillName
-        margin-left: 6px
+        margin-left: 16px
         font-size: 24px
         line-height: 3
+
+    $progress-bar-height: 26px
 
     .progressBarContainer
         display: block
         float: left
         border-radius: 12px 0 0 12px
         background-color: $secondary-color
-        height: 2.2em
+        height: $progress-bar-height
         width: 85%
 
         .progressBarFill
             display: block
             border-radius: 12px 0 0 12px
             background-color: $stronger-color
-            height: 2.2em
+            height: $progress-bar-height
             text-align: center
             padding: 0.6em
             color: $background-color
@@ -54,21 +55,20 @@ input[type=number]::-webkit-outer-spin-button
         resize: none
         overflow: hidden
         float: left
-        margin: 0 1px 0 2px
         background-color: $stronger-color
-        height: 2.2em
+        height: $progress-bar-height
         width: 65%
         text-align: center
         padding: 0.6em
         color: $background-color
-        margin: auto
+        margin: 0 1px 0 2px
 
     .addBtn
         display: inline
         float: left
         background-color: $stronger-color
         border-radius: 0 12px 12px 0
-        height: 2.2em
+        height: $progress-bar-height
         width: 30%
         text-align: center
         padding: 0.55em

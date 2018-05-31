@@ -4,20 +4,19 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; }
 
 .skill {
-  margin: auto;
+  margin: 5px auto 5px auto;
   width: 60%;
   border-radius: 12px;
   border: 2px solid #C8E8E0;
   padding: 1em;
-  min-width: 400px;
-  margin-top: 5px; }
+  min-width: 400px; }
   .skill .level {
-    padding: 6px 0 0 6px;
+    padding: 6px 0 0 16px;
     font-size: 36px;
     font-weight: bold;
     color: #00D1A0; }
   .skill .skillName {
-    margin-left: 6px;
+    margin-left: 16px;
     font-size: 24px;
     line-height: 3; }
   .skill .progressBarContainer {
@@ -25,13 +24,13 @@ input[type=number]::-webkit-outer-spin-button {
     float: left;
     border-radius: 12px 0 0 12px;
     background-color: #C8E8E0;
-    height: 2.2em;
+    height: 26px;
     width: 85%; }
     .skill .progressBarContainer .progressBarFill {
       display: block;
       border-radius: 12px 0 0 12px;
       background-color: #00D1A0;
-      height: 2.2em;
+      height: 26px;
       text-align: center;
       padding: 0.6em;
       color: #FFFFFF;
@@ -45,20 +44,19 @@ input[type=number]::-webkit-outer-spin-button {
     resize: none;
     overflow: hidden;
     float: left;
-    margin: 0 1px 0 2px;
     background-color: #00D1A0;
-    height: 2.2em;
+    height: 26px;
     width: 65%;
     text-align: center;
     padding: 0.6em;
     color: #FFFFFF;
-    margin: auto; }
+    margin: 0 1px 0 2px; }
   .skill .addBtn {
     display: inline;
     float: left;
     background-color: #00D1A0;
     border-radius: 0 12px 12px 0;
-    height: 2.2em;
+    height: 26px;
     width: 30%;
     text-align: center;
     padding: 0.55em;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Skill.css';
+import { addExp } from "../../actions";
 
 class Skill extends Component {
   constructor(props) {
@@ -14,12 +15,21 @@ class Skill extends Component {
   }
 
   handleExpChange = (e) => {
-    this.setState({ addExp: e.target.vale });
+    this.setState({ addExp: e.target.value });
+  }
+
+  handleKeyPress = (e) => {
+    if(e.key === 'Enter'){
+      this.addExp();
+    }
+  }
+
+  addExp = () => {
+    console.log("Elo, dodaje expa: " + this.state.addExp);
+    this.props.addExp(this.state.addExp, this.state.skillInfo.name);
   }
 
   render() {
-    console.log("SkillInfo = ");
-    console.log(this.state.skillInfo);
     return(
       <div className="skill">
         <span className="level">{this.state.skillInfo.level}</span>
@@ -35,8 +45,9 @@ class Skill extends Component {
               type="number"
               value={this.state.addExp}
               onChange={this.handleExpChange}
+              onKeyPress={this.handleKeyPress}
             ></input>
-            <button className="addBtn">+</button>
+            <button className="addBtn" onClick={this.addExp}>+</button>
           </div>
         </div>
         <span className="experience">{this.state.skillInfo.exp}/
@@ -46,4 +57,15 @@ class Skill extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = { addExp };
+
+
+
+//POLACZ TO KONEKTEM
+//SKMIN SKAD BRAC SKILLE, czy z tamtego artykulu na stack overflow, ktory mowil,
+//w jaki sposob dobierac sie do store'a, czy moze przekazujac wszystkie skille do pojedynczego skilla
 export default Skill;
