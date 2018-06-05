@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Skill from "../Skill/Skill.js";
+import { SkillContainer } from "../Skill/Skill.js";
 
 class Home extends Component {
   constructor(props) {
@@ -13,13 +13,13 @@ class Home extends Component {
   }
 
   render() {
-    let skills = [];
-    for (let i in this.state.skills) {
-      skills.push(<Skill skillInfo={this.state.skills[i]} />);
-    }
     return(
       <div>
-        {skills}
+        {
+          this.state.skills.map((skill) => {
+            return <SkillContainer skillInfo={skill} />
+          })
+        }
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Skill from "../Skill/Skill.js";
+import { SkillContainer } from "../Skill/Skill.js";
 import { AddNewSkillContainer } from "./AddNewSkill.js";
 
 class Edit extends Component {
@@ -14,13 +14,13 @@ class Edit extends Component {
   }
 
   render() {
-    let skills = [];
-    for (let i in this.state.skills){
-      skills.push(<Skill skillInfo={this.state.skills[i]} edit={true} />);
-    }
     return (
       <div>
-        {skills}
+        {
+          this.state.skills.map((skill) => {
+            return <SkillContainer skillInfo={skill} />
+          })
+        }
         <AddNewSkillContainer />
       </div>
     );

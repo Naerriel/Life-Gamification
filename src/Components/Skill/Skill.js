@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Skill.css';
 import { addExp } from "../../actions";
+import { connect } from "react-redux";
 
 class Skill extends Component {
   constructor(props) {
@@ -22,6 +23,13 @@ class Skill extends Component {
     if(e.key === 'Enter'){
       this.addExp();
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      skillInfo: nextProps.skillInfo,
+      progress: nextProps.skillInfo.exp / nextProps.skillInfo.expTillNextLevel * 100
+    });
   }
 
   addExp = () => {
@@ -63,9 +71,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { addExp };
 
-
-
-//POLACZ TO KONEKTEM
-//SKMIN SKAD BRAC SKILLE, czy z tamtego artykulu na stack overflow, ktory mowil,
-//w jaki sposob dobierac sie do store'a, czy moze przekazujac wszystkie skille do pojedynczego skilla
-export default Skill;
+export const SkillContainer = connect(mapStateToProps, mapDispatchToProps)(Skill);

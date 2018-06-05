@@ -1,4 +1,4 @@
-export const skills = (state = {}, action) => {
+export const skills = (state = [], action) => {
   switch (action.type) {
     case 'SET_SKILLS':
       return action.skills;

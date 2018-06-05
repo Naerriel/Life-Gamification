@@ -20,7 +20,11 @@ export const getSkills = () => (dispatch) => {
     });
 }
 
-export const addExp = (exp, skillName) => (dispatch) => {
-  console.log("Siemano, dodaje expa!");
-  console.log(`exp = ${exp}, skillName = ${skillName} `);
+export const addExp = (exp, skillName) => (dispatch, getState) => {
+  let newSkills = JSON.parse(JSON.stringify(getState().skills));
+  newSkills.find((skill) => {
+    return skill.name === skillName;
+  }).exp += parseInt(exp, 10);
+  setRepoSkills(newSkills);
+  dispatch(setSkills(newSkills));
 }
