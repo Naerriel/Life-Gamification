@@ -20,7 +20,7 @@ export const addExperience = (exp, skill) => {
   if(!exp){
     return;
   }
-  skill.exp += parseInt(exp);
+  skill.exp += parseInt(exp, 10);
   while (skill.exp >= skill.expTillNextLevel) {
     skill.exp -= skill.expTillNextLevel;
     skill.level++;
