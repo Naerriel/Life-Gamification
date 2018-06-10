@@ -3,7 +3,7 @@ const startingExpNeeded = 5;
 export const createEmptySkill = (skillName) => {
   return {
     name: skillName,
-    level: 0,
+    level: 1,
     exp: 0,
     expTillNextLevel: startingExpNeeded
   };
@@ -21,9 +21,14 @@ export const addExperience = (exp, skill) => {
     return;
   }
   skill.exp += parseInt(exp);
-  while (skill.exp >= skill.expTillNextLevel){
+  while (skill.exp >= skill.expTillNextLevel) {
     skill.exp -= skill.expTillNextLevel;
     skill.level++;
     skill.expTillNextLevel = expToLevelUp(skill.level);
+  }
+  while (skill.exp < 0) {
+    skill.level--;
+    skill.expTillNextLevel = expToLevelUp(skill.level);
+    skill.exp += skill.expTillNextLevel;
   }
 }
