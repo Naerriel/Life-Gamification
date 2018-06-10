@@ -14,7 +14,6 @@ class Skill extends Component {
       addExp: 1,
       startedRemoval: false
     };
-    //Ustaw, że minimalny progress to jest jakieś 5%, żeby napis "0%" się zmieścił :P
   }
 
   handleExpChange = (e) => {
@@ -44,6 +43,7 @@ class Skill extends Component {
   }
 
   confirmSkillRemoval = () => {
+    this.setState({ startedRemoval: false });
     this.props.removeSkill(this.state.skillInfo.name);
   }
 
