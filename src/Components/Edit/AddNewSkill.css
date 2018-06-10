@@ -2,7 +2,8 @@
   width: 60%;
   margin: auto;
   height: 48px;
-  position: relative; }
+  position: relative;
+  min-width: 400px; }
   .addSkill .addSkillInput {
     position: absolute;
     top: 0;

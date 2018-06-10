@@ -12,7 +12,9 @@
     padding: 8px 20px;
     font-size: 21px;
     height: 42px;
-    margin: 0 1px; }
+    margin: 0 1px;
+    overflow: hidden;
+    white-space: nowrap; }
   .header .header__text:hover, .header .active {
     background-color: #00D1A0; }
 
