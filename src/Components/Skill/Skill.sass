@@ -77,11 +77,6 @@ input[type=number]::-webkit-outer-spin-button
         color: $background-color
         cursor: pointer
 
-        //Zupełnie nie czaję, dlaczego ten addExpInput się tak wykrzacza. To jest straszne.
-        //Poproś Jurka, aby pomógł to ogarnąć i ustawić to do dobrej wielkości.
-
-        //Popraw też paddingi - w levelu i w nazwie skilla
-
     .progressBarWrapper:after
         content: ""
         display: table
@@ -106,3 +101,46 @@ input[type=number]::-webkit-outer-spin-button
 
 .skill:first-child
     margin-top: 36px
+
+.skillRemoveConfirmation
+    position: absolute
+    z-index: 1001
+    min-height: 100px
+    width: 50%
+    border: 2px solid $secondary-color
+    border-radius: 12px
+    margin: 0 25%
+    background-color: $background-color
+    top: 40%
+    min-width: 300px
+
+    .skillRemoveMessage
+        margin: 12px
+        font-size: 18px
+        text-align: center
+        .skillName
+            margin: 5px
+            font-style: italic
+            font-weight: bold
+
+    .skillRemoveConfirmationButtons
+        display: flex
+        justify-content: space-around
+        margin: 20px 0
+
+        .skillRemoveConfirmationBtn
+            background-color: $stronger-color
+            color: $background-color
+            height: 30px
+            width: 100px
+            border-radius: 12px
+
+.screenDim
+    position: fixed
+    top: 0
+    bottom: 0
+    right: 0
+    left: 0
+    background-color: $background-color
+    opacity: 0.8
+    z-index: 1000

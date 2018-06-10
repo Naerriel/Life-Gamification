@@ -86,4 +86,44 @@ input[type=number]::-webkit-outer-spin-button {
 .skill:first-child {
   margin-top: 36px; }
 
+.skillRemoveConfirmation {
+  position: absolute;
+  z-index: 1001;
+  min-height: 100px;
+  width: 50%;
+  border: 2px solid #C8E8E0;
+  border-radius: 12px;
+  margin: 0 25%;
+  background-color: #FFFFFF;
+  top: 40%;
+  min-width: 300px; }
+  .skillRemoveConfirmation .skillRemoveMessage {
+    margin: 12px;
+    font-size: 18px;
+    text-align: center; }
+    .skillRemoveConfirmation .skillRemoveMessage .skillName {
+      margin: 5px;
+      font-style: italic;
+      font-weight: bold; }
+  .skillRemoveConfirmation .skillRemoveConfirmationButtons {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0; }
+    .skillRemoveConfirmation .skillRemoveConfirmationButtons .skillRemoveConfirmationBtn {
+      background-color: #00D1A0;
+      color: #FFFFFF;
+      height: 30px;
+      width: 100px;
+      border-radius: 12px; }
+
+.screenDim {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #FFFFFF;
+  opacity: 0.8;
+  z-index: 1000; }
+
 /*# sourceMappingURL=Skill.css.map */
