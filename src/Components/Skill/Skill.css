@@ -35,7 +35,7 @@ input[type=number]::-webkit-outer-spin-button {
       text-align: center;
       padding: 0.6em;
       color: #FFFFFF;
-      width: 15%; }
+      min-width: 5%; }
   .skill .progressBarBtns {
     display: block;
     width: 14%;

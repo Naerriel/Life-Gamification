@@ -93,7 +93,12 @@ class Skill extends Component {
           <span className="skillName">{this.state.skillInfo.name}</span>
           <div className="progressBarWrapper">
             <span className="progressBarContainer">
-              <span className="progressBarFill">{this.state.progress}%</span>
+              <span
+                className="progressBarFill"
+                style={{width: `${this.state.progress}%`}}
+              >
+                {this.state.progress}%
+              </span>
             </span>
             <div className="progressBarBtns">
               <input
