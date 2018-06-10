@@ -1,6 +1,6 @@
 import { getRepoSkills } from "../repository/skills.js";
 import { setRepoSkills } from "../repository/skills.js";
-import { createEmptySkill } from "../selectors/skills.js";
+import { createEmptySkill, addExperience } from "../selectors/skills.js";
 
 export const setSkills = (skills) => ({
   type: 'SET_SKILLS',
@@ -22,9 +22,9 @@ export const getSkills = () => (dispatch) => {
 
 export const addExp = (exp, skillName) => (dispatch, getState) => {
   let newSkills = JSON.parse(JSON.stringify(getState().skills));
-  newSkills.find((skill) => {
+  addExperience(exp, newSkills.find((skill) => {
     return skill.name === skillName;
-  }).exp += parseInt(exp, 10);
+  }));
   setRepoSkills(newSkills);
   dispatch(setSkills(newSkills));
 }
