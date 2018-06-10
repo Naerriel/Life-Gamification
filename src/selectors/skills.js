@@ -17,6 +17,9 @@ const expToLevelUp = (level) => {
 }
 
 export const addExperience = (exp, skill) => {
+  if(!exp){
+    return;
+  }
   skill.exp += parseInt(exp);
   while (skill.exp >= skill.expTillNextLevel){
     skill.exp -= skill.expTillNextLevel;
