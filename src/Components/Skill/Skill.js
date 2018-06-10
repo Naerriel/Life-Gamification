@@ -9,7 +9,7 @@ class Skill extends Component {
 
     this.state = {
       skillInfo: props.skillInfo,
-      progress: props.skillInfo.exp / props.skillInfo.expTillNextLevel * 100,
+      progress: Math.floor(props.skillInfo.exp / props.skillInfo.expTillNextLevel * 100),
       addExp: 1
     };
     //Ustaw, że minimalny progress to jest jakieś 5%, żeby napis "0%" się zmieścił :P
@@ -28,7 +28,7 @@ class Skill extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       skillInfo: nextProps.skillInfo,
-      progress: nextProps.skillInfo.exp / nextProps.skillInfo.expTillNextLevel * 100
+      progress: Math.floor(nextProps.skillInfo.exp / nextProps.skillInfo.expTillNextLevel * 100)
     });
   }
 
