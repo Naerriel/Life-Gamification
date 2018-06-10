@@ -85,7 +85,7 @@ class Skill extends Component {
                   </div>
               </div>
             </div>
-        ) : (<div></div>)}
+        ) : (null)}
         <div className="skill">
           {this.editElements()}
           <span className="level">{this.state.skillInfo.level}</span>

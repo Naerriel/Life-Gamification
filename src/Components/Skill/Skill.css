@@ -83,9 +83,6 @@ input[type=number]::-webkit-outer-spin-button {
     background-size: 24px auto;
     background-position: center; }
 
-.skill:first-child {
-  margin-top: 36px; }
-
 .skillRemoveConfirmation {
   position: absolute;
   z-index: 1001;
