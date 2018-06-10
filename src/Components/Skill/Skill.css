@@ -4,6 +4,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; }
 
 .skill {
+  position: relative;
   margin: 5px auto 5px auto;
   width: 60%;
   border-radius: 12px;
@@ -70,6 +71,17 @@ input[type=number]::-webkit-outer-spin-button {
   .skill .experience {
     font-style: italic;
     font-weight: lighter; }
+  .skill .removeSkillBtn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    height: 24px;
+    width: 24px;
+    background-color: #FFFFFF;
+    background-image: url("delete.svg");
+    background-repeat: no-repeat;
+    background-size: 24px auto;
+    background-position: center; }
 
 .skill:first-child {
   margin-top: 36px; }

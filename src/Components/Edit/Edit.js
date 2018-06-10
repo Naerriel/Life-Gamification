@@ -18,7 +18,7 @@ class Edit extends Component {
       <div>
         {
           this.state.skills.map((skill) => {
-            return <SkillContainer skillInfo={skill} />
+            return <SkillContainer skillInfo={skill} edit="true" />
           })
         }
         <AddNewSkillContainer />

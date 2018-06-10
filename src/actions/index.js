@@ -28,3 +28,10 @@ export const addExp = (exp, skillName) => (dispatch, getState) => {
   setRepoSkills(newSkills);
   dispatch(setSkills(newSkills));
 }
+
+export const removeSkill = (skillName) => (dispatch, getState) => {
+  let newSkills = JSON.parse(JSON.stringify(getState().skills));
+  newSkills = newSkills.filter(skill => skill.name !== skillName);
+  setRepoSkills(newSkills);
+  dispatch(setSkills(newSkills));
+}

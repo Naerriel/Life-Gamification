@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Skill.css';
-import { addExp } from "../../actions";
+import { addExp, removeSkill } from "../../actions";
 import { connect } from "react-redux";
 
 class Skill extends Component {
@@ -9,6 +9,7 @@ class Skill extends Component {
 
     this.state = {
       skillInfo: props.skillInfo,
+      edit: props.edit,
       progress: Math.floor(props.skillInfo.exp / props.skillInfo.expTillNextLevel * 100),
       addExp: 1
     };
@@ -28,18 +29,29 @@ class Skill extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       skillInfo: nextProps.skillInfo,
+      edit: nextProps.edit,
       progress: Math.floor(nextProps.skillInfo.exp / nextProps.skillInfo.expTillNextLevel * 100)
     });
   }
 
   addExp = () => {
-    console.log("Elo, dodaje expa: " + this.state.addExp);
     this.props.addExp(this.state.addExp, this.state.skillInfo.name);
+  }
+
+  startRemovingSkill = () => {
+    this.props.removeSkill(this.state.skillInfo.name);
+  }
+
+  editElements = () => {
+    if(this.state.edit) {
+      return <button className="removeSkillBtn" onClick={this.startRemovingSkill}></button>
+    }
   }
 
   render() {
     return(
       <div className="skill">
+        {this.editElements()}
         <span className="level">{this.state.skillInfo.level}</span>
         <span className="levelLabel">lvl</span>
         <span className="skillName">{this.state.skillInfo.name}</span>
@@ -69,6 +81,6 @@ const mapStateToProps = state => {
   return {};
 };
 
-const mapDispatchToProps = { addExp };
+const mapDispatchToProps = { addExp, removeSkill };
 
 export const SkillContainer = connect(mapStateToProps, mapDispatchToProps)(Skill);
