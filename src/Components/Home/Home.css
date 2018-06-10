@@ -1,4 +1,16 @@
 .skillsContainer {
   margin-top: 36px; }
 
+.welcomeMessage {
+  min-width: 400px;
+  border: 2px solid #C8E8E0;
+  margin: 60px auto;
+  width: 60%;
+  border-radius: 12px;
+  padding: 0 12px;
+  font-size: 24px;
+  text-align: center; }
+  .welcomeMessage p {
+    padding: 24px; }
+
 /*# sourceMappingURL=Home.css.map */

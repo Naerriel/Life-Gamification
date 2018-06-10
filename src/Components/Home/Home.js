@@ -15,13 +15,29 @@ class Home extends Component {
   }
 
   render() {
+    const thereAreSkills = this.state.skills.length > 0;
     return(
-      <div className="skillsContainer">
-        {
-          this.state.skills.map((skill) => {
-            return <SkillContainer skillInfo={skill} />
-          })
-        }
+      <div>
+        { thereAreSkills ? (
+          <div className="skillsContainer">
+            {
+              this.state.skills.map((skill) => {
+                return <SkillContainer skillInfo={skill} />
+              })
+            }
+          </div>
+        ) : (
+          <div className="welcomeMessage">
+            <p>
+              <div>
+                Welcome to Life Gamification!
+              </div>
+              <div>
+                To add your first skill go to Edit skills.
+              </div>
+            </p>
+          </div>
+        )}
       </div>
     );
   }
