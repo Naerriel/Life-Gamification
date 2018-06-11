@@ -35,3 +35,9 @@ export const removeSkill = (skillName) => (dispatch, getState) => {
   setRepoSkills(newSkills);
   dispatch(setSkills(newSkills));
 }
+
+export const saveAll = (skills) => (dispatch) => {
+  // Currently it saves only skills
+  setRepoSkills(skills);
+  dispatch(setSkills(skills));
+}

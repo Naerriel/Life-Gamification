@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import Home from "../Home/Home";
 import Edit from "../Edit/Edit";
 import Timer from "../Timer/Timer";
-import ImportExport from "../ImportExport/ImportExport";
+import { ImportExportContainer } from "../ImportExport/ImportExport";
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import { connect } from "react-redux";
@@ -29,7 +29,7 @@ class App extends Component {
             {(props) => <Edit skills={this.props.skills} />}
           />
           <Route path="/timer" component={Timer} />
-          <Route path="/importexport" component={ImportExport} />
+          <Route path="/importexport" component={ImportExportContainer} />
         </div>
       </BrowserRouter>
     );
