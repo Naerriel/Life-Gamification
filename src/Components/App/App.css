@@ -4,10 +4,10 @@
     text-decoration: none;
     box-sizing: border-box;
     color: inherit;
+    font-family: "Roboto", sans-serif;
 }
 
 body{
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
 }

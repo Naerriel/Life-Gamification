@@ -1,0 +1,40 @@
+::-webkit-input-placeholder {
+  font-style: italic; }
+
+:-moz-placeholder {
+  font-style: italic; }
+
+::-moz-placeholder {
+  font-style: italic; }
+
+:-ms-input-placeholder {
+  font-style: italic; }
+
+.importExport {
+  margin: auto;
+  margin-top: 36px;
+  width: 50%;
+  min-width: 480px; }
+  .importExport .importExportBtn {
+    display: inline-block;
+    height: 35px;
+    width: 160px;
+    border-radius: 6px;
+    background-color: #00D1A0;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 24px;
+    padding: 2px;
+    margin: 2px; }
+  .importExport .importExportJSONText {
+    display: block;
+    margin-top: 16px;
+    min-height: 150px;
+    width: 100%;
+    border-radius: 18px;
+    font-size: 18px;
+    padding: 16px;
+    border: 2px solid #00D1A0;
+    resize: vertical; }
+
+/*# sourceMappingURL=ImportExport.css.map */
