@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Skill.css';
-import { addExp, removeSkill } from "../../actions";
+import { addExp, removeSkill } from "../../actions/skills.js";
 import { connect } from "react-redux";
 
 class Skill extends Component {

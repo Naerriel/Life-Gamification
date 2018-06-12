@@ -16,7 +16,11 @@ export const addSkill = (skills, skillName) => (dispatch) => {
 export const getSkills = () => (dispatch) => {
   getRepoSkills()
     .then((skills) => {
+      console.log(skills);
       dispatch(setSkills(skills));
+    })
+    .catch((e) => {
+      dispatch(setSkills([]));
     });
 }
 

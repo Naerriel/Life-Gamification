@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Header from "../Header/Header";
 import Home from "../Home/Home";
 import Edit from "../Edit/Edit";
-import Timer from "../Timer/Timer";
+import { TimerContainer } from "../Timer/Timer";
 import { ImportExportContainer } from "../ImportExport/ImportExport";
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import { connect } from "react-redux";
-import { getSkills } from "../../actions";
+import { getSkills } from "../../actions/skills.js";
 
 class App extends Component {
   componentDidMount() {
@@ -28,7 +28,7 @@ class App extends Component {
           <Route path="/edit" render=
             {(props) => <Edit skills={this.props.skills} />}
           />
-          <Route path="/timer" component={Timer} />
+          <Route path="/timer" component={TimerContainer} />
           <Route path="/importexport" component={ImportExportContainer} />
         </div>
       </BrowserRouter>

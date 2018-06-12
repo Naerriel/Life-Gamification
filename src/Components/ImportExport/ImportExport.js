@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./ImportExport.css"
 import { connect } from "react-redux";
-import { saveAll } from "../../actions";
+import { saveAll } from "../../actions/skills.js";
 
 class ImportExport extends Component {
   constructor(){

@@ -1,0 +1,43 @@
+.addTimer {
+  border: 2px solid #00D1A0;
+  border-radius: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -150px;
+  background-color: #FFF;
+  height: 250px;
+  width: 300px;
+  z-index: 1001; }
+  .addTimer dd, .addTimer dt {
+    display: inline-block;
+    margin: 0; }
+  .addTimer dl {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 10%; }
+  .addTimer dt input {
+    border: none;
+    text-align: right;
+    max-width: 80px; }
+  .addTimer dt input[type="checkbox"] {
+    background-color: green; }
+  .addTimer dd {
+    color: grey; }
+  .addTimer .mainAddTimerInfo dl:last-child {
+    padding-bottom: 10px;
+    border-bottom: 1px solid grey; }
+  .addTimer .addTimerBtns {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-around; }
+    .addTimer .addTimerBtns .addTimerBtn {
+      background-color: #00D1A0;
+      border: none;
+      color: #FFFFFF;
+      height: 25px;
+      width: 60px;
+      border-radius: 10px; }
+
+/*# sourceMappingURL=AddNewTimer.css.map */

@@ -1,0 +1,15 @@
+.timersContainer {
+  width: 60%;
+  margin: auto;
+  margin-top: 36px; }
+  .timersContainer .startAddingTimerBtn {
+    width: 100%;
+    border: 2px solid #C8E8E0;
+    font-size: 18px;
+    text-align: center;
+    background-color: #FFFFFF;
+    margin-top: 36px;
+    border-radius: 16px;
+    padding: 12px; }
+
+/*# sourceMappingURL=Timer.css.map */
