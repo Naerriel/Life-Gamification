@@ -1,25 +1,33 @@
-@import "../../colors.sass"
+@import "../../mainStyle.sass"
 
-.header
-    width: 100%
-    background-color: $main-color
-    height: 42px
+.mainHeader
+  background-color: $main-color
+  height: 70px
+  position: fixed
+  z-index: 5
+  width: 100%
+  top: 0
+
+  .headerContainer
+    height: inherit
     display: flex
-    flex-direction: row
+    justify-content: space-between
 
-    .header__icon
-        img
-            height: 42px
-            padding: 6px 10px
+  .header-element
+    background-color: inherit
+    padding: 6px
+    margin: 10px 10px
 
-    .header__text
-        color: #FFFFFF
-        padding: 8px 20px
-        font-size: 21px
-        height: 42px
-        margin: 0 1px
-        overflow: hidden
-        white-space: nowrap
+    .header-icon
+      height: 35px
+      width: auto
+      margin-right: 8px
+      vertical-align: middle
 
-    .header__text:hover, .active
-        background-color: $stronger-color
+    .header-description
+      position: relative
+      top: 4px
+      height: inherit
+      font-size: 23px
+      color: white
+      white-space: nowrap

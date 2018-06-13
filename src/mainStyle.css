@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  border: none;
+  font-family: "Roboto", sans-serif; }
+
+a, button {
+  cursor: pointer; }
+
+html {
+  height: 101%; }
+
+body {
+  background-color: #E4E4E4; }
+
+.content {
+  width: 720px;
+  margin: auto; }
+
+/*# sourceMappingURL=mainStyle.css.map */

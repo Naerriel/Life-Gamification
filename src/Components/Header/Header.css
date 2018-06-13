@@ -1,21 +1,50 @@
-.header {
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  border: none;
+  font-family: "Roboto", sans-serif; }
+
+a, button {
+  cursor: pointer; }
+
+html {
+  height: 101%; }
+
+body {
+  background-color: #E4E4E4; }
+
+.content {
+  width: 720px;
+  margin: auto; }
+
+.mainHeader {
+  background-color: #00D1A0;
+  height: 70px;
+  position: fixed;
+  z-index: 5;
   width: 100%;
-  background-color: #00A67F;
-  height: 42px;
-  display: flex;
-  flex-direction: row; }
-  .header .header__icon img {
-    height: 42px;
-    padding: 6px 10px; }
-  .header .header__text {
-    color: #FFFFFF;
-    padding: 8px 20px;
-    font-size: 21px;
-    height: 42px;
-    margin: 0 1px;
-    overflow: hidden;
-    white-space: nowrap; }
-  .header .header__text:hover, .header .active {
-    background-color: #00D1A0; }
+  top: 0; }
+  .mainHeader .headerContainer {
+    height: inherit;
+    display: flex;
+    justify-content: space-between; }
+  .mainHeader .header-element {
+    background-color: inherit;
+    padding: 6px;
+    margin: 10px 10px; }
+    .mainHeader .header-element .header-icon {
+      height: 35px;
+      width: auto;
+      margin-right: 8px;
+      vertical-align: middle; }
+    .mainHeader .header-element .header-description {
+      position: relative;
+      top: 4px;
+      height: inherit;
+      font-size: 23px;
+      color: white;
+      white-space: nowrap; }
 
 /*# sourceMappingURL=Header.css.map */

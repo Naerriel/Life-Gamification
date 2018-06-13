@@ -1,31 +1,41 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
-import logo from './iconwhite.svg';
+import lgIcon from './assets/lg.svg';
+import addSkillIcon from './assets/add-skill.svg';
+import historyIcon from './assets/history.svg';
+import settingsIcon from './assets/settings.svg';
 
 class Header extends Component {
-
-  handleClick = (e) => {
-    document.querySelector(".active").classList.remove("active");
-    if(e.target.alt === "Life Gamification"){
-      e.target = document.querySelector("#Home");
-    }
-    e.target.classList.add("active");
-  }
-
   render() {
     return (
-      <header className="header">
-        <Link to="/" className="header__icon" onClick={this.handleClick}>
-           <img src={logo} alt="Life Gamification"/></Link>
-        <Link to="/" className="active header__text" id="Home"
-            onClick={this.handleClick}>Home</Link>
-        <Link to="/edit/" className="header__text"
-            onClick={this.handleClick}>Edit skills</Link>
-        <Link to="/timer/" className="header__text"
-            onClick={this.handleClick}>Timer</Link>
-        <Link to="/importexport/" className="header__text"
-            onClick={this.handleClick}>Import / Export</Link>
+      <header className="mainHeader">
+        <div className="headerContainer content">
+          <Link to="/" className="header-element">
+            <img className="header-icon" src={lgIcon} alt="" />
+            <span className="header-description">
+              Home
+            </span>
+          </Link>
+          <button className="header-element">
+            <img class="header-icon" src={addSkillIcon} alt="" />
+            <span className="header-description">
+              Add skill
+            </span>
+          </button>
+          <Link to="/history" className="header-element">
+            <img className="header-icon" src={historyIcon} alt="" />
+            <span className="header-description">
+              History
+            </span>
+          </Link>
+          <Link to="/settings" className="header-element">
+            <img className="header-icon" src={settingsIcon} alt="" />
+            <span className="header-description">
+              Settings
+            </span>
+          </Link>
+        </div>
       </header>
     );
   }
