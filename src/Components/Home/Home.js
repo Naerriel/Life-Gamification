@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { SkillContainer } from "../Skill/Skill.js";
 
-import "./Home.css";
-
 class Home extends Component {
   constructor(props) {
     super(props);
