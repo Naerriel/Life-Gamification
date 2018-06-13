@@ -6,11 +6,10 @@ import History from "../History/History";
 import Settings from "../Settings/Settings";
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from "react-redux";
-import { getSkills } from "../../actions/skills.js";
+//import { getSkills } from "../../actions/skills.js";
 
 class App extends Component {
   componentDidMount() {
-    this.props.getSkills();
   }
 
   render() {
@@ -38,6 +37,6 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = { getSkills };
+const mapDispatchToProps = { };
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
