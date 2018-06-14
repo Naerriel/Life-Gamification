@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  border: none;
+  font-family: "Roboto", sans-serif; }
+
+a, button {
+  cursor: pointer; }
+
+html {
+  height: 101%; }
+
+body {
+  background-color: #E4E4E4; }
+
+.content {
+  width: 720px;
+  margin: auto; }
+
+.add-experience {
+  margin: 25px 0; }
+  .add-experience .add-experience-btn {
+    margin-left: 40px;
+    display: inline-block; }
+    .add-experience .add-experience-btn button {
+      background: transparent;
+      margin-right: 20px; }
+  .add-experience .add-experience-btn:first-child {
+    margin-left: 25px; }
+  .add-experience .add-experience-icon {
+    height: 50px;
+    width: auto; }
+  .add-experience .add-experience-info {
+    font-size: 22px;
+    color: #707070;
+    font-weight: 300;
+    vertical-align: top;
+    position: relative;
+    top: 13px; }
+  .add-experience .play {
+    display: inline-block;
+    margin-left: 10px; }
+    .add-experience .play .play-buttons button {
+      background: transparent; }
+    .add-experience .play .play-buttons .play-button {
+      height: 20px;
+      width: auto;
+      margin-right: 20px; }
+    .add-experience .play .play-buttons .play-time-left {
+      font-size: 25px;
+      color: #707070; }
+    .add-experience .play .play-buttons .play-exp-added {
+      float: right;
+      font-style: italic;
+      font-size: 14px;
+      color: #707070;
+      margin-top: 8px; }
+    .add-experience .play .play-progress {
+      display: inline-block;
+      background-color: #E4E4E4;
+      height: 10px;
+      width: 585px;
+      border-radius: 4px;
+      margin-top: 8px;
+      position: relative;
+      top: -3px; }
+      .add-experience .play .play-progress .play-progress-fill {
+        display: inline-block;
+        background-color: #00D1A0;
+        border-radius: 4px;
+        height: 10px;
+        width: 4%; }
+
+/*# sourceMappingURL=index.css.map */

@@ -6,6 +6,23 @@ class Home extends Component {
     super(props);
 
     this.state = { skills: props.skills };
+    this.state.skills = [{
+      name: "Jazda na rolkach",
+      level: 73,
+      exp: 213,
+      expTillNextLevel: 270,
+      timer: {}
+    }, {
+      name: "Robienie na drutach",
+      level: 66,
+      exp: 24,
+      expTillNextLevel: 10000,
+      timer: {
+        time: 25,
+        timeLeft: 23,
+        exp: 30
+      }
+    }] // Code for creating Skill Component
   }
 
   componentWillReceiveProps(nextProps) {
@@ -17,10 +34,10 @@ class Home extends Component {
     return(
       <div>
         { thereAreSkills ? (
-          <div className="skillsContainer">
+          <div className="content">
             {
               this.state.skills.map((skill) => {
-                return <SkillContainer skillInfo={skill} />
+                return <SkillContainer skill={skill} />
               })
             }
           </div>
