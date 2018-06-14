@@ -5,12 +5,33 @@ import addExpIcon from "./assets/add-exp.svg";
 import timerIcon from "./assets/timer-icon.svg";
 import playIcon from "./assets/play.svg";
 import pauseIcon from "./assets/pause.svg";
-import stopIcon from "./assets/stop.svg";
+import endIcon from "./assets/stop.svg";
 
 class UnfoldSkillElements extends Component {
 
-  alertuj = () => {
-    alert("foo");
+  handleStartTimerClick = (e) => {
+    e.stopPropagation();
+
+  }
+
+  handleAddExpClick = (e) => {
+    e.stopPropagation();
+
+  }
+
+  handlePausingTimerClick = (e) => {
+    e.stopPropagation();
+
+  }
+
+  handlePlayingTimerClick = (e) => {
+    e.stopPropagation();
+
+  }
+
+  handleEndingTimerClick = (e) => {
+    e.stopPropagation();
+
   }
 
   renderAddingExperienceButtons = () => {
@@ -18,7 +39,7 @@ class UnfoldSkillElements extends Component {
     return (
       <div className="add-experience">
         <div className="add-experience-btn">
-          <button onClick={this.alertuj}>
+          <button onClick={this.handleStartTimerClick}>
             <img
               className="add-experience-icon"
               src={startTimerIcon}
@@ -29,7 +50,7 @@ class UnfoldSkillElements extends Component {
           </span>
         </div>
         <div className="add-experience-btn">
-          <button>
+          <button onClick={this.handleAddExpClick}>
             <img
               className="add-experience-icon"
               src={addExpIcon}
@@ -53,14 +74,14 @@ class UnfoldSkillElements extends Component {
         </div>
         <div className="play">
           <div className="play-buttons">
-            <button>
+            <button onClick={this.handlePausingTimerClick}>
               <img className="play-button" src={pauseIcon} alt="pause" />
             </button>
-            <button>
+            <button onClick={this.handlePlayingTimerClick}>
               <img className="play-button" src={playIcon} alt="play" />
             </button>
-            <button>
-              <img className="play-button" src={stopIcon} alt="stop" />
+            <button onClick={this.handleEndingTimerClick}>
+              <img className="play-button" src={endIcon} alt="end" />
             </button>
             <span className="play-time-left">
               24:59

@@ -5,17 +5,25 @@ import editIcon from "./assets/edit.svg";
 
 class EditSkillIcons extends Component {
 
+  handleDragNDrop = (e) => {
+    e.stopPropagation();
+  }
+
+  handleEditSkillClick = (e) => {
+    e.stopPropagation();
+  }
+
   render() {
     if(this.props.shouldRender){
       return (
         <div className="skill-edit-icons">
-          <button>
+          <button onClick={this.handleDragNDrop}>
             <img
               className="skill-edit-icon"
               src={dragNDropIcon}
               alt="drag and drop"/>
           </button>
-          <button>
+          <button onClick={this.handleEditSkillClick}>
             <img
               className="skill-edit-icon"
               src={editIcon}
