@@ -1,11 +1,12 @@
 const startingExpNeeded = 5;
 
-export const createEmptySkill = (skillName) => {
+export const createEmptySkill = () => {
   return {
-    name: skillName,
+    name: "",
     level: 1,
     exp: 0,
-    expTillNextLevel: startingExpNeeded
+    expTillNextLevel: startingExpNeeded,
+    timer: {}
   };
 }
 

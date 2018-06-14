@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from "../Header/Header";
+import { Header } from "../Header/Header";
 import Home from "../Home/Home";
 import History from "../History/History";
 import Settings from "../Settings/Settings";
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from "react-redux";
-//import { getSkills } from "../../actions/skills.js";
+import { getSkills } from "../../actions/skills.js";
 
 class App extends Component {
   componentDidMount() {
+    this.props.getSkills();
   }
 
   render() {
@@ -37,6 +38,6 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = { };
+const mapDispatchToProps = { getSkills };
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
