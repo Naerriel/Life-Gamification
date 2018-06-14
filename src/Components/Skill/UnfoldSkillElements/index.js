@@ -100,7 +100,6 @@ class UnfoldSkillElements extends Component {
   }
 
   hasTimerStartedPlaying = () => {
-    console.log(this.props.timer);
     return 'timeLeft' in this.props.timer;
   }
 

@@ -11,14 +11,65 @@ class Skill extends Component {
     console.log(props); // Delete after succesfuly implementing skill
     this.state = {
       skill: props.skill,
+      temporaryName: props.skill.name,
       progress: Math.floor(props.skill.exp / props.skill.expTillNextLevel * 100),
       unfold: false,
       edit: false
     };
   }
 
-  collapseSkill = () => {
+  componentWillMount = () => {
+    if(this.state.skill.name === ""){
+      this.setState({ edit: true });
+    }
+  }
+
+  componentDidMount = () => {
+    if(this.state.edit){
+      this.nameInput.focus();
+    }
+  }
+
+  foldAndUnfoldSkill = () => {
     this.setState({ unfold: !this.state.unfold });
+  }
+
+  saveNewName = () => {
+    this.setState({ edit: false });
+    this.state.skill.name = this.state.temporaryName; //TODO change upon adding actions
+  }
+
+  handleNameChange = (e) => {
+    this.setState({ temporaryName: e.target.value });
+  }
+
+  handleInputClick = (e) => {
+    e.stopPropagation();
+  }
+
+  handleKeyDownOnName = (e) => {
+    if(e.keyCode === 13){
+      this.saveNewName();
+    }
+  }
+
+  renderSkillName = () => {
+    console.log(this.state.edit);
+    if(!this.state.edit){
+      return `${this.state.skill.name}`;
+    } else {
+      return (
+          <input type="text"
+            className="skill-name skill-name-input"
+            ref={(input) => { this.nameInput = input ;}}
+            onChange={this.handleNameChange}
+            onClick={this.handleInputClick}
+            value={this.state.temporaryName}
+            onBlur={this.saveNewName}
+            onKeyDown={this.handleKeyDownOnName}
+            />
+      );
+    }
   }
 
   render() {
@@ -32,7 +83,7 @@ class Skill extends Component {
       <div
         className="skill"
         style={{ height: `${skillHeight}`}}
-        onClick={this.collapseSkill}
+        onClick={this.foldAndUnfoldSkill}
       >
         <EditSkillIcons
           shouldRender={this.state.unfold}
@@ -46,7 +97,7 @@ class Skill extends Component {
           </span>
         </div>
         <span className="skill-name">
-          {this.state.skill.name}
+          {this.renderSkillName()}
         </span>
         <div className="progress-bar">
           <div

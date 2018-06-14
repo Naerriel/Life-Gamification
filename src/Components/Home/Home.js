@@ -22,6 +22,12 @@ class Home extends Component {
         timeLeft: 23,
         exp: 30
       }
+    }, {
+      name: "",
+      level: 1,
+      exp: 0,
+      expTillNextLevel: 5,
+      timer : {}
     }] // Code for creating Skill Component
   }
 
