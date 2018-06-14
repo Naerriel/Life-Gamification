@@ -26,7 +26,9 @@ body {
   padding: 8px;
   position: relative;
   margin-top: 8px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-out;
+  overflow: hidden; }
   .skill .experience {
     font-style: italic;
     font-size: 10px;
