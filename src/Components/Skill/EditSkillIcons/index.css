@@ -52,5 +52,9 @@ body {
         padding: 15px 12px 12px 25px; }
       .skill-edit-icons .skill-editing-helper .skill-editing li button:focus, .skill-edit-icons .skill-editing-helper .skill-editing li button:hover {
         background-color: #E4E4E4; }
+      .skill-edit-icons .skill-editing-helper .skill-editing li:first-child button {
+        border-radius: 7px 7px 0 0; }
+      .skill-edit-icons .skill-editing-helper .skill-editing li:last-child button {
+        border-radius: 0 0 7px 7px; }
 
 /*# sourceMappingURL=index.css.map */
