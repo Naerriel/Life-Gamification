@@ -14,20 +14,32 @@ class Skill extends Component {
       temporaryName: props.skill.name,
       progress: Math.floor(props.skill.exp / props.skill.expTillNextLevel * 100),
       unfold: false,
-      edit: false
+      editSkillName: false
     };
   }
 
   componentWillMount = () => {
     if(this.state.skill.name === ""){
-      this.setState({ edit: true });
+      this.setState({ editSkillName: true });
+    }
+  }
+
+  tryGivingFocusToSkillName = () => {
+    if(this.state.editSkillName){
+      this.nameInput.focus();
     }
   }
 
   componentDidMount = () => {
-    if(this.state.edit){
-      this.nameInput.focus();
-    }
+    this.tryGivingFocusToSkillName();
+  }
+
+  componentDidUpdate = () => {
+    this.tryGivingFocusToSkillName();
+  }
+
+  startEditingSkillName = () => {
+    this.setState({ editSkillName: true });
   }
 
   foldAndUnfoldSkill = () => {
@@ -35,7 +47,7 @@ class Skill extends Component {
   }
 
   saveNewName = () => {
-    this.setState({ edit: false });
+    this.setState({ editSkillName: false });
     this.state.skill.name = this.state.temporaryName; //TODO change upon adding actions
   }
 
@@ -54,8 +66,7 @@ class Skill extends Component {
   }
 
   renderSkillName = () => {
-    console.log(this.state.edit);
-    if(!this.state.edit){
+    if(!this.state.editSkillName){
       return `${this.state.skill.name}`;
     } else {
       return (
@@ -87,6 +98,7 @@ class Skill extends Component {
       >
         <EditSkillIcons
           shouldRender={this.state.unfold}
+          startEditingSkillName={this.startEditingSkillName}
         />
         <div className="skill-level-info">
           <span className="skill-level">
