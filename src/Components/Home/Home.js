@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { SkillContainer } from "../Skill/Skill.js";
+import { SkillDeletionUndoingContainer } from "./SkillDeletionUndoing/index.js";
+import { connect } from "react-redux";
 
 class Home extends Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class Home extends Component {
                 return <SkillContainer skill={skill} />
               })
             }
+            <SkillDeletionUndoingContainer />
           </div>
         ) : (
           <div className="welcomeMessage">

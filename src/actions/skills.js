@@ -1,9 +1,10 @@
 import { getRepoSkills } from "../repository/index.js";
 import { setRepoSkills } from "../repository/index.js";
 import { createEmptySkill } from "../libs/skills.js";
+import { setSkillDeletionUndoing } from "./undo.js";
 import isEqual from 'lodash/isEqual';
 
-const copyJSONWithoutReference = (array) => {
+export const copyJSONWithoutReference = (array) => {
   return JSON.parse(JSON.stringify(array));
 }
 
@@ -12,7 +13,7 @@ const setSkills = (skills) => ({
   skills
 });
 
-const saveSkills = (skills) => (dispatch) => {
+export const saveSkills = (skills) => (dispatch) => {
   setRepoSkills(skills);
   dispatch(setSkills(skills));
 }
@@ -60,5 +61,6 @@ export const deleteSkill = (skillToRemove) => (dispatch, getState) => {
     }
     return true;
   });
+  dispatch(setSkillDeletionUndoing(skillToRemove));
   dispatch(saveSkills(newSkills));
 }

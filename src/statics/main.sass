@@ -58,6 +58,37 @@ body
       color: white
       white-space: nowrap
 
+.skill-deletion-undoing
+  width: 100%
+  height: 60px
+  background-color: white
+  border-radius: 3px
+  padding: 8px
+  margin-top: 8px
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.20)
+
+  .skill-deletion-message
+    display: inline-block
+    padding: 8px 20px
+    font-size: 18px
+
+  .skill-deletion-undo-btn
+    background-color: $main-color
+    font-size: 20px
+    float: right
+    font-weight: 700
+    color: white
+    border-radius: 4px
+    height: 30px
+    width: 70px
+    margin: 6px 20px
+
+  .skill-name
+    font-size: 20px
+    font-weight: 700
+    padding-left: 10px
+
+
 .skill
   height: 80px
   background-color: white
@@ -108,6 +139,9 @@ body
 
           button:focus, button:hover
             background-color: $background-color
+  .skill-name
+    font-size: 20px
+    font-weight: 700
 
   .skill-level-info
     display: inline-block
@@ -121,10 +155,6 @@ body
 
     .skill-level-label
       color: $shadow-color
-
-  .skill-name
-    font-size: 20px
-    font-weight: 700
 
   .progress-bar
     background-color: $background-color

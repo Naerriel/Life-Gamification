@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  border: none;
+  font-family: "Roboto", sans-serif; }
+
+a, button {
+  cursor: pointer; }
+
+html {
+  height: 101%; }
+
+body {
+  background-color: #E4E4E4; }
+
+.content {
+  width: 720px;
+  margin: auto; }
+
+.skill-deletion-undoing {
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  border-radius: 3px;
+  padding: 8px;
+  margin-top: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); }
+  .skill-deletion-undoing .skill-deletion-message {
+    display: inline-block;
+    padding: 8px 20px;
+    font-size: 18px; }
+  .skill-deletion-undoing .skill-deletion-undo-btn {
+    background-color: #00D1A0;
+    font-size: 20px;
+    float: right;
+    font-weight: 700;
+    color: white;
+    border-radius: 4px;
+    height: 30px;
+    width: 70px;
+    margin: 6px 20px; }
+  .skill-deletion-undoing .skill-deletion-skill-name {
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 10px; }
+
+/*# sourceMappingURL=index.css.map */
