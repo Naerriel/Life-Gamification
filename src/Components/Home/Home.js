@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SkillContainer } from "../Skill/Skill.js";
+import { SkillContainer } from "./Skill/Skill.js";
 import { SkillDeletionUndoingContainer } from "./SkillDeletionUndoing/index.js";
 import { connect } from "react-redux";
 

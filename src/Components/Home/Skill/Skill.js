@@ -3,7 +3,7 @@ import "./Skill.css"
 import UnfoldSkillElements from "./UnfoldSkillElements";
 import EditSkillIcons from "./EditSkillIcons";
 import { connect } from "react-redux";
-import { renameSkill, deleteSkill } from "../../actions/skills.js";
+import { renameSkill, deleteSkill } from "../../../actions/skills.js";
 
 class Skill extends Component {
   constructor(props) {

@@ -48,6 +48,8 @@ body {
   .skill .skill-name {
     font-size: 20px;
     font-weight: 700; }
+  .skill .skill-name-input {
+    width: 400px; }
   .skill .skill-name-input:focus {
     outline: none; }
   .skill .progress-bar {
