@@ -33,6 +33,19 @@ export const addSkill = () => (dispatch, getState) => {
   dispatch(saveSkills(newSkills));
 }
 
+export const renameSkill = (newName, skillToChange) => (dispatch, getState) => {
+  let newSkills = copyJSONWithoutReference(getState().skills);
+  let renamedASkill = false;
+
+  newSkills.forEach((skill) => {
+    if(!renamedASkill && isEqual(skill, skillToChange)){
+      skill.name = newName;
+      renamedASkill = true;
+    }
+  });
+  dispatch(saveSkills(newSkills));
+}
+
 export const deleteSkill = (skillToRemove) => (dispatch, getState) => {
   let newSkills = copyJSONWithoutReference(getState().skills);
   let removedASkill = false;

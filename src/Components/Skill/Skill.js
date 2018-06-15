@@ -3,7 +3,7 @@ import "./Skill.css"
 import UnfoldSkillElements from "./UnfoldSkillElements";
 import EditSkillIcons from "./EditSkillIcons";
 import { connect } from "react-redux";
-import { deleteSkill } from "../../actions/skills.js";
+import { renameSkill, deleteSkill } from "../../actions/skills.js";
 
 class Skill extends Component {
   constructor(props) {
@@ -61,7 +61,7 @@ class Skill extends Component {
 
   saveNewName = () => {
     this.setState({ editSkillName: false });
-    this.state.skill.name = this.state.temporaryName; //TODO change upon adding actions
+    this.props.renameSkill(this.state.temporaryName, this.state.skill);
   }
 
   handleNameChange = (e) => {
@@ -153,6 +153,6 @@ const mapStateToProps = state => {
   return {};
 };
 
-const mapDispatchToProps = { deleteSkill};
+const mapDispatchToProps = { renameSkill, deleteSkill };
 
 export const SkillContainer = connect(mapStateToProps, mapDispatchToProps)(Skill);
