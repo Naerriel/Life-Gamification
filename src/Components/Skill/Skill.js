@@ -3,12 +3,12 @@ import "./Skill.css"
 import UnfoldSkillElements from "./UnfoldSkillElements";
 import EditSkillIcons from "./EditSkillIcons";
 import { connect } from "react-redux";
+import { deleteSkill } from "../../actions/skills.js";
 
 class Skill extends Component {
   constructor(props) {
     super(props);
 
-    console.log(props); // Delete after succesfuly implementing skill
     this.state = {
       skill: props.skill,
       temporaryName: props.skill.name,
@@ -24,18 +24,31 @@ class Skill extends Component {
     }
   }
 
-  tryGivingFocusToSkillName = () => {
-    if(this.state.editSkillName){
-      this.nameInput.focus();
-    }
-  }
-
   componentDidMount = () => {
     this.tryGivingFocusToSkillName();
   }
 
   componentDidUpdate = () => {
     this.tryGivingFocusToSkillName();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      skill: nextProps.skill,
+      temporaryName: nextProps.skill.name,
+      progress: Math.floor(nextProps.skill.exp / nextProps.skill.expTillNextLevel * 100),
+      unfold: false
+    });
+  }
+
+  tryGivingFocusToSkillName = () => {
+    if(this.state.editSkillName){
+      this.nameInput.focus();
+    }
+  }
+
+  deleteSkill = () => {
+    this.props.deleteSkill(this.state.skill);
   }
 
   startEditingSkillName = () => {
@@ -99,6 +112,7 @@ class Skill extends Component {
         <EditSkillIcons
           shouldRender={this.state.unfold}
           startEditingSkillName={this.startEditingSkillName}
+          deleteSkill={this.deleteSkill}
         />
         <div className="skill-level-info">
           <span className="skill-level">
@@ -139,6 +153,6 @@ const mapStateToProps = state => {
   return {};
 };
 
-const mapDispatchToProps = { };
+const mapDispatchToProps = { deleteSkill};
 
 export const SkillContainer = connect(mapStateToProps, mapDispatchToProps)(Skill);

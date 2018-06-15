@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Header } from "../Header/Header";
+import { HeaderContainer } from "../Header/Header";
 import Home from "../Home/Home";
 import History from "../History/History";
 import Settings from "../Settings/Settings";
@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Header />
+          <HeaderContainer />
           <Route path="/index.html" render=
             {(props) => <Home skills={this.props.skills} />}
           />

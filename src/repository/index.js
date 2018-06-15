@@ -21,7 +21,6 @@ const getElementFromRepo = (key) => {
 }
 
 export const setRepoSkills = (skills) => {
-  console.log(skills);
   return new Promise((resolve, reject) => {
     setElementToRepo(skillsCollectionId, skills)
       .then(() => {

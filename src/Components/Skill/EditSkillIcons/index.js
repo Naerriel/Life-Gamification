@@ -25,8 +25,18 @@ class EditSkillIcons extends Component {
 
   handleEditSkillNameClick = (e) => {
     e.stopPropagation();
-    this.setState({ editingMenuOpen: false });
     this.props.startEditingSkillName();
+  }
+
+  handleDeleteSkillClick = (e) => {
+    e.stopPropagation();
+    //TODO add some sort of confirmation
+    //A popup
+    //
+    //How to make dimming screen of this popup?
+    //Maybe render it somewhere low in the tree?
+
+    this.props.deleteSkill();
   }
 
   renderEditingMenu = () => {
@@ -39,7 +49,7 @@ class EditSkillIcons extends Component {
             </button>
           </li>
           <li>
-            <button>
+            <button onClick={this.handleDeleteSkillClick}>
               Delete skill
             </button>
           </li>

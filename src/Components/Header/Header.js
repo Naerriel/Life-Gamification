@@ -8,7 +8,7 @@ import settingsIcon from './assets/settings.svg';
 import { connect } from "react-redux";
 import { addSkill } from "../../actions/skills.js";
 
-class HeaderContainer extends Component {
+class Header extends Component {
 
   handleAddSkillClick = () => {
     this.props.addSkill();
@@ -54,5 +54,5 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { addSkill };
 
-export const Header = connect(
-  mapStateToProps, mapDispatchToProps)(HeaderContainer);
+export const HeaderContainer = connect(
+  mapStateToProps, mapDispatchToProps)(Header);

@@ -6,29 +6,6 @@ class Home extends Component {
     super(props);
 
     this.state = { skills: props.skills };
-    //this.state.skills = [{
-    //  name: "Jazda na rolkach",
-    //  level: 73,
-    //  exp: 213,
-    //  expTillNextLevel: 270,
-    //  timer: {}
-    //}, {
-    //  name: "Robienie na drutach",
-    //  level: 66,
-    //  exp: 24,
-    //  expTillNextLevel: 10000,
-    //  timer: {
-    //    time: 25,
-    //    timeLeft: 23,
-    //    exp: 30
-    //  }
-    //}, {
-    //  name: "",
-    //  level: 1,
-    //  exp: 0,
-    //  expTillNextLevel: 5,
-    //  timer : {}
-    //}] // Code for creating Skill Component
   }
 
   componentWillReceiveProps(nextProps) {
