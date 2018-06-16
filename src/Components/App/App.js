@@ -3,14 +3,16 @@ import './App.css';
 import { HeaderContainer } from "../Header/Header";
 import Home from "../Home/Home";
 import History from "../History/History";
-import Settings from "../Settings/Settings";
+import { SettingsContainer } from "../Settings/Settings";
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from "react-redux";
 import { getSkills } from "../../actions/skills.js";
+import { getSettings } from "../../actions/settings.js";
 
 class App extends Component {
   componentDidMount() {
     this.props.getSkills();
+    this.props.getSettings();
   }
 
   render() {
@@ -24,7 +26,7 @@ class App extends Component {
           <Route exact path="/" render=
             {(props) => <Home skills={this.props.skills} />}
           />
-          <Route path="/settings" component={Settings} />
+          <Route path="/settings" component={SettingsContainer} />
           <Route path="/history" component={History} />
         </div>
       </BrowserRouter>
@@ -38,6 +40,6 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = { getSkills };
+const mapDispatchToProps = { getSkills, getSettings };
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

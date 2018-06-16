@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import { skills } from "./skills";
 import { timers } from "./timers";
-import { pomodoroOptions } from "./pomodoroOptions";
+import { settings } from "./settings";
 import { skillDeletionUndoing } from "./skillDeletionUndoing";
 
 export default combineReducers({
   skills,
   timers,
-  pomodoroOptions,
+  settings,
   skillDeletionUndoing
 });

@@ -1,12 +1,8 @@
-import { getRepoSkills } from "../repository/index.js";
-import { setRepoSkills } from "../repository/index.js";
+import { setRepoSkills, getRepoSkills } from "../repository/index.js";
 import { createEmptySkill } from "../libs/skills.js";
 import { setSkillDeletionUndoing } from "./undo.js";
+import { copyJSONWithoutReference } from "../libs/other.js";
 import isEqual from 'lodash/isEqual';
-
-export const copyJSONWithoutReference = (array) => {
-  return JSON.parse(JSON.stringify(array));
-}
 
 const setSkills = (skills) => ({
   type: 'SET_SKILLS',

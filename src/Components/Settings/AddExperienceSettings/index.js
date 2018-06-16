@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import addExpSettingsIcon from "./assets/add-exp-settings.svg";
 
 class AddExperienceSettings extends Component {
+
+  handleInputChange = (e) => {
+    const newValue = parseInt(e.target.value, 10);
+    if(!isNaN(newValue)){
+      this.props.handleSettingsModification("expAtATime", newValue);
+    }
+  }
+
   render() {
     return (
       <section className="settings-section">
@@ -16,7 +24,12 @@ class AddExperienceSettings extends Component {
             <span className="setting-description">
               Experience at a time:
             </span>
-            <input className="setting-input" type="text" value="10" />
+            <input
+              className="setting-input"
+              type="number"
+              value={this.props.temporarySettings.expAtATime}
+              onChange={this.handleInputChange}
+              />
           </div>
         </div>
       </section>

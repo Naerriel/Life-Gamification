@@ -1,6 +1,7 @@
 /* global chrome */
 const skillsCollectionId = "skillsCollectionId";
 const historyCollectionId = "historyCollectionId";
+const settingsCollectionId = "settingsCollectionId";
 
 const setElementToRepo = (key, element) => {
   return new Promise((resolve, reject) => {
@@ -37,6 +38,30 @@ export const getRepoSkills = () => {
     getElementFromRepo(skillsCollectionId)
       .then((skills) => {
         resolve(skills);
+      })
+      .catch((e) => {
+        reject();
+      });
+  });
+}
+
+export const setRepoSettings = (settings) => {
+  return new Promise((resolve, reject) => {
+    setElementToRepo(settingsCollectionId, settings)
+      .then(() => {
+        resolve();
+      })
+      .catch((e) => {
+        reject();
+      });
+  });
+}
+
+export const getRepoSettings = () => {
+  return new Promise((resolve, reject) => {
+    getElementFromRepo(settingsCollectionId)
+      .then((settings) => {
+        resolve(settings);
       })
       .catch((e) => {
         reject();
