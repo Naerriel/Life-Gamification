@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "immutability-helper": "^2.7.0",
     "lodash": "^4.17.10",
     "node-sass": "^4.9.0",
