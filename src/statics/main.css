@@ -310,6 +310,8 @@ body {
     .history .history-main-information .history-skill-name {
       font-size: 20px;
       font-weight: 700; }
+    .history .history-main-information .history-task-description {
+      margin-left: 20px; }
     .history .history-main-information .history-icon {
       height: 25px;
       width: auto;
@@ -415,14 +417,14 @@ body {
   opacity: 0.6;
   z-index: 1000; }
 
-.finishedTask {
+.finishedTask,
+.addExp {
   position: absolute;
   width: 500px;
   margin: auto;
   top: 10%;
   left: 0;
   right: 0;
-  height: 400px;
   z-index: 1003;
   background-color: white;
   border-radius: 6px;
@@ -430,10 +432,15 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   text-align: center;
   padding: 40px 40px 20px 40px; }
-  .finishedTask .finishedTask-main-message {
+  .finishedTask .finishedTask-main-message,
+  .addExp .finishedTask-main-message {
     font-size: 30px;
     margin-bottom: 20px; }
-  .finishedTask .starsContainer {
+    .finishedTask .finishedTask-main-message .skill-name,
+    .addExp .finishedTask-main-message .skill-name {
+      font-weight: 700; }
+  .finishedTask .starsContainer,
+  .addExp .starsContainer {
     font-size: 30px;
     color: #707070;
     margin: 20px auto 30px auto;
@@ -442,22 +449,34 @@ body {
     flex-direction: row-reverse;
     justify-content: space-around; }
     .finishedTask .starsContainer .fa-star:hover::before,
-    .finishedTask .starsContainer .fa-star:hover ~ .fa-star::before {
+    .finishedTask .starsContainer .fa-star:hover ~ .fa-star::before,
+    .addExp .starsContainer .fa-star:hover::before,
+    .addExp .starsContainer .fa-star:hover ~ .fa-star::before {
       color: gold; }
-  .finishedTask .finishedTask-log {
+  .finishedTask .finishedTask-log,
+  .addExp .finishedTask-log {
+    display: block;
     border: 1px solid #707070;
     margin: 10px auto;
     width: 300px;
     max-width: 100%;
     padding: 8px;
     border-radius: 3px; }
-  .finishedTask .finishedTask-log::placeholder {
+  .finishedTask .finishedTask-log::placeholder,
+  .addExp .finishedTask-log::placeholder {
     font-style: italic; }
-  .finishedTask .finishedTask-btn {
+  .finishedTask .finishedTask-btn,
+  .addExp .finishedTask-btn {
     background-color: #00D1A0;
     padding: 8px;
     margin-top: 16px;
     color: white;
     border-radius: 3px; }
+
+.addExp {
+  height: 280px; }
+
+.finishedTask {
+  height: 400px; }
 
 /*# sourceMappingURL=main.css.map */
