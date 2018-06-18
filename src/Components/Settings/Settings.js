@@ -28,7 +28,6 @@ class Settings extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="settings content">
         <div className="column">

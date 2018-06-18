@@ -1,5 +1,5 @@
 import { setRepoSettings, getRepoSettings } from "../repository/index.js";
-import { defaultSettings } from "../libs/settings.js";
+import { defaultSettings, validateSettings } from "../libs/settings.js";
 import { copyJSONWithoutReference } from "../libs/other.js";
 
 const setSettings = settings => ({
@@ -8,6 +8,8 @@ const setSettings = settings => ({
 });
 
 export const saveSettings = (settings) => (dispatch) => {
+  settings = copyJSONWithoutReference(settings);
+  validateSettings(settings);
   setRepoSettings(settings);
   dispatch(setSettings(settings));
 }

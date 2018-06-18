@@ -78,13 +78,10 @@ input[type=number]::-webkit-outer-spin-button {
       text-align: right; }
     .settings .settings-section .section-content .setting-checkbox {
       -webkit-appearance: none;
-      padding: 9px;
-      border: 2px solid #707070;
-      border-radius: 4px; }
-    .settings .settings-section .section-content .setting-checkbox:active, .settings .settings-section .section-content .setting-checkbox:checked:active {
-      background-color: #00D1A0;
-      border: none;
-      padding: 11px; }
+      padding: 11px;
+      background-image: url("./assets/checkbox-1.svg"); }
+    .settings .settings-section .section-content .setting-checkbox:active, .settings .settings-section .section-content .setting-checkbox:checked {
+      background-image: url("./assets/checkbox-2.svg"); }
     .settings .settings-section .section-content #setting-pomodoro-checkbox {
       padding-bottom: 7px;
       margin-bottom: 10px;
@@ -100,7 +97,7 @@ input[type=number]::-webkit-outer-spin-button {
       padding: 10px; }
     .settings .settings-section .section-content .setting-importExport-textarea::placeholder {
       font-style: italic; }
-    .settings .settings-section .section-content .setting-pomodoro-information .setting-description, .settings .settings-section .section-content .setting-pomodoro-information .setting-input {
+    .settings .settings-section .section-content .setting-pomodoro-information-dimmed .setting-description, .settings .settings-section .section-content .setting-pomodoro-information-dimmed .setting-input {
       color: #E4E4E4; }
 
 /*# sourceMappingURL=Settings.css.map */

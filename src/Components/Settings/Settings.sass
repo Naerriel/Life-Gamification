@@ -73,14 +73,11 @@ input[type=number]::-webkit-outer-spin-button
 
       .setting-checkbox
         -webkit-appearance: none
-        padding: 9px
-        border: 2px solid $shadow-color
-        border-radius: 4px
-
-      .setting-checkbox:active, .setting-checkbox:checked:active
-        background-color: $main-color
-        border: none
         padding: 11px
+        background-image: url("./assets/checkbox-1.svg")
+
+      .setting-checkbox:active, .setting-checkbox:checked
+        background-image: url("./assets/checkbox-2.svg")
 
       #setting-pomodoro-checkbox
         padding-bottom: 7px
@@ -100,6 +97,6 @@ input[type=number]::-webkit-outer-spin-button
       .setting-importExport-textarea::placeholder
         font-style: italic
 
-      .setting-pomodoro-information
+      .setting-pomodoro-information-dimmed
         .setting-description, .setting-input
           color: $background-color
