@@ -33,3 +33,23 @@ export const addExperience = (exp, skill) => {
     skill.exp += skill.expTillNextLevel;
   }
 }
+
+const validateSkillField = (skill, skillField) => {
+  if(!(skillField in skill)){
+    if(skillField === "expTillNextLevel"){
+      skill[skillField] = expToLevelUp(skill["level"]);
+    } else {
+      skill[skillField] = createEmptySkill()[skillField];
+    }
+  }
+}
+
+export const validateSkills = (skills) => {
+  let skillFields = ["name", "level", "exp", "expTillNextLevel", "timer"];
+
+  skills.forEach((skill) => {
+    skillFields.forEach((skillField) => {
+      validateSkillField(skill, skillField);
+    });
+  });
+}
