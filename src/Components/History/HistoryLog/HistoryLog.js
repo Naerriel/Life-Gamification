@@ -9,7 +9,6 @@ class HistoryLog extends Component {
     //TODO use moment.js or something like that to make beautiful displays
 
     if("timeEnded" in this.props.log) {
-      console.log(this);
       return (`${this.props.log.timeStarted} - ${this.props.log.timeEnded}`);
     }
     else {
@@ -55,7 +54,7 @@ class HistoryLog extends Component {
             {this.props.log.skillName}
           </span>
           <span className="history-task-description">
-            {this.props.taskDescription}
+            {this.props.log.taskDescription}
           </span>
           {this.renderIcon()}
         </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { HeaderContainer } from "../Header/Header";
 import Home from "../Home/Home";
-import History from "../History/History";
+import { HistoryContainer } from "../History/History";
 import { SettingsContainer } from "../Settings/Settings";
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from "react-redux";
@@ -27,7 +27,7 @@ class App extends Component {
             {(props) => <Home skills={this.props.skills} />}
           />
           <Route path="/settings" component={SettingsContainer} />
-          <Route path="/history" component={History} />
+          <Route path="/history" component={HistoryContainer} />
         </div>
       </BrowserRouter>
     );
