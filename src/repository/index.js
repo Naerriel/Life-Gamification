@@ -68,3 +68,27 @@ export const getRepoSettings = () => {
       });
   });
 }
+
+export const setRepoHistory = (history) => {
+  return new Promise((resolve, reject) => {
+    setElementToRepo(historyCollectionId, history)
+      .then(() => {
+        resolve();
+      })
+      .catch((e) => {
+        reject();
+      });
+  });
+}
+
+export const getRepoHistory = () => {
+  return new Promise((resolve, reject) => {
+    getElementFromRepo(historyCollectionId)
+      .then((history) => {
+        resolve(history);
+      })
+      .catch((e) => {
+        reject();
+      });
+  });
+}
