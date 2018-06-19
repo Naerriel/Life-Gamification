@@ -5,6 +5,7 @@ import { settings } from "./settings";
 import { skillDeletionUndoing } from "./skillDeletionUndoing";
 import { history } from "./history";
 import { skillsHistoryFilter } from "./skillsHistoryFilter";
+import { filterHistoryLogs } from "./filterHistoryLogs";
 
 export default combineReducers({
   skills,
@@ -12,5 +13,6 @@ export default combineReducers({
   settings,
   skillDeletionUndoing,
   history,
-  skillsHistoryFilter
+  skillsHistoryFilter,
+  filterHistoryLogs
 });

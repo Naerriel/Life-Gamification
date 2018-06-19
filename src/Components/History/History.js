@@ -3,6 +3,7 @@ import { FilterContainer } from "./Filter/Filter.js";
 import HistoryLog from "./HistoryLog/HistoryLog.js";
 import { connect } from "react-redux";
 import { getHistory } from "../../actions/history.js";
+import { filterLogs } from "../../selectors/history.js";
 
 class History extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class History extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    logs: state.history.logs
+    logs: filterLogs(state.history.logs, state.filterHistoryLogs)
   }
 }
 

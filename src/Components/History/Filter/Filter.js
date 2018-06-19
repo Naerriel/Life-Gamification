@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Filter.css";
 import { SelectSkillContainer } from "./SelectSkill/SelectSkill.js";
 import { connect } from "react-redux";
+import { setHistoryLogFilter } from "../../../actions/historyLogFilter.js";
 
 class Filter extends Component {
   constructor() {
@@ -14,6 +15,7 @@ class Filter extends Component {
       filterInput: "",
       toDate: todaysDate,
       fromDate: todaysDate,
+      shouldRenderSkillList: false
     };
   }
 
@@ -30,12 +32,34 @@ class Filter extends Component {
     this.setState({ filterInput: newValue });
   }
 
+  xorShouldRenderSkillList = () => {
+    this.setState({ shouldRenderSkillList: !this.state.shouldRenderSkillList });
+  }
+
+  setShouldRenderSkillList = (value) => {
+    this.setState({ shouldRenderSkillList: value });
+  }
+
+  handleStartFilteringBtn = () => {
+    this.setState({ shouldRenderSkillList: false });
+    this.props.setHistoryLogFilter(this.state.filterInput,
+        this.state.fromDate, this.state.toDate);
+  }
+
+  handleCancelFilteringBtn = () => {
+    this.setState({ shouldRenderSkillList: false });
+    this.props.setHistoryLogFilter("all", "all", "all");
+  }
+
   render() {
     return (
       <div className="history-filter">
         <SelectSkillContainer
           updateFilterInput={this.updateFilterInput}
           filterInput={this.state.filterInput}
+          shouldRenderSkillList={this.state.shouldRenderSkillList}
+          xorShouldRenderSkillList={this.xorShouldRenderSkillList}
+          setShouldRenderSkillList={this.setShouldRenderSkillList}
         />
         <label className="filter-label">
           From:
@@ -57,8 +81,16 @@ class Filter extends Component {
           value={this.state.toDate}
           onChange={this.handleInputChange}
         />
-        <button className="filter-finish-button" id="filter-cancel"></button>
-        <button className="filter-finish-button" id="filter-accept"></button>
+        <button
+          className="filter-finish-button"
+          id="filter-cancel"
+          onClick={this.handleCancelFilteringBtn}>
+        </button>
+        <button
+          className="filter-finish-button"
+          id="filter-accept"
+          onClick={this.handleStartFilteringBtn}>
+        </button>
       </div>
     );
   }
@@ -69,7 +101,7 @@ const mapStateToProps = (state) => {
   };
 }
 
-const mapDispatchToProps = { };
+const mapDispatchToProps = { setHistoryLogFilter };
 
 export const FilterContainer = connect(
   mapStateToProps, mapDispatchToProps)(Filter);

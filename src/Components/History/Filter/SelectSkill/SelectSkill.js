@@ -10,7 +10,6 @@ class SelectSkill extends Component {
     super(props);
 
     this.state = {
-      shouldRenderSkillList: false,
       skillListFocus: 0,
     };
   }
@@ -27,11 +26,11 @@ class SelectSkill extends Component {
   };
 
   enableRenderingSkillList = () => {
-    this.setState ({ shouldRenderSkillList: true });
+    this.props.setShouldRenderSkillList(true);
   }
 
   handleSkillListBtn = (e) => {
-    this.setState({ shouldRenderSkillList: !this.state.shouldRenderSkillList });
+    this.props.xorShouldRenderSkillList();
   }
 
   handleNewFocusBoundaries = (newFocus) => {
@@ -65,15 +64,13 @@ class SelectSkill extends Component {
       this.handleFocusChange(this.state.skillListFocus + 1);
     }
     if(e.keyCode === 13 && e.target.nodeName === "BUTTON") {
-      this.setState({
-        shouldRenderSkillList: false
-      });
+      this.props.setShouldRenderSkillList(false);
       this.props.updateFilterInput(e.target.innerHTML);
     }
   }
 
   tryRenderingSkillList = () => {
-    if(this.state.shouldRenderSkillList){
+    if(this.props.shouldRenderSkillList && this.props.skills.length > 0){
       let buttonNum = 0;
       return (
         <ul className="filter-skill-list">
@@ -134,7 +131,7 @@ const mapStateToProps = (state) => {
   };
 }
 
-const mapDispatchToProps = { setSkillsHistoryFilter}
+const mapDispatchToProps = { setSkillsHistoryFilter }
 
 export const SelectSkillContainer = connect(
   mapStateToProps, mapDispatchToProps)(SelectSkill);
