@@ -17,21 +17,39 @@ export const getHistory = () => (dispatch) => {
     skills: ["Myślenie", "Jedzenie", "Granie",
     "Planowanie", "Pożądanie", "Programowanie"],
     logs: [{
-        timeStarted: "23:14",
-        timeEnded: "27:25",
+        timeStarted: "2018-06-19 08:00:00",
+        timeEnded: "2018-06-19 08:25:00",
         expAdded: 30,
         skillName: "Jazda na rolkach",
         stars: 4,
         taskDescription: "Jeźdźiłem na rolkach pod litewskim",
       }, {
-        timeStarted: "00:00",
-        timeEnded: "01:25",
+        timeStarted: "2018-06-18 10:00:00",
+        timeEnded: "2018-06-18 12:00:00",
         expAdded: 100,
         skillName: "Kopanie dziury",
         stars: 2,
         taskDescription: "Kopałem grób.",
       },{
-        timeStarted: "69:22",
+        timeStarted: "2018-06-17 14:00:00",
+        expAdded: 21,
+        skillName: "Pieczenie ciastek",
+        stars: -1,
+        taskDescription: "Taaaaaaaakie ciacho upiekłem!"
+      },{
+        timeStarted: "2018-06-15 14:00:00",
+        expAdded: 21,
+        skillName: "Pieczenie ciastek",
+        stars: -1,
+        taskDescription: "Taaaaaaaakie ciacho upiekłem!"
+      },{
+        timeStarted: "2018-06-13 14:00:00",
+        expAdded: 21,
+        skillName: "Pieczenie ciastek",
+        stars: -1,
+        taskDescription: "Taaaaaaaakie ciacho upiekłem!"
+      },{
+        timeStarted: "2018-06-10 14:00:00",
         expAdded: 21,
         skillName: "Pieczenie ciastek",
         stars: -1,

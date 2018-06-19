@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
   };
 }
 
-const mapDispatchToProps = { setSkillsHistoryFilter };
+const mapDispatchToProps = { };
 
 export const FilterContainer = connect(
   mapStateToProps, mapDispatchToProps)(Filter);

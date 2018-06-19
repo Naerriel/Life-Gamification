@@ -2,17 +2,28 @@ import React, { Component } from "react";
 import timerHistoryIcon from "./assets/timer-history.svg";
 import addExpIcon from "./assets/add-exp-history.svg";
 import "./HistoryLog.css";
+import moment from 'moment';
 
 class HistoryLog extends Component {
 
-  displayTime = () => {
-    //TODO use moment.js or something like that to make beautiful displays
+  getDateFormated(date) {
+    return moment(date).calendar(null, {
+      sameDay: '[Today] HH:mm',
+      nextDay: '[Tomorrow] HH:mm',
+      nextWeek: 'dddd MMM DD HH:mm',
+      lastDay: '[Yesterday] HH:mm',
+      lastWeek: '[Last] dddd HH:mm',
+      sameElse: 'DD-MM-YYYY HH:mm'
+    });
+  }
 
+  displayTime = () => {
     if("timeEnded" in this.props.log) {
-      return (`${this.props.log.timeStarted} - ${this.props.log.timeEnded}`);
+      return(`${this.getDateFormated(this.props.log.timeStarted)}
+          - ${moment(this.props.log.timeEnded).format("HH:mm")}`);
     }
     else {
-      return (`${this.props.log.timeStarted}`);
+      return (`${this.getDateFormated(this.props.log.timeStarted)}`);
     }
   }
 
