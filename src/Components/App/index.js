@@ -20,14 +20,16 @@ class _App extends Component {
       <BrowserRouter>
         <div className="App">
           <Header />
-          <Route path="/index.html" render=
-            {(props) => <Home skills={this.props.skills} />}
-          />
-          <Route exact path="/" render=
-            {(props) => <Home skills={this.props.skills} />}
-          />
-          <Route path="/settings" component={Settings} />
-          <Route path="/history" component={History} />
+          <main>
+            <Route path="/index.html" render=
+              {(props) => <Home skills={this.props.skills} />}
+            />
+            <Route exact path="/" render=
+              {(props) => <Home skills={this.props.skills} />}
+            />
+            <Route path="/settings" component={Settings} />
+            <Route path="/history" component={History} />
+          </main>
         </div>
       </BrowserRouter>
     )
