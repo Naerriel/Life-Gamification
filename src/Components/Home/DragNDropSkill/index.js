@@ -8,7 +8,6 @@ class DragNDropSkill extends Component {
   render() {
 
     const {
-      isOver,
       isDragging,
       connectDragSource,
       connectDropTarget,
@@ -81,6 +80,5 @@ export default flow(
     })),
     DropTarget(Types.SKILL, skillTarget, (connect, monitor) => ({
       connectDropTarget: connect.dropTarget(),
-      isOver: monitor.isOver(),
     }))
   )(DragNDropSkill)

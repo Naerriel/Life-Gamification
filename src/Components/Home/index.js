@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Skill } from "./Skill/index.js"
 import DragNDropSkill from "./DragNDropSkill/index.js"
 import { SkillDeletionUndoing } from "./SkillDeletionUndoing/index.js"
 

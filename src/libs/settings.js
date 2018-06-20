@@ -28,14 +28,16 @@ export const validateSettings = (settings) => {
       case 'pomodoros':
       case 'bigBreaks':
         if(isNaN(settings[name])){
-          settings[name] = defaultSettings[name];
+          settings[name] = defaultSettings[name]
         }
         break;
       case 'isPomodoro':
-        if(typeof(settings[name]) != typeof(true)){
-          settings[name] = true;
+        if(typeof(settings[name]) !== typeof(true)){
+          settings[name] = true
         }
         break
+      default:
+        delete settings[name]
     }
   }
 }
