@@ -1,14 +1,14 @@
-import { setRepoHistory, getRepoHistory } from "repository/index.js";
-import { emptyHistory } from "libs/history.js";
+import { setRepoHistory, getRepoHistory } from "repository/index.js"
+import { emptyHistory } from "libs/history.js"
 
 const setHistory = history => ({
   type: 'SET_HISTORY',
   history
-});
+})
 
 export const saveHistory = (history) => (dispatch) => {
-  setRepoHistory(history);
-  dispatch(setHistory(history));
+  setRepoHistory(history)
+  dispatch(setHistory(history))
 }
 
 export const getHistory = () => (dispatch) => {
@@ -55,15 +55,15 @@ export const getHistory = () => (dispatch) => {
         stars: -1,
         taskDescription: "Taaaaaaaakie ciacho upiekłem!"
       }]
-  }));
+  }))
 
   getRepoHistory()
     .then((history) => {
-      dispatch(setHistory(history));
+      dispatch(setHistory(history))
     })
     .catch(() => {
-      dispatch(setHistory(emptyHistory));
-    });
+      dispatch(setHistory(emptyHistory))
+    })
 }
 
 export const addLog = (log) => (dispatch, getState) => {

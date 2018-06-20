@@ -1,65 +1,65 @@
-import { setRepoSkills, getRepoSkills } from "repository/index.js";
-import { createEmptySkill, validateSkills } from "libs/skills.js";
-import { setSkillDeletionUndoing } from "./undo.js";
-import { copyJSONWithoutReference } from "libs/other.js";
-import isEqual from 'lodash/isEqual';
+import { setRepoSkills, getRepoSkills } from "repository/index.js"
+import { createEmptySkill, validateSkills } from "libs/skills.js"
+import { setSkillDeletionUndoing } from "./undo.js"
+import { copyJSONWithoutReference } from "libs/other.js"
+import isEqual from 'lodash/isEqual'
 
 const setSkills = (skills) => ({
   type: 'SET_SKILLS',
   skills
-});
+})
 
 export const saveSkills = (skills) => (dispatch) => {
-  validateSkills(skills);
-  setRepoSkills(skills);
-  dispatch(setSkills(skills));
+  validateSkills(skills)
+  setRepoSkills(skills)
+  dispatch(setSkills(skills))
 }
 
 export const getSkills = () => (dispatch) => {
   getRepoSkills()
     .then((skills) => {
-      dispatch(setSkills(skills));
+      dispatch(setSkills(skills))
     })
     .catch(() => {
-      dispatch(setSkills([]));
-    });
+      dispatch(setSkills([]))
+    })
 }
 
 export const addSkill = () => (dispatch, getState) => {
-  let newSkills = copyJSONWithoutReference(getState().skills);
-  newSkills.push(createEmptySkill());
-  dispatch(saveSkills(newSkills));
+  let newSkills = copyJSONWithoutReference(getState().skills)
+  newSkills.push(createEmptySkill())
+  dispatch(saveSkills(newSkills))
 }
 
 export const renameSkill = (newName, skillToChange) => (dispatch, getState) => {
-  let newSkills = copyJSONWithoutReference(getState().skills);
-  let renamedASkill = false;
+  let newSkills = copyJSONWithoutReference(getState().skills)
+  let renamedASkill = false
 
   newSkills.forEach((skill) => {
     if(!renamedASkill && isEqual(skill, skillToChange)){
-      skill.name = newName;
-      renamedASkill = true;
+      skill.name = newName
+      renamedASkill = true
     }
   });
-  dispatch(saveSkills(newSkills));
+  dispatch(saveSkills(newSkills))
 }
 
 export const deleteSkill = (skillToRemove) => (dispatch, getState) => {
-  let newSkills = copyJSONWithoutReference(getState().skills);
-  let removedASkill = false;
+  let newSkills = copyJSONWithoutReference(getState().skills)
+  let removedASkill = false
 
   newSkills = newSkills.filter(skill => {
     if(removedASkill){
-      return true;
+      return true
     }
     if(isEqual(skill, skillToRemove)){
-      removedASkill = true;
-      return false;
+      removedASkill = true
+      return false
     }
-    return true;
-  });
-  dispatch(setSkillDeletionUndoing(skillToRemove));
-  dispatch(saveSkills(newSkills));
+    return true
+  })
+  dispatch(setSkillDeletionUndoing(skillToRemove))
+  dispatch(saveSkills(newSkills))
 }
 
 const swapInArray = (arr, indexA, indexB) => {

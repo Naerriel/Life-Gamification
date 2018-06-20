@@ -3,7 +3,7 @@ export const skillDeletionUndoing = (state = {}, action) => {
     case 'SET_SKILL_DELETION_UNDOING':
       return action.skill;
     case 'ERASE_SKILL_DELETION_UNDOING':
-      return {};
+      return {}
     default:
       return state
   }

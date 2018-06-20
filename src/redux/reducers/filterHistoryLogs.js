@@ -5,7 +5,7 @@ export const filterHistoryLogs = (state = {}, action) => {
         skill: action.skill,
         begin: action.begin,
         end: action.end
-      };
+      }
     default:
       return state
   }

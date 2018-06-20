@@ -1,11 +1,11 @@
-import { combineReducers } from "redux";
-import { skills } from "./skills";
-import { timers } from "./timers";
-import { settings } from "./settings";
-import { skillDeletionUndoing } from "./skillDeletionUndoing";
-import { history } from "./history";
-import { skillsHistoryFilter } from "./skillsHistoryFilter";
-import { filterHistoryLogs } from "./filterHistoryLogs";
+import { combineReducers } from "redux"
+import { skills } from "./skills"
+import { timers } from "./timers"
+import { settings } from "./settings"
+import { skillDeletionUndoing } from "./skillDeletionUndoing"
+import { history } from "./history"
+import { skillsHistoryFilter } from "./skillsHistoryFilter"
+import { filterHistoryLogs } from "./filterHistoryLogs"
 
 export default combineReducers({
   skills,
@@ -15,4 +15,4 @@ export default combineReducers({
   history,
   skillsHistoryFilter,
   filterHistoryLogs
-});
+})

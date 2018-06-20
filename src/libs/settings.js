@@ -10,8 +10,8 @@ export const defaultSettings = {
 }
 
 export const isATime = (text) => {
-  let regexForTime = /^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/;
-  return regexForTime.test(text);
+  let regexForTime = /^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/
+  return regexForTime.test(text)
 }
 
 export const validateSettings = (settings) => {
@@ -21,7 +21,7 @@ export const validateSettings = (settings) => {
       case 'breakLen':
       case 'bigBreakLen':
         if(!isATime(settings[name])){
-          settings[name] = defaultSettings[name];
+          settings[name] = defaultSettings[name]
         }
         break;
       case 'expPerSession':
