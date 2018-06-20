@@ -23,6 +23,7 @@
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./node_modules src/ -o src/",
     "watch-css": "node-sass-chokidar --include-path ./node_modules src/ -o src/ --watch",
+    "watch-js": "watch-then-execute './src/**/*.js' --script 'npm run build'",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
