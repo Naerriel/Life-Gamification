@@ -9,7 +9,7 @@ import endIcon from "./assets/stop.svg"
 
 import { connect } from "react-redux"
 
-class UnfoldSkillElements extends Component {
+class _UnfoldSkillElements extends Component {
   constructor(props) {
     super(props)
 
@@ -17,7 +17,6 @@ class UnfoldSkillElements extends Component {
       shouldRenderAddingExp: false
     }
   }
-
 
   handleStartTimerClick = (e) => {
     e.stopPropagation();
@@ -135,5 +134,5 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {}
 
-export const UnfoldSkillElementsContainer = connect(
-  mapStateToProps, mapDispatchToProps)(UnfoldSkillElements)
+export const UnfoldSkillElements = connect(
+  mapStateToProps, mapDispatchToProps)(_UnfoldSkillElements)

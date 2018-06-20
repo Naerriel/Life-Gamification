@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import './index.css';
-import lgIcon from './assets/lg.svg';
-import addSkillIcon from './assets/add-skill.svg';
-import historyIcon from './assets/history.svg';
-import settingsIcon from './assets/settings.svg';
-import { connect } from "react-redux";
-import { addSkill } from "redux/actions/skills.js";
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import './index.css'
+import lgIcon from './assets/lg.svg'
+import addSkillIcon from './assets/add-skill.svg'
+import historyIcon from './assets/history.svg'
+import settingsIcon from './assets/settings.svg'
+import { connect } from "react-redux"
+import { addSkill } from "redux/actions/skills.js"
 
-class Header extends Component {
+class _Header extends Component {
 
   handleAddSkillClick = () => {
-    this.props.addSkill();
+    this.props.addSkill()
   }
 
   render() {
@@ -24,7 +24,10 @@ class Header extends Component {
               Home
             </span>
           </Link>
-          <button className="header-element" onClick={this.handleAddSkillClick}>
+          <button
+            className="header-element"
+            onClick={this.handleAddSkillClick}
+          >
             <img className="header-icon" src={addSkillIcon} alt="" />
             <span className="header-description">
               Add skill
@@ -44,15 +47,15 @@ class Header extends Component {
           </Link>
         </div>
       </header>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
   return {}
-};
+}
 
-const mapDispatchToProps = { addSkill };
+const mapDispatchToProps = { addSkill }
 
-export const HeaderContainer = connect(
-  mapStateToProps, mapDispatchToProps)(Header);
+export const Header = connect(
+  mapStateToProps, mapDispatchToProps)(_Header)

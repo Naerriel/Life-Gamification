@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SkillContainer } from "./Skill.js"
+import { Skill } from "../Skill/index.js"
 import { DragSource, DropTarget } from 'react-dnd'
 import { findDOMNode } from 'react-dom'
 import flow from 'lodash/flow'
@@ -19,7 +19,7 @@ class DragNDropSkill extends Component {
 
     return connectDragSource(connectDropTarget(
       <div className="dragNDrop" style={{ opacity }}>
-        <SkillContainer skill={skill} />
+        <Skill skill={skill} />
       </div>
       )
     )

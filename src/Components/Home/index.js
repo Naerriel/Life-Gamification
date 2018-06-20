@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { SkillContainer } from "./Skill/Skill.js";
-import DragNDropSkill from "./Skill/DragNDropSkill.js";
-import { SkillDeletionUndoingContainer } from "./SkillDeletionUndoing/index.js";
+import React, { Component } from 'react'
+import { Skill } from "./Skill/index.js"
+import DragNDropSkill from "./DragNDropSkill/index.js"
+import { SkillDeletionUndoing } from "./SkillDeletionUndoing/index.js"
 
 import { connect } from "react-redux"
 import { swapSkills } from 'redux/actions/skills.js'
 
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
-class Home extends Component {
+class _Home extends Component {
   moveSkill = (dragIndex, hoverIndex) => {
     this.props.swapSkills(dragIndex, hoverIndex, this.props.skills)
   }
@@ -34,7 +34,7 @@ class Home extends Component {
                   )
               })
             }
-            <SkillDeletionUndoingContainer />
+            <SkillDeletionUndoing />
           </div>
         ) : (
           <div className="welcomeMessage">
@@ -49,7 +49,7 @@ class Home extends Component {
           </div>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -59,4 +59,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { swapSkills }
 
-export const HomeContainer = connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(Home))
+export const Home = connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(_Home))

@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { filterSkills } from "redux/selectors/filterSkills.js";
-import { setSkillsHistoryFilter } from "redux/actions/skillsHistoryFilter.js";
+import React, { Component } from "react"
+
+import { connect } from "react-redux"
+import { filterSkills } from "redux/selectors/filterSkills.js"
+import { setSkillsHistoryFilter } from "redux/actions/skillsHistoryFilter.js"
 
 const maxSkillsRender = 5;
 
-class SelectSkill extends Component {
+class _SelectSkill extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       skillListFocus: 0,
-    };
+    }
   }
 
-  skillList = [];
+  skillList = []
 
   handleStartingOfFilteringSkills = (filter) => {
     var timer;
@@ -22,56 +23,56 @@ class SelectSkill extends Component {
 
     timer = setTimeout(() => {
       this.props.setSkillsHistoryFilter(filter);
-    }, 200);
-  };
+    }, 200)
+  }
 
   enableRenderingSkillList = () => {
-    this.props.setShouldRenderSkillList(true);
+    this.props.setShouldRenderSkillList(true)
   }
 
   handleSkillListBtn = (e) => {
-    this.props.xorShouldRenderSkillList();
+    this.props.xorShouldRenderSkillList()
   }
 
   handleNewFocusBoundaries = (newFocus) => {
     if(newFocus < 0){
-      return Math.min(this.props.skills.length, maxSkillsRender);
+      return Math.min(this.props.skills.length, maxSkillsRender)
     }
     if(newFocus > Math.min(this.props.skills.length, maxSkillsRender)){
-      return 0;
+      return 0
     }
-    return newFocus;
+    return newFocus
   }
 
   setFocusOnSkillList = (newFocus) => {
-    this.skillList[newFocus].focus();
+    this.skillList[newFocus].focus()
   }
 
   handleFocusChange = (newFocus) => {
-    newFocus = this.handleNewFocusBoundaries(newFocus);
+    newFocus = this.handleNewFocusBoundaries(newFocus)
 
-    this.setState({ skillListFocus: newFocus });
-    this.setFocusOnSkillList(newFocus);
+    this.setState({ skillListFocus: newFocus })
+    this.setFocusOnSkillList(newFocus)
   }
 
   handleSkillListKeys = (e) => {
     if(e.keyCode === 38){ // arrow up
-      e.preventDefault();
-      this.handleFocusChange(this.state.skillListFocus - 1);
+      e.preventDefault()
+      this.handleFocusChange(this.state.skillListFocus - 1)
     }
     if(e.keyCode === 40){ // arrow down
-      e.preventDefault();
-      this.handleFocusChange(this.state.skillListFocus + 1);
+      e.preventDefault()
+      this.handleFocusChange(this.state.skillListFocus + 1)
     }
     if(e.keyCode === 13 && e.target.nodeName === "BUTTON") {
-      this.props.setShouldRenderSkillList(false);
-      this.props.updateFilterInput(e.target.innerHTML);
+      this.props.setShouldRenderSkillList(false)
+      this.props.updateFilterInput(e.target.innerHTML)
     }
   }
 
   tryRenderingSkillList = () => {
     if(this.props.shouldRenderSkillList && this.props.skills.length > 0){
-      let buttonNum = 0;
+      let buttonNum = 0
       return (
         <ul className="filter-skill-list">
           {this.props.skills.slice(0, maxSkillsRender).map((skill) => {
@@ -84,18 +85,18 @@ class SelectSkill extends Component {
                   {skill}
                 </button>
               </li>
-            );
+            )
           })}
         </ul>
-      );
+      )
     } else {
-      return null;
+      return null
     }
   }
 
   handleInputChange = (e) => {
-    this.props.updateFilterInput(e.target.value);
-    this.handleStartingOfFilteringSkills(e.target.value);
+    this.props.updateFilterInput(e.target.value)
+    this.handleStartingOfFilteringSkills(e.target.value)
   }
 
   render() {
@@ -121,17 +122,17 @@ class SelectSkill extends Component {
         ></button>
         {this.tryRenderingSkillList()}
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     skills: filterSkills(state.history.skills, state.skillsHistoryFilter)
-  };
+  }
 }
 
 const mapDispatchToProps = { setSkillsHistoryFilter }
 
-export const SelectSkillContainer = connect(
-  mapStateToProps, mapDispatchToProps)(SelectSkill);
+export const SelectSkill = connect(
+  mapStateToProps, mapDispatchToProps)(_SelectSkill)

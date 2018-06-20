@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from './Components/App/App';
+import { App } from './Components/App/index.js';
 import { store } from 'redux/store';
 import { Provider } from "react-redux";
 import 'font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
     <Provider store={store}>
-      <AppContainer />
+      <App />
     </Provider>,
     document.getElementById('root')
 );

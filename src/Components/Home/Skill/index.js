@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import "./index.css"
-import { UnfoldSkillElementsContainer } from "./UnfoldSkillElements";
-import EditSkillIcons from "./EditSkillIcons";
-import { connect } from "react-redux";
-import { renameSkill, deleteSkill } from "redux/actions/skills.js";
+import React, { Component } from 'react'
+import { UnfoldSkillElements } from "./UnfoldSkillElements/index.js"
+import EditSkillIcons from "./EditSkillIcons"
 
-class Skill extends Component {
+import "./index.css"
+
+import { connect } from "react-redux"
+import { renameSkill, deleteSkill } from "redux/actions/skills.js"
+
+class _Skill extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       skill: props.skill,
@@ -15,7 +17,7 @@ class Skill extends Component {
       progress: Math.floor(props.skill.exp / props.skill.expTillNextLevel * 100),
       unfold: false,
       editSkillName: false
-    };
+    }
   }
 
   componentWillMount = () => {
@@ -25,11 +27,11 @@ class Skill extends Component {
   }
 
   componentDidMount = () => {
-    this.tryGivingFocusToSkillName();
+    this.tryGivingFocusToSkillName()
   }
 
   componentDidUpdate = () => {
-    this.tryGivingFocusToSkillName();
+    this.tryGivingFocusToSkillName()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,70 +40,70 @@ class Skill extends Component {
       temporaryName: nextProps.skill.name,
       progress: Math.floor(nextProps.skill.exp / nextProps.skill.expTillNextLevel * 100),
       unfold: false
-    });
+    })
   }
 
   tryGivingFocusToSkillName = () => {
     if(this.state.editSkillName){
-      this.nameInput.focus();
+      this.nameInput.focus()
     }
   }
 
   deleteSkill = () => {
-    this.props.deleteSkill(this.state.skill);
+    this.props.deleteSkill(this.state.skill)
   }
 
   startEditingSkillName = () => {
-    this.setState({ editSkillName: true });
+    this.setState({ editSkillName: true })
   }
 
   foldAndUnfoldSkill = () => {
-    this.setState({ unfold: !this.state.unfold });
+    this.setState({ unfold: !this.state.unfold })
   }
 
   saveNewName = () => {
-    this.setState({ editSkillName: false });
-    this.props.renameSkill(this.state.temporaryName, this.state.skill);
+    this.setState({ editSkillName: false })
+    this.props.renameSkill(this.state.temporaryName, this.state.skill)
   }
 
   handleNameChange = (e) => {
-    this.setState({ temporaryName: e.target.value });
+    this.setState({ temporaryName: e.target.value })
   }
 
   handleInputClick = (e) => {
-    e.stopPropagation();
+    e.stopPropagation()
   }
 
   handleKeyDownOnName = (e) => {
     if(e.keyCode === 13){
-      this.saveNewName();
+      this.saveNewName()
     }
   }
 
   renderSkillName = () => {
     if(!this.state.editSkillName){
-      return `${this.state.skill.name}`;
+      return `${this.state.skill.name}`
     } else {
       return (
           <input type="text"
             className="skill-name skill-name-input"
-            ref={(input) => { this.nameInput = input ;}}
+            ref={(input) => { this.nameInput = input }}
             onChange={this.handleNameChange}
             onClick={this.handleInputClick}
             value={this.state.temporaryName}
             onBlur={this.saveNewName}
             onKeyDown={this.handleKeyDownOnName}
             />
-      );
+      )
     }
   }
 
   render() {
-    let skillHeight;
+    let skillHeight
     if(this.state.unfold){
-      skillHeight = "160px";
+      skillHeight = "160px"
     } else {
-      skillHeight = "80px";
+      skillHeight = "80px"
     }
     const { skill } = this.props
 
@@ -140,19 +142,19 @@ class Skill extends Component {
           </span>
         ) : (null)}
 
-        <UnfoldSkillElementsContainer
+        <UnfoldSkillElements
           shouldRender={this.state.unfold}
           skill={skill}
         />
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
-  return {};
-};
+  return {}
+}
 
-const mapDispatchToProps = { renameSkill, deleteSkill };
+const mapDispatchToProps = { renameSkill, deleteSkill }
 
-export const SkillContainer = connect(mapStateToProps, mapDispatchToProps)(Skill);
+export const Skill = connect(mapStateToProps, mapDispatchToProps)(_Skill)

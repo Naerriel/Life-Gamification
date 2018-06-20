@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import importExportIcon from "./assets/import-export.svg";
-import { saveSkills } from "redux/actions/skills.js";
-import { validateSkills } from "libs/skills.js";
+import React, { Component } from 'react'
+import { connect } from "react-redux"
+import importExportIcon from "./assets/import-export.svg"
+import { saveSkills } from "redux/actions/skills.js"
+import { validateSkills } from "libs/skills.js"
 
-class ImportExport extends Component {
+class _ImportExport extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.state = { input: "" };
+    this.state = { input: "" }
   }
 
   handleInputChange = (e) => {
-    this.setState({ input: e.target.value });
+    this.setState({ input: e.target.value })
   }
 
   handleImportBtn = () => {
     try {
-      let skills = JSON.parse(this.state.input);
-      validateSkills(skills);
-      this.props.saveSkills(skills);
-      this.setState({ input: "" });
+      let skills = JSON.parse(this.state.input)
+      validateSkills(skills)
+      this.props.saveSkills(skills)
+      this.setState({ input: "" })
     } catch(e) {
-      alert("This is not a correct skills' JSON.");
+      alert("This is not a correct skills' JSON.")
     }
   }
 
   handleExportBtn = () => {
-    this.setState({ input: JSON.stringify(this.props.skills) });
+    this.setState({ input: JSON.stringify(this.props.skills) })
   }
 
   render() {
@@ -59,17 +59,17 @@ class ImportExport extends Component {
             placeholder="Place your JSON here"></textarea>
         </div>
       </section>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
   return {
     skills: state.skills
-  };
+  }
 }
 
-const mapDispatchToProps = { saveSkills };
+const mapDispatchToProps = { saveSkills }
 
-export const ImportExportContainer = connect(
-  mapStateToProps, mapDispatchToProps)(ImportExport);
+export const ImportExport = connect(
+  mapStateToProps, mapDispatchToProps)(_ImportExport)

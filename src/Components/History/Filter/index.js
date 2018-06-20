@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
+import { SelectSkill } from "./SelectSkill/index.js"
 import "./index.css";
-import { SelectSkillContainer } from "./SelectSkill/SelectSkill.js";
-import { connect } from "react-redux";
-import { setHistoryLogFilter } from "redux/actions/historyLogFilter.js";
 
-class Filter extends Component {
+import { connect } from "react-redux"
+import { setHistoryLogFilter } from "redux/actions/historyLogFilter.js"
+
+class _Filter extends Component {
   constructor() {
     super();
 
@@ -16,45 +17,45 @@ class Filter extends Component {
       toDate: todaysDate,
       fromDate: todaysDate,
       shouldRenderSkillList: false
-    };
+    }
   }
 
   DateToYYYYMMDD = (date) => {
-    return date.toISOString().slice(0, 10);
+    return date.toISOString().slice(0, 10)
   }
 
   handleInputChange = (e) => {
-    const target = e.target;
-    this.setState({ [target.name]: target.value });
+    const target = e.target
+    this.setState({ [target.name]: target.value })
   }
 
   updateFilterInput = (newValue) => {
-    this.setState({ filterInput: newValue });
+    this.setState({ filterInput: newValue })
   }
 
   xorShouldRenderSkillList = () => {
-    this.setState({ shouldRenderSkillList: !this.state.shouldRenderSkillList });
+    this.setState({ shouldRenderSkillList: !this.state.shouldRenderSkillList })
   }
 
   setShouldRenderSkillList = (value) => {
-    this.setState({ shouldRenderSkillList: value });
+    this.setState({ shouldRenderSkillList: value })
   }
 
   handleStartFilteringBtn = () => {
-    this.setState({ shouldRenderSkillList: false });
+    this.setState({ shouldRenderSkillList: false })
     this.props.setHistoryLogFilter(this.state.filterInput,
-        this.state.fromDate, this.state.toDate);
+        this.state.fromDate, this.state.toDate)
   }
 
   handleCancelFilteringBtn = () => {
-    this.setState({ shouldRenderSkillList: false });
-    this.props.setHistoryLogFilter("all", "all", "all");
+    this.setState({ shouldRenderSkillList: false })
+    this.props.setHistoryLogFilter("all", "all", "all")
   }
 
   render() {
     return (
       <div className="history-filter">
-        <SelectSkillContainer
+        <SelectSkill
           updateFilterInput={this.updateFilterInput}
           filterInput={this.state.filterInput}
           shouldRenderSkillList={this.state.shouldRenderSkillList}
@@ -92,16 +93,16 @@ class Filter extends Component {
           onClick={this.handleStartFilteringBtn}>
         </button>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-  };
+  }
 }
 
-const mapDispatchToProps = { setHistoryLogFilter };
+const mapDispatchToProps = { setHistoryLogFilter }
 
-export const FilterContainer = connect(
-  mapStateToProps, mapDispatchToProps)(Filter);
+export const Filter = connect(
+  mapStateToProps, mapDispatchToProps)(_Filter)

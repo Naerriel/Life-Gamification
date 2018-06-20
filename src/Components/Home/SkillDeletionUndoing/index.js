@@ -1,25 +1,28 @@
-import React, { Component } from 'react';
-import "./index.css";
-import { connect } from "react-redux";
-import { eraseSkillDeletionUndoing, undoSkillDeletion }
-  from "redux/actions/undo.js";
+import React, { Component } from 'react'
 
-class SkillDeletionUndoing extends Component {
+import "./index.css"
+
+import { connect } from "react-redux"
+import { eraseSkillDeletionUndoing, undoSkillDeletion }
+  from "redux/actions/undo.js"
+
+class _SkillDeletionUndoing extends Component {
 
   componentWillReceiveProps(nextProps) {
-    clearTimeout(timer);
+    var timer
+    clearTimeout(timer)
 
-    var timer = setTimeout(() => {
-      this.props.eraseSkillDeletionUndoing();
-    }, 10000);
+    timer = setTimeout(() => {
+      this.props.eraseSkillDeletionUndoing()
+    }, 10000)
   }
 
   thereIsDeletedSkill = () => {
-    return "name" in this.props.skill;
+    return "name" in this.props.skill
   }
 
   handleUndoClick = () => {
-    this.props.undoSkillDeletion(this.props.skill);
+    this.props.undoSkillDeletion(this.props.skill)
   }
 
   render() {
@@ -37,9 +40,9 @@ class SkillDeletionUndoing extends Component {
             Undo
           </button>
         </div>
-      );
+      )
     } else {
-      return (null);
+      return null
     }
   }
 }
@@ -47,10 +50,10 @@ class SkillDeletionUndoing extends Component {
 const mapStateToProps = state => {
   return {
     skill: state.skillDeletionUndoing
-  };
-};
+  }
+}
 
-const mapDispatchToProps = { eraseSkillDeletionUndoing, undoSkillDeletion };
+const mapDispatchToProps = { eraseSkillDeletionUndoing, undoSkillDeletion }
 
-export const SkillDeletionUndoingContainer = connect(
-  mapStateToProps, mapDispatchToProps)(SkillDeletionUndoing);
+export const SkillDeletionUndoing = connect(
+  mapStateToProps, mapDispatchToProps)(_SkillDeletionUndoing)

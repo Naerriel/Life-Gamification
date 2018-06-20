@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
-import "./index.css";
-import AddExperienceSettings from "./AddExperienceSettings/index.js";
-import TimerSettings from "./TimerSettings/index.js";
-import { ImportExportContainer } from "./ImportExport/index.js";
-import { connect } from "react-redux";
-import { saveSettings } from "redux/actions/settings.js";
-import { copyJSONWithoutReference } from "libs/other.js";
-import update from 'immutability-helper';
+import React, { Component } from 'react'
+import AddExperienceSettings from "./AddExperienceSettings/index.js"
+import TimerSettings from "./TimerSettings/index.js"
+import { ImportExport } from "./ImportExport/index.js"
 
-class Settings extends Component {
+import "./index.css";
+
+import { connect } from "react-redux"
+import { saveSettings } from "redux/actions/settings.js"
+import { copyJSONWithoutReference } from "libs/other.js"
+import update from 'immutability-helper'
+
+class _Settings extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       temporarySettings: copyJSONWithoutReference(props.settings)
@@ -20,11 +22,11 @@ class Settings extends Component {
   handleSettingsModification = (key, value) => {
     this.setState({ temporarySettings: update(
       this.state.temporarySettings, {[key]: {$set: value}})
-    });
+    })
   }
 
   saveSettings = () => {
-    this.props.saveSettings(this.state.temporarySettings);
+    this.props.saveSettings(this.state.temporarySettings)
   }
 
   render() {
@@ -41,13 +43,13 @@ class Settings extends Component {
           />
         </div>
         <div className="column">
-          <ImportExportContainer />
+          <ImportExport />
           <button className="save-btn" onClick={this.saveSettings}>
             Save
           </button>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -55,9 +57,9 @@ const mapStateToProps = state => {
   return {
     settings: state.settings
   }
-};
+}
 
-const mapDispatchToProps = { saveSettings };
+const mapDispatchToProps = { saveSettings }
 
-export const SettingsContainer = connect(
-  mapStateToProps, mapDispatchToProps)(Settings);
+export const Settings = connect(
+  mapStateToProps, mapDispatchToProps)(_Settings)
