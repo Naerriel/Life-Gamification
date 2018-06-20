@@ -61,3 +61,15 @@ export const deleteSkill = (skillToRemove) => (dispatch, getState) => {
   dispatch(setSkillDeletionUndoing(skillToRemove));
   dispatch(saveSkills(newSkills));
 }
+
+const swapInArray = (arr, indexA, indexB) => {
+  let temp = arr[indexA]
+  arr[indexA] = arr[indexB]
+  arr[indexB] = temp
+}
+
+export const swapSkills = (indexA, indexB, skills) => (dispatch) => {
+  let newSkills = copyJSONWithoutReference(skills)
+  swapInArray(newSkills, indexA, indexB)
+  dispatch(saveSkills(newSkills))
+}

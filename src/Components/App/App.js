@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { HeaderContainer } from "../Header/Header";
-import Home from "../Home/Home";
+import { HomeContainer} from "../Home/Home";
 import { HistoryContainer } from "../History/History";
 import { SettingsContainer } from "../Settings/Settings";
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -21,10 +21,10 @@ class App extends Component {
         <div className="App">
           <HeaderContainer />
           <Route path="/index.html" render=
-            {(props) => <Home skills={this.props.skills} />}
+            {(props) => <HomeContainer skills={this.props.skills} />}
           />
           <Route exact path="/" render=
-            {(props) => <Home skills={this.props.skills} />}
+            {(props) => <HomeContainer skills={this.props.skills} />}
           />
           <Route path="/settings" component={SettingsContainer} />
           <Route path="/history" component={HistoryContainer} />
