@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./Skill.css"
-import UnfoldSkillElements from "./UnfoldSkillElements";
+import { UnfoldSkillElementsContainer } from "./UnfoldSkillElements";
 import EditSkillIcons from "./EditSkillIcons";
 import { connect } from "react-redux";
 import { renameSkill, deleteSkill } from "../../../actions/skills.js";
@@ -103,6 +103,8 @@ class Skill extends Component {
     } else {
       skillHeight = "80px";
     }
+    const { skill } = this.props
+
     return(
       <div
         className="skill"
@@ -138,11 +140,9 @@ class Skill extends Component {
           </span>
         ) : (null)}
 
-        <UnfoldSkillElements
+        <UnfoldSkillElementsContainer
           shouldRender={this.state.unfold}
-          exp={this.state.skill.exp}
-          expTillNextLevel={this.state.skill.expTillNextLevel}
-          timer={this.state.skill.timer}
+          skill={skill}
         />
       </div>
     );

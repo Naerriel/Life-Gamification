@@ -1,13 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import "./index.css"
-import startTimerIcon from "./assets/start-timer.svg";
-import addExpIcon from "./assets/add-exp.svg";
-import timerIcon from "./assets/timer-icon.svg";
-import playIcon from "./assets/play.svg";
-import pauseIcon from "./assets/pause.svg";
-import endIcon from "./assets/stop.svg";
+import startTimerIcon from "./assets/start-timer.svg"
+import addExpIcon from "./assets/add-exp.svg"
+import timerIcon from "./assets/timer-icon.svg"
+import playIcon from "./assets/play.svg"
+import pauseIcon from "./assets/pause.svg"
+import endIcon from "./assets/stop.svg"
+
+import { connect } from "react-redux"
 
 class UnfoldSkillElements extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      shouldRenderAddingExp: false
+    }
+  }
+
 
   handleStartTimerClick = (e) => {
     e.stopPropagation();
@@ -35,7 +45,8 @@ class UnfoldSkillElements extends Component {
   }
 
   renderAddingExperienceButtons = () => {
-    //TODO change 25 min and 20 exp to options from settings
+    const { time, expAtATime } = this.props.settings
+
     return (
       <div className="add-experience">
         <div className="add-experience-btn">
@@ -46,7 +57,7 @@ class UnfoldSkillElements extends Component {
               alt="start timer"/>
           </button>
           <span className="add-experience-info">
-            25 min
+            {time}
           </span>
         </div>
         <div className="add-experience-btn">
@@ -57,7 +68,7 @@ class UnfoldSkillElements extends Component {
               alt="add experience" />
           </button>
           <span className="add-experience-info">
-            20 exp
+            {expAtATime}
           </span>
         </div>
       </div>
@@ -100,20 +111,29 @@ class UnfoldSkillElements extends Component {
   }
 
   hasTimerStartedPlaying = () => {
-    return 'timeLeft' in this.props.timer;
+    return 'timeLeft' in this.props.skill.timer
   }
 
   render() {
     if(this.props.shouldRender){
       if(this.hasTimerStartedPlaying()){
-        return this.renderPlayInterface();
+        return this.renderPlayInterface()
       } else {
-        return this.renderAddingExperienceButtons();
+        return this.renderAddingExperienceButtons()
       }
     } else {
-      return (null);
+      return null
     }
   }
 }
 
-export default UnfoldSkillElements;
+const mapStateToProps = state => {
+  return {
+    settings: state.settings
+  }
+}
+
+const mapDispatchToProps = {}
+
+export const UnfoldSkillElementsContainer = connect(
+  mapStateToProps, mapDispatchToProps)(UnfoldSkillElements)
