@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { HeaderContainer } from "../Header/Header";
 import { HomeContainer} from "../Home/Home";
 import { HistoryContainer } from "../History/History";
