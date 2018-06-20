@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import timerHistoryIcon from "./assets/timer-history.svg";
 import addExpIcon from "./assets/add-exp-history.svg";
-import "./HistoryLog.css";
+import "./index.css";
 import moment from 'moment';
 
 class HistoryLog extends Component {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./Settings.css";
+import "./index.css";
 import AddExperienceSettings from "./AddExperienceSettings/index.js";
 import TimerSettings from "./TimerSettings/index.js";
 import { ImportExportContainer } from "./ImportExport/index.js";

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./Skill.css"
+import "./index.css"
 import { UnfoldSkillElementsContainer } from "./UnfoldSkillElements";
 import EditSkillIcons from "./EditSkillIcons";
 import { connect } from "react-redux";

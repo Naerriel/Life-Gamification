@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css';
+import './index.css';
 import lgIcon from './assets/lg.svg';
 import addSkillIcon from './assets/add-skill.svg';
 import historyIcon from './assets/history.svg';

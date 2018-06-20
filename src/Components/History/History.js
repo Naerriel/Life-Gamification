@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FilterContainer } from "./Filter/Filter.js";
+import { FilterContainer } from "./Filter/index.js";
 import HistoryLog from "./HistoryLog/HistoryLog.js";
 import { connect } from "react-redux";
 import { getHistory } from "redux/actions/history.js";

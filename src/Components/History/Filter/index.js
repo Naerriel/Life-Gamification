@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Filter.css";
+import "./index.css";
 import { SelectSkillContainer } from "./SelectSkill/SelectSkill.js";
 import { connect } from "react-redux";
 import { setHistoryLogFilter } from "redux/actions/historyLogFilter.js";
