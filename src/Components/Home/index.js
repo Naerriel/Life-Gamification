@@ -3,6 +3,8 @@ import { Skill } from "./Skill/index.js"
 import DragNDropSkill from "./DragNDropSkill/index.js"
 import { SkillDeletionUndoing } from "./SkillDeletionUndoing/index.js"
 
+import "./index.css"
+
 import { connect } from "react-redux"
 import { swapSkills } from 'redux/actions/skills.js'
 
@@ -18,38 +20,33 @@ class _Home extends Component {
     const { skills } = this.props
     const thereAreSkills = skills.length > 0
 
-    return(
-      <div>
-        { thereAreSkills ? (
-          <div className="content">
-            {
-              skills.map((skill, index) => {
-                return (
-                    <DragNDropSkill
-                      key={skill.name} // TODO make sure names are unique
-                      skill={skill}
-                      index={index}
-                      moveSkill={this.moveSkill}
-                    />
-                  )
-              })
-            }
-            <SkillDeletionUndoing />
-          </div>
-        ) : (
+    if(thereAreSkills) {
+      return (
+        <div className="content">
+          {skills.map((skill, index) => {
+            return (
+                <DragNDropSkill
+                  key={skill.name} // TODO make sure names are unique
+                  skill={skill}
+                  index={index}
+                  moveSkill={this.moveSkill}
+                />
+              )
+          })}
+          <SkillDeletionUndoing />
+        </div>
+      )
+    } else {
+      return (
+        <div className="content">
           <div className="welcomeMessage">
-            <p>
-              <div>
-                Welcome to Life Gamification!
-              </div>
-              <div>
-                To add your first skill go to Edit skills.
-              </div>
-            </p>
+            <p>Welcome to Life Gamification!</p>
+            <p>Add your first skill by pressing "Add Skill" in the Header</p>
           </div>
-        )}
-      </div>
-    )
+          <SkillDeletionUndoing />
+        </div>
+      )
+    }
   }
 }
 
