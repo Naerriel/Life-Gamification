@@ -26,7 +26,7 @@ class Home extends Component {
               skills.map((skill, index) => {
                 return (
                     <DragNDropSkill
-                      key={skill.name}
+                      key={skill.name} // TODO make sure names are unique
                       skill={skill}
                       index={index}
                       moveSkill={this.moveSkill}
