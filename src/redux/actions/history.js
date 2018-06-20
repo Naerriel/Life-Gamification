@@ -1,5 +1,5 @@
-import { setRepoHistory, getRepoHistory } from "../repository/index.js";
-import { emptyHistory } from "../libs/history.js";
+import { setRepoHistory, getRepoHistory } from "repository/index.js";
+import { emptyHistory } from "libs/history.js";
 
 const setHistory = history => ({
   type: 'SET_HISTORY',

@@ -1,7 +1,7 @@
-import { setRepoSkills, getRepoSkills } from "../repository/index.js";
-import { createEmptySkill, validateSkills } from "../libs/skills.js";
+import { setRepoSkills, getRepoSkills } from "repository/index.js";
+import { createEmptySkill, validateSkills } from "libs/skills.js";
 import { setSkillDeletionUndoing } from "./undo.js";
-import { copyJSONWithoutReference } from "../libs/other.js";
+import { copyJSONWithoutReference } from "libs/other.js";
 import isEqual from 'lodash/isEqual';
 
 const setSkills = (skills) => ({

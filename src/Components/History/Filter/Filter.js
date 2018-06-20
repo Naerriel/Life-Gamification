@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Filter.css";
 import { SelectSkillContainer } from "./SelectSkill/SelectSkill.js";
 import { connect } from "react-redux";
-import { setHistoryLogFilter } from "../../../actions/historyLogFilter.js";
+import { setHistoryLogFilter } from "redux/actions/historyLogFilter.js";
 
 class Filter extends Component {
   constructor() {

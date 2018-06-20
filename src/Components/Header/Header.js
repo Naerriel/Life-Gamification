@@ -6,7 +6,7 @@ import addSkillIcon from './assets/add-skill.svg';
 import historyIcon from './assets/history.svg';
 import settingsIcon from './assets/settings.svg';
 import { connect } from "react-redux";
-import { addSkill } from "../../actions/skills.js";
+import { addSkill } from "redux/actions/skills.js";
 
 class Header extends Component {
 

@@ -1,5 +1,5 @@
 import { saveSkills } from "./skills.js";
-import { copyJSONWithoutReference } from "../libs/other.js";
+import { copyJSONWithoutReference } from "libs/other.js";
 
 export const setSkillDeletionUndoing = (skill) => ({
   type: 'SET_SKILL_DELETION_UNDOING',

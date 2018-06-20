@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "./index.css";
 import { connect } from "react-redux";
 import { eraseSkillDeletionUndoing, undoSkillDeletion }
-  from "../../../actions/undo.js";
+  from "redux/actions/undo.js";
 
 class SkillDeletionUndoing extends Component {
 

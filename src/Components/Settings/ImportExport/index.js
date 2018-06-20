@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import importExportIcon from "./assets/import-export.svg";
-import { saveSkills } from "../../../actions/skills.js";
-import { validateSkills } from "../../../libs/skills.js";
+import { saveSkills } from "redux/actions/skills.js";
+import { validateSkills } from "libs/skills.js";
 
 class ImportExport extends Component {
   constructor(props) {

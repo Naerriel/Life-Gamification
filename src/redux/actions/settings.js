@@ -1,6 +1,6 @@
-import { setRepoSettings, getRepoSettings } from "../repository/index.js";
-import { defaultSettings, validateSettings } from "../libs/settings.js";
-import { copyJSONWithoutReference } from "../libs/other.js";
+import { setRepoSettings, getRepoSettings } from "repository/index.js";
+import { defaultSettings, validateSettings } from "libs/settings.js";
+import { copyJSONWithoutReference } from "libs/other.js";
 
 const setSettings = settings => ({
   type: 'SET_SETTINGS',

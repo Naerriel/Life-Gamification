@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { filterSkills } from "../../../../selectors/filterSkills.js";
-import { setSkillsHistoryFilter } from "../../../../actions/skillsHistoryFilter.js";
+import { filterSkills } from "redux/selectors/filterSkills.js";
+import { setSkillsHistoryFilter } from "redux/actions/skillsHistoryFilter.js";
 
 const maxSkillsRender = 5;
 

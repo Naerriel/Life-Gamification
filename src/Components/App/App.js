@@ -6,8 +6,8 @@ import { HistoryContainer } from "../History/History";
 import { SettingsContainer } from "../Settings/Settings";
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from "react-redux";
-import { getSkills } from "../../actions/skills.js";
-import { getSettings } from "../../actions/settings.js";
+import { getSkills } from "redux/actions/skills.js";
+import { getSettings } from "redux/actions/settings.js";
 
 class App extends Component {
   componentDidMount() {

@@ -4,8 +4,8 @@ import AddExperienceSettings from "./AddExperienceSettings/index.js";
 import TimerSettings from "./TimerSettings/index.js";
 import { ImportExportContainer } from "./ImportExport/index.js";
 import { connect } from "react-redux";
-import { saveSettings } from "../../actions/settings.js";
-import { copyJSONWithoutReference } from "../../libs/other.js";
+import { saveSettings } from "redux/actions/settings.js";
+import { copyJSONWithoutReference } from "libs/other.js";
 import update from 'immutability-helper';
 
 class Settings extends Component {

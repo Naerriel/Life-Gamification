@@ -4,7 +4,7 @@ import DragNDropSkill from "./Skill/DragNDropSkill.js";
 import { SkillDeletionUndoingContainer } from "./SkillDeletionUndoing/index.js";
 
 import { connect } from "react-redux"
-import { swapSkills } from 'actions/skills.js'
+import { swapSkills } from 'redux/actions/skills.js'
 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
