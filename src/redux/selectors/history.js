@@ -1,8 +1,8 @@
 import moment from 'moment'
 
 const skillNameIsCorrect = (name = "", pattern = "") => {
-  name.toLowerCase()
-  pattern.toLowerCase()
+  name = name.toLowerCase()
+  pattern = pattern.toLowerCase()
   if(pattern === "" || pattern === "all" || pattern === "all skills"){
     return true
   }
@@ -13,7 +13,7 @@ const dateIsBefore = (date1, date2) => {
   if(date1 === "all" || date2 === "all"){
     return true
   }
-  return (moment(date1, "YYYY-MM-DD") <= moment(date2, "YYYY-MM-DD"))
+  return (moment(date1).startOf('day') <= moment(date2).startOf('day'))
 }
 
 const dateIsCorrect = (begin, shouldBegin, shouldEnd) => {
