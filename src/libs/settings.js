@@ -14,7 +14,23 @@ export const isATime = (text) => {
   return regexForTime.test(text)
 }
 
+const ensureFormat = (time) => {
+  // Preferred format is that after a ':' minutes or seconds have 2 digits
+
+  for(let i = 1; i < time.length; i++) {
+    if(time[i - 1] === ':' && (i + 1 === time.length || time[i + 1] === ':')) {
+      time = time.substring(0, i) + "0" + time.substring(i)
+    }
+  }
+  return time
+}
+
 export const validateSettings = (settings) => {
+  console.log("in validationg settings")
+  console.log("ensuring format of: 1:6:2, 1:5:13")
+  console.log(ensureFormat("1:6:2"))
+  console.log(ensureFormat("1:5:13"))
+
   for(let name in settings) {
     switch(name) {
       case 'time':
@@ -22,6 +38,8 @@ export const validateSettings = (settings) => {
       case 'bigBreakLen':
         if(!isATime(settings[name])){
           settings[name] = defaultSettings[name]
+        } else {
+          settings[name] = ensureFormat(settings[name])
         }
         break;
       case 'expPerSession':

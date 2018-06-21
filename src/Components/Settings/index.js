@@ -25,6 +25,12 @@ class _Settings extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      temporarySettings: copyJSONWithoutReference(nextProps.settings)
+    });
+  }
+
   saveSettings = () => {
     this.props.saveSettings(this.state.temporarySettings)
   }
