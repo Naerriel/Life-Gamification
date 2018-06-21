@@ -1,5 +1,8 @@
 import { setRepoSkills, getRepoSkills } from "repository/index.js"
-import { createEmptySkill, validateSkills } from "libs/skills.js"
+import {
+  createEmptySkill,
+  validateSkills,
+  addExperience} from "libs/skills.js"
 import { setSkillDeletionUndoing } from "./undo.js"
 import { copyJSONWithoutReference } from "libs/other.js"
 
@@ -27,6 +30,17 @@ export const getSkills = () => (dispatch) => {
 export const addSkill = () => (dispatch, getState) => {
   let newSkills = copyJSONWithoutReference(getState().skills)
   newSkills.push(createEmptySkill())
+  dispatch(saveSkills(newSkills))
+}
+
+export const addExp = (skillId, exp) => (dispatch, getState) => {
+  let newSkills = copyJSONWithoutReference(getState().skills)
+
+  let skillToReceiveExp = newSkills.find(skill => {
+    console.log(skill)
+    return skill.id === skillId
+  })
+  addExperience(exp, skillToReceiveExp)
   dispatch(saveSkills(newSkills))
 }
 

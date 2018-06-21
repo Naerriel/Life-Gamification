@@ -46,7 +46,7 @@ const validateSkillField = (skill, skillField) => {
 }
 
 export const validateSkills = (skills) => {
-  let skillFields = ["name", "level", "exp", "expTillNextLevel", "timer"]
+  let skillFields = ["id", "name", "level", "exp", "expTillNextLevel", "timer"]
 
   skills.forEach((skill) => {
     skillFields.forEach((skillField) => {

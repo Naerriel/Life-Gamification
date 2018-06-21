@@ -2,20 +2,47 @@ import React, { Component } from 'react'
 import './index.css'
 
 import { connect} from 'react-redux'
+import { clearWorkComplete } from 'redux/actions/workComplete.js'
+import { addExp } from 'redux/actions/skills.js'
+
+const maxLogLength = 60
 
 class _AddExp extends Component {
+  constructor(props) {
+    super()
+
+    this.state = ({ input: '' })
+  }
+
+  componentWillReceiveProps() {
+    this.setState({ input: '' })
+  }
 
   shouldRender = () => {
     return 'expToAdd' in this.props.workComplete
   }
 
-  handleContinueBtn = () => {
-    console.log("Continuing")
+  handleInputChange = (e) => {
+    if(e.target.value.length <= maxLogLength) {
+      this.setState({ input: e.target.value })
+    }
+  }
 
+  handleContinueBtn = () => {
+    const { id, expToAdd } = this.props.workComplete
+    // DODAJ DO HISTORII
+    this.props.addExp(id, expToAdd)
+    this.props.clearWorkComplete()
+  }
+
+  handleKeyDown = (e) => {
+    if(e.keyCode === 13) {
+      this.handleContinueBtn()
+    }
   }
 
   render() {
-    const { name, expAtATime } = this.props.workComplete
+    const { name, expToAdd } = this.props.workComplete
 
     if(this.shouldRender()){
       return (
@@ -24,7 +51,7 @@ class _AddExp extends Component {
           </div>
           <div className="addExp">
             <div className="finishedTask-main-message">
-              You add {expAtATime} exp to:
+              You add {expToAdd} exp to:
               <div className="skill-name">
                 {name}
               </div>
@@ -36,6 +63,9 @@ class _AddExp extends Component {
               type="text"
               className="finishedTask-log"
               placeholder="E.g. Finished 3rd chapter"
+              value={this.state.input}
+              onChange={this.handleInputChange}
+              onKeyDown={this.handleKeyDown}
             />
             <button
               className="finishedTask-btn"
@@ -58,6 +88,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { clearWorkComplete, addExp }
 
 export const AddExp = connect(mapStateToProps, mapDispatchToProps)(_AddExp)
