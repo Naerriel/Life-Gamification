@@ -65,7 +65,7 @@ class _Skill extends Component {
 
   saveNewName = () => {
     this.setState({ editSkillName: false })
-    this.props.renameSkill(this.state.temporaryName, this.props.skill)
+    this.props.renameSkill(this.state.temporaryName, this.props.skill.id)
   }
 
   handleNameChange = (e) => {

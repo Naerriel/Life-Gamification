@@ -31,32 +31,20 @@ export const addSkill = () => (dispatch, getState) => {
   dispatch(saveSkills(newSkills))
 }
 
-export const renameSkill = (newName, skillToChange) => (dispatch, getState) => {
+export const renameSkill = (newName, skillId) => (dispatch, getState) => {
   let newSkills = copyJSONWithoutReference(getState().skills)
-  let renamedASkill = false
 
-  newSkills.forEach((skill) => {
-    if(!renamedASkill && isEqual(skill, skillToChange)){
-      skill.name = newName
-      renamedASkill = true
-    }
-  });
+  newSkills.find(skill => {
+    return skill.id === skillId
+  }).name = newName
   dispatch(saveSkills(newSkills))
 }
 
 export const deleteSkill = (skillToRemove) => (dispatch, getState) => {
   let newSkills = copyJSONWithoutReference(getState().skills)
-  let removedASkill = false
 
   newSkills = newSkills.filter(skill => {
-    if(removedASkill){
-      return true
-    }
-    if(isEqual(skill, skillToRemove)){
-      removedASkill = true
-      return false
-    }
-    return true
+    return skill.id !== skillToRemove.id
   })
   dispatch(setSkillDeletionUndoing(skillToRemove))
   dispatch(saveSkills(newSkills))
