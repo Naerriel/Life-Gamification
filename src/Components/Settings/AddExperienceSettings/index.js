@@ -4,10 +4,7 @@ import addExpSettingsIcon from "./assets/add-exp-settings.svg";
 class AddExperienceSettings extends Component {
 
   handleInputChange = (e) => {
-    const newValue = parseInt(e.target.value, 10);
-    if(!isNaN(newValue)){
-      this.props.handleSettingsModification("expAtATime", newValue);
-    }
+    this.props.handleSettingsModification("expAtATime", e.target.value);
   }
 
   render() {

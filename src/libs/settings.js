@@ -26,11 +26,6 @@ const ensureFormat = (time) => {
 }
 
 export const validateSettings = (settings) => {
-  console.log("in validationg settings")
-  console.log("ensuring format of: 1:6:2, 1:5:13")
-  console.log(ensureFormat("1:6:2"))
-  console.log(ensureFormat("1:5:13"))
-
   for(let name in settings) {
     switch(name) {
       case 'time':
@@ -43,6 +38,7 @@ export const validateSettings = (settings) => {
         }
         break;
       case 'expPerSession':
+      case 'expAtATime':
       case 'pomodoros':
       case 'bigBreaks':
         if(isNaN(settings[name])){
