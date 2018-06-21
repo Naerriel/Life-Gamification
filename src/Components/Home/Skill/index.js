@@ -12,16 +12,19 @@ class _Skill extends Component {
     super(props)
 
     this.state = {
-      skill: props.skill,
       temporaryName: props.skill.name,
-      progress: Math.floor(props.skill.exp / props.skill.expTillNextLevel * 100),
+      progress: this.calcProgress(this.props.skill),
       unfold: false,
       editSkillName: false
     }
   }
 
+  calcProgress = (skill) => {
+    return Math.min(99, Math.floor(skill.exp / skill.expTillNextLevel * 100))
+  }
+
   componentWillMount = () => {
-    if(this.state.skill.name === ""){
+    if(this.props.skill.name === ""){
       this.setState({ editSkillName: true });
     }
   }
@@ -36,9 +39,8 @@ class _Skill extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      skill: nextProps.skill,
       temporaryName: nextProps.skill.name,
-      progress: Math.floor(nextProps.skill.exp / nextProps.skill.expTillNextLevel * 100),
+      progress: this.calcProgress(nextProps.skill),
       unfold: false
     })
   }
@@ -50,7 +52,7 @@ class _Skill extends Component {
   }
 
   deleteSkill = () => {
-    this.props.deleteSkill(this.state.skill)
+    this.props.deleteSkill(this.props.skill)
   }
 
   startEditingSkillName = () => {
@@ -63,15 +65,11 @@ class _Skill extends Component {
 
   saveNewName = () => {
     this.setState({ editSkillName: false })
-    this.props.renameSkill(this.state.temporaryName, this.state.skill)
+    this.props.renameSkill(this.state.temporaryName, this.props.skill)
   }
 
   handleNameChange = (e) => {
     this.setState({ temporaryName: e.target.value })
-  }
-
-  handleInputClick = (e) => {
-    e.stopPropagation()
   }
 
   handleKeyDownOnName = (e) => {
@@ -82,18 +80,18 @@ class _Skill extends Component {
 
   renderSkillName = () => {
     if(!this.state.editSkillName){
-      return `${this.state.skill.name}`
+      return `${this.props.skill.name}`
     } else {
       return (
           <input type="text"
             className="skill-name skill-name-input"
             ref={(input) => { this.nameInput = input }}
             onChange={this.handleNameChange}
-            onClick={this.handleInputClick}
+            onClick={(e) => { e.stopPropagation() }}
             value={this.state.temporaryName}
             onBlur={this.saveNewName}
             onKeyDown={this.handleKeyDownOnName}
-            />
+          />
       )
     }
   }
@@ -110,7 +108,7 @@ class _Skill extends Component {
     return(
       <div
         className="skill"
-        style={{ height: `${skillHeight}`}}
+        style={{ height: {skillHeight}}}
         onClick={this.foldAndUnfoldSkill}
       >
         <EditSkillIcons
@@ -120,7 +118,7 @@ class _Skill extends Component {
         />
         <div className="skill-level-info">
           <span className="skill-level">
-            {this.state.skill.level}
+            {skill.level}
           </span>
           <span className="skill-level-label">
             Lvl
@@ -138,9 +136,9 @@ class _Skill extends Component {
 
         {this.state.unfold ? (
           <span className="experience">
-            {this.state.skill.exp} / {this.state.skill.expTillNextLevel}
+            {skill.exp} / {skill.expTillNextLevel}
           </span>
-        ) : (null)}
+        ) : null}
 
         <UnfoldSkillElements
           shouldRender={this.state.unfold}
