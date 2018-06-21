@@ -3,6 +3,8 @@ import { Header } from "../Header/index.js"
 import { Home } from "../Home/index.js"
 import { History } from "../History/index.js"
 import { Settings } from "../Settings/index.js"
+import { AddExp } from "../WorkComplete/AddExp/index.js"
+import { FinishPomodoro } from "../WorkComplete/FinishPomodoro/index.js"
 
 import { BrowserRouter, Route } from 'react-router-dom'
 import { connect } from "react-redux"
@@ -21,6 +23,8 @@ class _App extends Component {
         <div className="App">
           <Header />
           <main>
+            <AddExp />
+            <FinishPomodoro />
             <Route path="/index.html" render=
               {(props) => <Home skills={this.props.skills} />}
             />

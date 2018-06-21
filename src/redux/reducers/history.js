@@ -3,6 +3,6 @@ export const history = (state = {}, action) => {
     case 'SET_HISTORY':
       return action.history
     default:
-      return state;
+      return state
   }
 }

@@ -6,6 +6,7 @@ import { skillDeletionUndoing } from "./skillDeletionUndoing"
 import { history } from "./history"
 import { skillsHistoryFilter } from "./skillsHistoryFilter"
 import { filterHistoryLogs } from "./filterHistoryLogs"
+import { workComplete } from "./workComplete"
 
 export default combineReducers({
   skills,
@@ -14,5 +15,6 @@ export default combineReducers({
   skillDeletionUndoing,
   history,
   skillsHistoryFilter,
-  filterHistoryLogs
+  filterHistoryLogs,
+  workComplete
 })

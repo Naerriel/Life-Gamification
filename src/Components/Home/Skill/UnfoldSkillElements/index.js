@@ -8,6 +8,7 @@ import pauseIcon from "./assets/pause.svg"
 import endIcon from "./assets/stop.svg"
 
 import { connect } from "react-redux"
+import { setAddingExp } from "redux/actions/workComplete.js"
 
 class _UnfoldSkillElements extends Component {
   constructor(props) {
@@ -25,7 +26,8 @@ class _UnfoldSkillElements extends Component {
 
   handleAddExpClick = (e) => {
     e.stopPropagation();
-
+    const { skill, settings } = this.props
+    this.props.setAddingExp(skill.id, skill.name, settings.expAtATime)
   }
 
   handlePausingTimerClick = (e) => {
@@ -132,7 +134,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { setAddingExp }
 
 export const UnfoldSkillElements = connect(
   mapStateToProps, mapDispatchToProps)(_UnfoldSkillElements)
