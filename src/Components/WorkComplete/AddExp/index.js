@@ -4,6 +4,7 @@ import './index.css'
 import { connect} from 'react-redux'
 import { clearWorkComplete } from 'redux/actions/workComplete.js'
 import { addExp } from 'redux/actions/skills.js'
+import { addLog } from 'redux/actions/history.js'
 
 const maxLogLength = 60
 
@@ -29,8 +30,16 @@ class _AddExp extends Component {
   }
 
   handleContinueBtn = () => {
-    const { id, expToAdd } = this.props.workComplete
-    // DODAJ DO HISTORII
+    const { id, name, expToAdd } = this.props.workComplete
+    const logMessage = this.state.input
+    const timeStarted = new Date().valueOf()
+
+    this.props.addLog({
+      skillName: name,
+      expAdded: expToAdd,
+      taskDescription: logMessage,
+      stars: -1,
+      timeStarted })
     this.props.addExp(id, expToAdd)
     this.props.clearWorkComplete()
   }
@@ -88,6 +97,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = { clearWorkComplete, addExp }
+const mapDispatchToProps = { clearWorkComplete, addExp, addLog }
 
 export const AddExp = connect(mapStateToProps, mapDispatchToProps)(_AddExp)

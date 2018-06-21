@@ -10,11 +10,13 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import { connect } from "react-redux"
 import { getSkills } from "redux/actions/skills.js"
 import { getSettings } from "redux/actions/settings.js"
+import { getHistory } from "redux/actions/history.js"
 
 class _App extends Component {
   componentDidMount() {
     this.props.getSkills()
     this.props.getSettings()
+    this.props.getHistory()
   }
 
   render() {
@@ -46,6 +48,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = { getSkills, getSettings }
+const mapDispatchToProps = { getSkills, getSettings, getHistory }
 
 export const App = connect(mapStateToProps, mapDispatchToProps)(_App)
