@@ -2,6 +2,7 @@ const startingExpNeeded = 5
 
 export const createEmptySkill = () => {
   return {
+    id: Date.now(),
     name: "",
     level: 1,
     exp: 0,
