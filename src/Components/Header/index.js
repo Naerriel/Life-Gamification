@@ -24,15 +24,17 @@ class _Header extends Component {
               Home
             </span>
           </Link>
-          <button
-            className="header-element"
-            onClick={this.handleAddSkillClick}
-          >
-            <img className="header-icon" src={addSkillIcon} alt="" />
-            <span className="header-description">
-              Add skill
-            </span>
-          </button>
+          <Link to="/">
+            <button
+              className="header-element"
+              onClick={this.handleAddSkillClick}
+            >
+              <img className="header-icon" src={addSkillIcon} alt="" />
+              <span className="header-description">
+                Add skill
+              </span>
+            </button>
+          </Link>
           <Link to="/history" className="header-element">
             <img className="header-icon" src={historyIcon} alt="" />
             <span className="header-description">
