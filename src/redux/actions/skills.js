@@ -5,6 +5,7 @@ import {
   addExperience} from "libs/skills.js"
 import { setSkillDeletionUndoing } from "./undo.js"
 import { copyJSONWithoutReference } from "libs/other.js"
+import { timeToMilliSeconds } from "libs/time.js"
 
 const setSkills = (skills) => ({
   type: 'SET_SKILLS',
@@ -72,5 +73,69 @@ const swapInArray = (arr, indexA, indexB) => {
 export const swapSkills = (indexA, indexB, skills) => (dispatch) => {
   let newSkills = copyJSONWithoutReference(skills)
   swapInArray(newSkills, indexA, indexB)
+  dispatch(saveSkills(newSkills))
+}
+
+// TODO Delete repetitions in timer functions
+// Procrastinating on this task because of need to resolve
+// copyJSONWithoutReference - how should it be done?
+
+export const pauseTimer = (skillId, timeLeft) => (dispatch, getState) => {
+  let newSkills = copyJSONWithoutReference(getState().skills)
+
+  console.log("skillId = ")
+  console.log(skillId)
+  console.log("newSkills:")
+  console.log(newSkills)
+  const skillToModify = newSkills.find(skill => {
+    return skill.id === skillId
+  })
+
+  console.log(skillToModify)
+  skillToModify.timer.timeLeft = timeLeft
+  skillToModify.timer.timeStamp = -1
+  dispatch(saveSkills(newSkills))
+}
+
+export const playTimer = (skillId, timeLeft) => (dispatch, getState) => {
+  let newSkills = copyJSONWithoutReference(getState().skills)
+
+  const skillToModify = newSkills.find(skill => {
+    return skill.id === skillId
+  })
+
+  const timeStamp = new Date().valueOf() + timeToMilliSeconds(timeLeft)
+
+  skillToModify.timer.timeLeft = timeLeft
+  skillToModify.timer.timeStamp = timeStamp
+  dispatch(saveSkills(newSkills))
+}
+
+export const startTimer = (skillId, settings) => (dispatch, getState) => {
+  let newSkills = copyJSONWithoutReference(getState().skills)
+
+  const skillToModify = newSkills.find(skill => {
+    return skill.id === skillId
+  })
+
+  skillToModify.timer = {
+    timeLeft: settings.time,
+    timeStamp: new Date().valueOf() + timeToMilliSeconds(settings.time),
+    sessionsCompleted: 0,
+    settings
+  }
+  dispatch(saveSkills(newSkills))
+}
+
+export const eraseTimer = (skillId) => (dispatch, getState) => {
+  let newSkills = copyJSONWithoutReference(getState().skills)
+
+  console.log(skillId)
+  console.log(newSkills)
+  const skillToModify = newSkills.find(skill => {
+    return skill.id === skillId
+  })
+
+  skillToModify.timer = {}
   dispatch(saveSkills(newSkills))
 }
