@@ -40,8 +40,7 @@ class _Skill extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       temporaryName: nextProps.skill.name,
-      progress: this.calcProgress(nextProps.skill),
-      unfold: false
+      progress: this.calcProgress(nextProps.skill)
     })
   }
 
