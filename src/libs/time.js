@@ -27,18 +27,48 @@ export const timeFromMilliSeconds = (timeInt) => {
   return time
 }
 
-export const timeToMilliSeconds = (time) => {
-  let seconds, minutes, hours = -1
+const extractTimeUnit = (obj) => {
+  let result = ""
+  let time = obj.getValue()
+  let foundAColon = false
+
   for (let i = time.length - 1; i >= 0; i--) {
     if(time[i] === ':') {
-      for (let j = i + 1; j < time.length; j++) {
-        //TODO I tutaj przepisujemy to do odpowiedniej zmiennej
-        //Potem parsujemy na inta
-        //Potem przemnażamy, dodajemy, hopsasa
-        //i potem ucinamy ten fragment z time'u.
-        //Tylko nie wiem jak ucinać. Jutro ten fragment zakodze.
-      }
+      result = time.substring(i + 1, time.length)
+      obj.setValue(time.substring(0, i))
+      foundAColon = true
+      break
     }
   }
-  return 120
+  if(!foundAColon) {
+    result = time
+    obj.setValue("")
+  }
+  return result
+}
+
+export const timeToMilliSeconds = (time) => {
+  let seconds, minutes, hours = -1
+
+  let timeObj = new function() { // To let it be modified in external function
+    let _time = time
+
+    this.setValue = function(val) { _time = val }
+    this.getValue = function() { return _time }
+  }
+  seconds = parseInt(extractTimeUnit(timeObj), 10)
+  minutes = parseInt(extractTimeUnit(timeObj), 10)
+  hours = parseInt(extractTimeUnit(timeObj), 10)
+
+  let result = 0
+  if(!isNaN(seconds)) {
+    result += seconds * 1000
+  }
+  if(!isNaN(minutes)) {
+    result += minutes * 60 * 1000
+  }
+  if(!isNaN(hours)) {
+    result += hours * 60 * 60 * 1000
+  }
+  return result
 }
