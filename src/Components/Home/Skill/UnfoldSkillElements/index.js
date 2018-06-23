@@ -28,7 +28,7 @@ class _UnfoldSkillElements extends Component {
 
   handleStartTimerClick = (e) => {
     e.stopPropagation()
-    this.props.startTimer(this.state.skill.id, this.props.settings)
+    this.props.startTimer(this.props.skill.id, this.props.settings)
   }
 
   handleAddExpClick = (e) => {
@@ -39,7 +39,10 @@ class _UnfoldSkillElements extends Component {
 
   handlePausingTimerClick = (e) => {
     e.stopPropagation()
+    console.log("Pausing - saved time:")
+    console.log(this.state.localTimeLeft)
     this.props.pauseTimer(this.props.skill.id, this.state.localTimeLeft)
+    this.stopCountdown()
   }
 
   handlePlayingTimerClick = (e) => {
@@ -86,12 +89,16 @@ class _UnfoldSkillElements extends Component {
   }
 
   calcProgress(timeLeft, timeAll) {
-    return 100 - Math.floor(
+    return 100 - (
         timeToMilliSeconds(timeLeft) / timeToMilliSeconds(timeAll) * 100)
   }
 
   timerIsPlaying = () => {
     return this.props.skill.timer.timeStamp !== -1
+  }
+
+  timerExists = () => {
+    return "timeLeft" in this.props.skill.timer
   }
 
   calcTimeLeft = () => {
@@ -126,9 +133,11 @@ class _UnfoldSkillElements extends Component {
   }
 
   setTimerProgressBar = (timeLeft) => {
-    console.log("timeLeft " + timeLeft)
     const { settings } = this.props.skill.timer
     const progress = this.calcProgress(timeLeft, settings.time)
+    console.log("timeLeft, settings.time = ")
+    console.log(timeLeft, settings.time)
+    console.log("progress = " + progress)
 
     this.setState({
       localTimeLeft: timeLeft,
@@ -138,24 +147,13 @@ class _UnfoldSkillElements extends Component {
   }
 
   componentWillMount() {
-    this.props.skill.timer = {
-      timeLeft: "19:23",
-      timeStamp: 123512541230000,
-      sessionsCompleted: 1,
-      settings: {
-        time: "25:00",
-        expPerSession: 30,
-        breakLen: "5:00",
-        bigBreakLen: "30:00",
-        pomodoros: 8,
-        bigBreaks: 1,
+    if(this.timerExists()){
+      console.log("Setting timer progress bar")
+      this.setTimerProgressBar(this.props.skill.timer.timeLeft)
+
+      if(this.timerIsPlaying()) {
+        this.startCountdown()
       }
-    } // TODO erase upon finishing component
-
-    this.setTimerProgressBar(this.props.skill.timer.timeLeft)
-
-    if(this.timerIsPlaying()) {
-      this.startCountdown()
     }
   }
 
