@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { UnfoldSkillElements } from "./UnfoldSkillElements/index.js"
+import UnfoldSkillElements from "./UnfoldSkillElements/index.js"
 import EditSkillIcons from "./EditSkillIcons"
 
 import "./index.css"
@@ -20,7 +20,7 @@ class _Skill extends Component {
   }
 
   calcProgress = (skill) => {
-    return Math.min(99, Math.floor(skill.exp / skill.expTillNextLevel * 100))
+    return Math.min(99, (skill.exp / skill.expTillNextLevel * 100))
   }
 
   componentWillMount = () => {

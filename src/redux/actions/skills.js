@@ -83,10 +83,6 @@ export const swapSkills = (indexA, indexB, skills) => (dispatch) => {
 export const pauseTimer = (skillId, timeLeft) => (dispatch, getState) => {
   let newSkills = copyJSONWithoutReference(getState().skills)
 
-  console.log("skillId = ")
-  console.log(skillId)
-  console.log("newSkills:")
-  console.log(newSkills)
   const skillToModify = newSkills.find(skill => {
     return skill.id === skillId
   })
@@ -130,8 +126,6 @@ export const startTimer = (skillId, settings) => (dispatch, getState) => {
 export const eraseTimer = (skillId) => (dispatch, getState) => {
   let newSkills = copyJSONWithoutReference(getState().skills)
 
-  console.log(skillId)
-  console.log(newSkills)
   const skillToModify = newSkills.find(skill => {
     return skill.id === skillId
   })
