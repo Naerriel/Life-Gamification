@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 
 import timerIcon from "./assets/timer-icon.svg"
-import playIcon from "./assets/play.svg"
-import pauseIcon from "./assets/pause.svg"
 import endIcon from "./assets/stop.svg"
 
 import { connect } from 'react-redux'
-import { setFinishPomodoro } from 'redux/actions/workComplete.js'
 import { pauseTimer, playTimer, eraseTimer } from 'redux/actions/skills.js'
 import { timeToMilliSeconds, timeFromMilliSeconds } from 'libs/time.js'
 
@@ -54,9 +51,8 @@ class _PlayInterface extends Component {
     let updateProgressBarAndDetectFinish = () => {
       let timeLeft = this.calcTimeLeft(props)
       if(timeLeft === "00:00") {
-        const { id, timer } = props.skill
+        const { id } = props.skill
 
-        // TODO enable: this.props.setFinishPomodoro(id, timer)
         this.stopCountdown()
         props.eraseTimer(id)
       }
@@ -120,12 +116,12 @@ class _PlayInterface extends Component {
         <div className="play">
           <div className="play-buttons">
             <button onClick={this.handlePausingTimerClick}>
-              <svg className="play-button" alt="pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.62 16.69"><title>pause</title><g><path d="M6.93,16a.73.73,0,0,1-.73.73H.73A.73.73,0,0,1,0,16V.73A.73.73,0,0,1,.73,0H6.27A.73.73,0,0,1,7,.73H7V16Zm9.69,0a.73.73,0,0,1-.73.73H10.35A.73.73,0,0,1,9.62,16V.73A.73.73,0,0,1,10.35,0h5.54a.73.73,0,0,1,.73.73Z"
+              <svg className="play-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.62 16.69"><title>pause</title><g><path d="M6.93,16a.73.73,0,0,1-.73.73H.73A.73.73,0,0,1,0,16V.73A.73.73,0,0,1,.73,0H6.27A.73.73,0,0,1,7,.73H7V16Zm9.69,0a.73.73,0,0,1-.73.73H10.35A.73.73,0,0,1,9.62,16V.73A.73.73,0,0,1,10.35,0h5.54a.73.73,0,0,1,.73.73Z"
                 fill={this.timerIsPlaying(this.props) ? shadowColor : backgroundColor}
               /></g></svg>
             </button>
             <button onClick={this.handlePlayingTimerClick}>
-              <svg className="play-button" alt="play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.25 16.81"><title>play</title><path id="Path_20" data-name="Path 20" d="M.59,16.71c-.29.22-.59.07-.59-.36V.43A.39.39,0,0,1,.33,0,.4.4,0,0,1,.59.06L15,8.1c.37.21.37.51,0,.65Z"
+              <svg className="play-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.25 16.81"><title>play</title><path id="Path_20" data-name="Path 20" d="M.59,16.71c-.29.22-.59.07-.59-.36V.43A.39.39,0,0,1,.33,0,.4.4,0,0,1,.59.06L15,8.1c.37.21.37.51,0,.65Z"
                 fill={this.timerIsPlaying(this.props) ? backgroundColor : shadowColor}
               /></svg>
             </button>
