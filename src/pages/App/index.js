@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Header } from "../Header/index.js"
-import { Home } from "../Home/index.js"
-import { History } from "../History/index.js"
-import { Settings } from "../Settings/index.js"
-import { AddExp } from "../WorkComplete/AddExp/index.js"
-import { FinishPomodoro } from "../WorkComplete/FinishPomodoro/index.js"
+import { Header } from "../../components/Header/index.js"
+import { Home } from "../../components/Home/index.js"
+import { History } from "../../components/History/index.js"
+import { Settings } from "../../components/Settings/index.js"
+import { AddExp } from "../../components/WorkComplete/AddExp/index.js"
+import { FinishPomodoro } from "../../components/WorkComplete/FinishPomodoro/index.js"
 
 import { BrowserRouter, Route } from 'react-router-dom'
 import { connect } from "react-redux"

@@ -50,7 +50,7 @@ const extractTimeUnit = (obj) => {
 export const timeToMilliSeconds = (time) => {
   let seconds, minutes, hours = -1
 
-  let timeObj = function () { // To let it be modified in external function
+  let timeObj = () => { // To let it be modified in external function
     let _time = time
 
     this.setValue = function(val) { _time = val }
