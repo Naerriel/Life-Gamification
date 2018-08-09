@@ -1,11 +1,11 @@
-import { setRepoSkills, getRepoSkills } from "repository/index.js"
+import { setRepoSkills, getRepoSkills } from "repository"
 import {
   createEmptySkill,
   validateSkills,
-  addExperience} from "libs/skills.js"
+  addExperience} from "utils/skills"
 import { setSkillDeletionUndoing } from "./undo.js"
-import { copyJSONWithoutReference } from "libs/other.js"
-import { timeToMilliSeconds } from "libs/time.js"
+import { copyJSONWithoutReference } from "utils/other"
+import { timeToMilliSeconds } from "utils/time"
 
 const setSkills = (skills) => ({
   type: 'SET_SKILLS',

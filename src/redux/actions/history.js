@@ -1,6 +1,6 @@
-import { setRepoHistory, getRepoHistory } from "repository/index.js"
-import { emptyHistory } from "libs/history.js"
-import { copyJSONWithoutReference } from "libs/other.js"
+import { setRepoHistory, getRepoHistory } from "repository"
+import { emptyHistory } from "utils/history"
+import { copyJSONWithoutReference } from "utils/other"
 
 const setHistory = history => ({
   type: 'SET_HISTORY',

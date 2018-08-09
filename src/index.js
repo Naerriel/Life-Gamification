@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { App } from './pages/App/index.js'
+import { Router } from './pages/Router'
 import { store } from 'redux/store'
 import { Provider } from "react-redux"
 
@@ -9,7 +9,7 @@ import 'font-awesome/css/font-awesome.min.css'
 
 ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <Router />
     </Provider>,
     document.getElementById('root')
 );
