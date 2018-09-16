@@ -78,7 +78,7 @@ export const swapSkills = (indexA, indexB, skills) => (dispatch) => {
 
 // TODO Delete repetitions in timer functions
 // Procrastinating on this task because of need to resolve
-// copyJSONWithoutReference - how should it be done?
+// copyJSONWithoutReference - use just spread operators
 
 export const pauseTimer = (skillId, timeLeft) => (dispatch, getState) => {
   let newSkills = copyJSONWithoutReference(getState().skills)

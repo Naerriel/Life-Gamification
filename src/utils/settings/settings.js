@@ -22,6 +22,9 @@ const ensureFormat = (time) => {
       time = time.substring(0, i) + "0" + time.substring(i)
     }
   }
+  if (time.length === 2) {
+    return "00:" + time
+  }
   return time
 }
 
